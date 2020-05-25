@@ -4,6 +4,6 @@
 	using CentralEvent.Business.Contracts.Models;
 
 	public interface IEventService {
-		IEnumerable<EventModel> GetEvents();
+	//	IEnumerable<EventModel> GetEvents();
 	}
 }

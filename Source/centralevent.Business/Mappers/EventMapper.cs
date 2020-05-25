@@ -4,6 +4,8 @@
 
 	using CentralEvent.Business.Mappers;
 
+	using CentralEvents.DataAccess.Contracts.Entities;
+
 	public class EventMapper : IEventMapper
 	{
 		public EventModel Mapper(EventEntity eventEntity)
@@ -16,7 +18,7 @@
 										PlzOrt = eventEntity.PlzOrt,
 										Datum = eventEntity.Datum,
 										BeginnUhrzeit = eventEntity.BeginnUhrzeit,
-										EndeUhrzeit = eventEntity.EndUhrzeit,
+										EndeUhrzeit = eventEntity.EndeUhrzeit,
 										Eintritt = eventEntity.Eintritt,
 										Beschreibung = eventEntity.Beschreibung,
 										Rubrik = eventEntity.Rubrik,
