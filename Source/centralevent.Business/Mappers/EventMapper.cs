@@ -14,7 +14,7 @@
 									{
 										Id = eventEntity.Id,
 										Name = eventEntity.Name,
-										Strasse = eventEntity.Strasse,
+										/*Strasse = eventEntity.Strasse,
 										PlzOrt = eventEntity.PlzOrt,
 										Datum = eventEntity.Datum,
 										BeginnUhrzeit = eventEntity.BeginnUhrzeit,
@@ -22,7 +22,7 @@
 										Eintritt = eventEntity.Eintritt,
 										Beschreibung = eventEntity.Beschreibung,
 										Rubrik = eventEntity.Rubrik,
-										GesamtanzahlEintrittskarten = eventEntity.GesamtanzahlEintrittskarten
+										GesamtanzahlEintrittskarten = eventEntity.GesamtanzahlEintrittskarten*/
 									};
 			return eventModel;
 		}

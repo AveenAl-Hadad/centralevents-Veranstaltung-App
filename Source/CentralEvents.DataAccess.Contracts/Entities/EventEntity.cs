@@ -8,7 +8,7 @@
 
 		public string Name { get; set; }
 
-		public string Strasse { get; set; }
+		/*public string Strasse { get; set; }
 
 		public string PlzOrt { get; set; }
 
@@ -24,6 +24,6 @@
 
 		public string Rubrik { get; set; }
 
-		public string GesamtanzahlEintrittskarten { get; set; }
+		public string GesamtanzahlEintrittskarten { get; set; }*/
 	}
 }
