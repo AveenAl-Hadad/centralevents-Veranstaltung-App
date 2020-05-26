@@ -17,4 +17,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CentralEvents.Commons\CentralEvents.Commons.csproj" />
+    <ProjectReference Include="..\CentralEvents.DataAccess.Contracts\CentralEvents.DataAccess.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>

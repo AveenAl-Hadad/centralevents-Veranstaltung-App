@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\centralevents.Web.Api\Models\Event.cs" Link="Models\Event.cs" />
+    <Compile Include="..\centralevent.Business.Contracts\Models\EventModel.cs" Link="Models\EventModel.cs" />
   </ItemGroup>
 
   <ItemGroup>
