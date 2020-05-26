@@ -8,7 +8,7 @@
 
 	public class EventMapper : IEventMapper
 	{
-		public EventModel Mapper(EventEntity eventEntity)
+		public EventModel EventEntityToModel(EventEntity eventEntity)
 		{
 			EventModel eventModel = new EventModel
 									{

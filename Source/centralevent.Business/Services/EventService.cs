@@ -1,8 +1,14 @@
 ﻿namespace CentralEvent.Business.Services
 {
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Security.Cryptography.X509Certificates;
+
+	using CentralEvent.Business.Contracts.Models;
 	using CentralEvent.Business.Contracts.Services;
 	using CentralEvent.Business.Mappers;
 
+	using CentralEvents.DataAccess.Contracts.Entities;
 	using CentralEvents.DataAccess.Contracts.Repositories;
 
 	public class EventService : IEventService
@@ -22,15 +28,22 @@
 		// public IEnumerable<EventModel> GetEvents()
 		// {
 		// 	IEnumerable<EventEntity> eventEntity = this.eventRepository.FetchAll();
-		// 	EventModel[] eventModels = eventEntity.Select(this.eventMapper.Mapper).ToArray();
+		// 	EventModel[] eventModels = eventEntity.Select(this.eventMapper.EventEntityToModel).ToArray();
 		// 	return eventModels;
 		// }
 		//
 		// public EventModel GetEvent(Guid id)
 		// {
 		// 	EventEntity eventEntity = this.eventRepository.Fetch(id);
-		// 	EventModel eventModel = this.eventMapper.Mapper(eventEntity);
+		// 	EventModel eventModel = this.eventMapper.EventEntityToModel(eventEntity);
 		// 	return eventModel;
 		// }
+		public IEnumerable<EventModel> GetEventS()
+		{
+			// IEnumerable<EventEntity> eventS = this.eventRepository.GetEvents();
+			//
+			// return this.eventMapper.EventEntityToModel.(this.eventRepository.GetEvents());
+			return this.eventRepository.GetEvents().Select(this.eventMapper.EventEntityToModel);
+		}
 	}
 }

@@ -13,7 +13,7 @@
 	[ExcludeFromCodeCoverage]
 	public class HttpClientWrapper : IHttpClient
 	{
-		private static string ApiUrl = "//localhost:54768/";
+		private static string ApiUrl = "http://localhost:54768/";
 
 		//private const string ApiUrl = "//localhost:50319/";
 		private HttpClient httpClient;

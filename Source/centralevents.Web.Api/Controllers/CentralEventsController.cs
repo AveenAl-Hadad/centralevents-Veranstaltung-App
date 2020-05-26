@@ -1,18 +1,28 @@
-﻿using CentralEvent.Business.Services;
-using Microsoft.AspNetCore.Mvc;
-
-namespace CentralEvents.Web.Api.Controllers
+﻿namespace CentralEvents.Web.Api.Controllers
 {
+	using System.Collections.Generic;
+
+	using CentralEvent.Business.Contracts.Models;
+	using CentralEvent.Business.Contracts.Services;
+
+	using Microsoft.AspNetCore.Mvc;
+
+	[Route("api/eventControl")]
 	public class CentralEventsController : ControllerBase
 	{
-		private readonly EventService eventService;
+		private readonly IEventService eventService;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="CentralEventsController"/> class.
-		/// </summary>
-		public CentralEventsController(EventService eventService)
+		public CentralEventsController(IEventService eventService)
 		{
 			this.eventService = eventService;
 		}
+
+		[Route("")]
+		[HttpGet]
+		public IEnumerable<EventModel> GetEventS()
+		{
+			return this.eventService.GetEventS();
+		}
 	}
+
 }

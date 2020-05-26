@@ -1,9 +1,25 @@
 ﻿@page "/"
 @using CentralEvents.Web.App.Wrappers
+@using CentralEvent.Business.Contracts.Models
 @inject IHttpClient Client
 
+<h1>Willkommen bei CentralEvents!</h1>
+<h2>Veranstaltungen</h2>
 
-<h1>Hello, wordl you!</h1>
+@foreach (EventModel eventModel in eventS)
+{
+    <div >
+        @eventModel.Name
+    </div>
+    <br/>
+}
 
-<p>Hier könnte in naher Zukunft eine Central Events Seite entstehen.</p>
-<p>How is your EventPage working for you?</p>
+@code
+{
+    private IEnumerable<EventModel> eventS = new EventModel[0];
+
+    protected override async Task OnInitializedAsync()
+    {
+        eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/eventControl");
+    }
+}

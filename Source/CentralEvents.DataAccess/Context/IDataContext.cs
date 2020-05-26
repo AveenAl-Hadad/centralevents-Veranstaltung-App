@@ -1,4 +1,11 @@
 ﻿namespace CentralEvents.DataAccess.Context
 {
-	public interface IDataContext { }
+	using System.Linq;
+
+	using CentralEvents.DataAccess.Contracts.Entities;
+
+	public interface IDataContext
+	{
+		IQueryable<TEntity> Query<TEntity>() where TEntity : EntityBase;
+	}
 }
