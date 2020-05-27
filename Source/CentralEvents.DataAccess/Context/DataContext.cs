@@ -40,11 +40,31 @@
 			this.Database.Migrate();
 		}
 
-		//Abfrage auf der DB
+		//CRUD
+
+		// CREATE
+		void IDataContext.Add<TEntity>(TEntity entity)
+		{
+			base.Add(entity);
+		}
+
+		// READ
 
 		IQueryable<TEntity> IDataContext.Query<TEntity>()
 		{
 			return this.Set<TEntity>();
+		}
+
+		// Save
+		public void SaveChanges()
+		{
+			base.SaveChanges();
+		}
+
+		// REMOVE
+		void IDataContext.Remove<TEntity>(TEntity entity)
+		{
+			base.Remove(entity);
 		}
 	}
 }

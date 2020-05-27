@@ -7,7 +7,7 @@ namespace CentralEvents.Web.Api
 	using CentralEvents.Commons;
 	using CentralEvents.DataAccess.Context;
 	using CentralEvents.DataAccess.Contracts.Repositories;
-	using CentralEvents.DataAccess.Repository;
+	using CentralEvents.DataAccess.Repositories;
 
 	using Microsoft.AspNetCore.Builder;
 	using Microsoft.AspNetCore.Hosting;
