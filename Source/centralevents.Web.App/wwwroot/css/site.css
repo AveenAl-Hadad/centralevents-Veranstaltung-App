@@ -20,13 +20,13 @@ app {
     flex-direction: column;
 }
 
-.top-row {
+/*.top-row {
     height: 3.5rem;
     display: flex;
     align-items: center;
-}
+}*/
 
-.main {
+/*.main {
     flex: 1;
 }
 
@@ -44,7 +44,7 @@ app {
 .main .top-row a:first-child {
     overflow: hidden;
     text-overflow: ellipsis;
-}
+}*/
 
 .sidebar {
     background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
@@ -177,7 +177,7 @@ app {
     }
 
     .sidebar .collapse {
-        /* Never collapse the sidebar for wide screens */
+         Never collapse the sidebar for wide screens 
         display: block;
     }
 }

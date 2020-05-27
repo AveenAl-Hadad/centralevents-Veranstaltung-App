@@ -1,1 +1,14 @@
-﻿
+﻿body {
+  margin: 10px auto;
+  background-color: #cccccc;
+  /*background-image: url(css/Images/ce_logo.png);*/
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-attachment: fixed; }
+
+h1 {
+  align-content: center;
+  background-color: orange; }
+
+h2 {
+  background-color: aliceblue; }
