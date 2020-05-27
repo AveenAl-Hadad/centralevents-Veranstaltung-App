@@ -27,6 +27,7 @@
 		public void Add(EventEntity eventEntity)
 		{
 			this.dataContext.Add(eventEntity);
+			this.dataContext.SaveChanges();
 		}
 
 		//READ

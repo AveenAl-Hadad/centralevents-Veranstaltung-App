@@ -23,6 +23,14 @@
 		{
 			return this.eventService.GetEventS();
 		}
+		[Route("add")]
+		[HttpPost]
+		public void AddEvent(EventModel eventModel)
+		{
+			this.eventService.AddEventModel(eventModel);
+		}
+
+
 	}
 
 }

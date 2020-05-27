@@ -2,7 +2,7 @@
 {
 	using System;
 
-	public class EntityBase
+	public abstract class EntityBase
 	{
 		public Guid Id { get; protected set; }
 	}

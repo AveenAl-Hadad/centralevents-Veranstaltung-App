@@ -46,7 +46,7 @@
 
 		public void AddEventModel(EventModel eventModel)
 		{
-			throw new NotImplementedException();
+			eventRepository.Add(this.eventMapper.EventModelToEntity(eventModel));
 		}
 
 		public void RemoveEventModel(EventModel eventModel)

@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using CentralEvents.Web.App.Wrappers
 @using CentralEvent.Business.Contracts.Models
+@using CentralEvents.Web.Api.Controllers
 @inject IHttpClient Client
 
 <link href="site.css" rel="stylesheet" type="text/css" />
@@ -19,9 +20,26 @@
 @code
 {
     private IEnumerable<EventModel> eventS = new EventModel[0];
+    private EventModel eventModel = new EventModel();
+    CesController cesController = new CesController();
 
     protected override async Task OnInitializedAsync()
     {
         eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/eventControl");
+
+        if (!(eventS.Count() > 0))
+        {
+            foreach (EventModel eventModel in cesController.CreateStammdaten())
+            {
+                this.eventModel = eventModel;
+                await AddEvent();
+            }
+        }
+        eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/eventControl");
+    }
+
+    private async Task AddEvent()
+    {
+        await Client.PostAsync<EventModel>("api/eventControl/add", eventModel);
     }
 }

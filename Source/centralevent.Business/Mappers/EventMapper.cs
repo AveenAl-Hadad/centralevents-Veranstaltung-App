@@ -26,5 +26,14 @@
 									};
 			return eventModel;
 		}
+
+		public EventEntity EventModelToEntity(EventModel eventModel)
+		{
+			EventEntity eventEntity = new EventEntity
+			{
+				Name = eventModel.Name
+			};
+			return eventEntity;
+		}
 	}
 }

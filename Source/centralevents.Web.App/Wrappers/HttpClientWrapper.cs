@@ -1,4 +1,6 @@
-﻿namespace CentralEvents.Web.App.Wrappers
+﻿using System.Net.Http.Headers;
+
+namespace CentralEvents.Web.App.Wrappers
 {
 	using System;
 	using System.Diagnostics.CodeAnalysis;
@@ -30,6 +32,12 @@
 			return await this.httpClient.PostAsync(this.GetUrl(path), this.JsonToStringContent(model));
 		}
 
+		//public async Task PostAsync<TModel>(string path, object content)
+		//{
+		//	// Umwandeln Json in String Content
+		//	await this.httpClient.PostAsync(this.GetUrl(path), this.JsonToStringContent(content));
+		//}
+
 		//READ
 		public async Task<TModel> GetJsonAsync<TModel>(string path)
 		{
@@ -60,7 +68,10 @@
 		{
 			string serializedBody = JsonConvert.SerializeObject(content);
 			StringContent stringContent = new StringContent(serializedBody, Encoding.UTF8, "application/json");
+			//StringContent stringContent = new StringContent(serializedBody);
+			//stringContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
 			return stringContent;
 		}
+
 	}
 }

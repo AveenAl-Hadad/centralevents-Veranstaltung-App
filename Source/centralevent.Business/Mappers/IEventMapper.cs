@@ -7,5 +7,6 @@
 	public interface IEventMapper
 	{
 		EventModel EventEntityToModel(EventEntity eventEntity);
+		EventEntity EventModelToEntity(EventModel eventModel);
 	}
 }
