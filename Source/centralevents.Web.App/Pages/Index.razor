@@ -4,23 +4,23 @@
 @using CentralEvents.Web.Api.Controllers
 @inject IHttpClient Client
 
-<link href="site.css" rel="stylesheet" type="text/css" />
-<img src="css/Images/ce_logo.png"/>
-<h1>Willkommen bei CentralEvents!</h1>
+
 <h2>Veranstaltungen</h2>
 
 @foreach (EventModel eventModel in eventS)
 {
-    <div >
+    <div>
         @eventModel.Name
+        <br/>
+        <a href="details">Details</a>
     </div>
     <br/>
 }
 
 @* in den foreach mit rein *@
-   
+
 @* <a href="details/@eventModel.Id">Details</a> *@
-<a href="details">Details</a>
+
 @code
 {
     private IEnumerable<EventModel> eventS = new EventModel[0];
@@ -44,6 +44,6 @@
 
     private async Task AddEvent()
     {
-        await Client.PostAsync<EventModel>("api/eventControl/add", eventModel);
+        await Client.PostAsync("api/eventControl/add", eventModel);
     }
 }

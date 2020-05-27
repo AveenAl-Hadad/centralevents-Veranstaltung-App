@@ -12,13 +12,13 @@ namespace CentralEvents.Web.Api.Controllers
 
 		public IEnumerable<EventModel> CreateStammdaten()
 		{
-			IList<string> rowS = File.ReadAllLines(@"..\\CentralEvents.Commons\CEname.csv").Skip(1).ToList();
+			string rawData = File.ReadAllText(@"..\\CentralEvents.Commons\CEname.csv");
 			IList<EventModel> eventListe = new List<EventModel>();
 
-			foreach (string row in rowS)
-			{
-				eventListe.Add(this.EventModelFromStringList(row));
-			}
+			//foreach (string row in rowS)
+			//{
+			//	eventListe.Add(this.EventModelFromStringList(row));
+			//}
 
 			return eventListe;
 		}
