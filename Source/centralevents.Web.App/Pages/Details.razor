@@ -1,10 +1,39 @@
 ﻿@* @page "/details/{id}" *@
 @page "/details"
 @using CentralEvents.Web.App.Wrappers
+@using CentralEvent.Business.Contracts.Models
 @inject IHttpClient Client
 
 <h3>Details</h3>
 
-@code {
+<label>Name: </label>
+<label>@eventModel.Name</label>
+<br />
+<label>Beschreibung: </label>
+<label>@eventModel.Beschreibung</label>
+<br />
+<label>Datum: </label>
+<label>@eventModel.</label>
+<br />
+<label>Uhrzeit: </label>
+<label>@eventModel.BeginnUhrzeit - @eventModel.EndeUhrzeit</label>
+<br />
+<label>Ort: </label>
+<label>@eventModel.Ort</label>
+<br />
+<label>Preis: </label>
+<label>@eventModel.Eintritt</label>
+<br />
 
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    EventModel eventModel = new EventModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        eventModel = await Client.GetJsonAsync<EventModel>($"api/eventControl/getEvent/{Id}");
+    }
 }
