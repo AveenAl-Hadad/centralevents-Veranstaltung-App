@@ -34,9 +34,7 @@
 
 		public EventModel GetEvent(Guid id)
 		{
-			EventEntity eventEntity = this.eventRepository.GetEvent(id);
-			EventModel eventModel = this.eventMapper.EventEntityToModel(eventEntity);
-			return eventModel;
+			return this.eventMapper.EventEntityToModel(this.eventRepository.GetEvent(id));
 		}
 
 		public void UpdateEvent(EventModel eventModel)

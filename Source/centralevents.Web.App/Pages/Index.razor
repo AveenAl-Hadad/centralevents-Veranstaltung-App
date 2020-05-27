@@ -9,17 +9,14 @@
 
 @foreach (EventModel eventModel in eventS)
 {
-    <div>
-        @eventModel.Name
-        <br/>
-        <a href="details">Details</a>
-    </div>
+    <a href="details/@eventModel.Id">
+        <div class="event">
+            @eventModel.Name
+        </div>
+    </a>
     <br/>
 }
 
-@* in den foreach mit rein *@
-
-@* <a href="details/@eventModel.Id">Details</a> *@
 
 @code
 {
@@ -29,7 +26,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/eventControl");
+        eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/eventControl/getEvents");
 
         if (!(eventS.Count() > 0))
         {
@@ -39,11 +36,11 @@
                 await AddEvent();
             }
         }
-        eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/eventControl");
+        eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/eventControl/getEventS");
     }
 
     private async Task AddEvent()
     {
-        await Client.PostAsync("api/eventControl/add", eventModel);
+        await Client.PostAsync("api/eventControl/addEvent", eventModel);
     }
 }

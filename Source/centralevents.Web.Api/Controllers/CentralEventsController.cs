@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
-using CentralEvent.Business.Contracts.Models;
-using CentralEvent.Business.Contracts.Services;
-using Microsoft.AspNetCore.Mvc;
-
-namespace CentralEvents.Web.Api.Controllers
+﻿namespace CentralEvents.Web.Api.Controllers
 {
+	using System;
+	using System.Collections.Generic;
+
+	using CentralEvent.Business.Contracts.Models;
+	using CentralEvent.Business.Contracts.Services;
+
+	using Microsoft.AspNetCore.Mvc;
+
 	[Route("api/eventControl")]
 	public class CentralEventsController : ControllerBase
 	{
@@ -15,19 +18,26 @@ namespace CentralEvents.Web.Api.Controllers
 			this.eventService = eventService;
 		}
 
-		[Route("")]
-		[HttpGet]
-		public IEnumerable<EventModel> GetEventS()
-		{
-			return eventService.GetEventS();
-		}
-
-		[Route("add")]
+		[Route("addEvent")]
 		[HttpPost]
 		public void
 			AddEvent([FromBody] EventModel eventModel) // FROMBODY voll wichtig da das Model in HTTP gewrappt ist und so!!!!
 		{
-			eventService.AddEvent(eventModel);
+			this.eventService.AddEvent(eventModel);
+		}
+
+		[Route("getEvents")]
+		[HttpGet]
+		public IEnumerable<EventModel> GetEventS()
+		{
+			return this.eventService.GetEventS();
+		}
+
+		[Route("getEvent/{id}")]
+		[HttpGet]
+		public EventModel GetEvent(Guid id)
+		{
+			return this.eventService.GetEvent(id);
 		}
 	}
 }
