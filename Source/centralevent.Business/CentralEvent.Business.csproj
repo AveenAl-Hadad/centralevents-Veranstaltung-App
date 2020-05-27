@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\centralevent.Business.Contracts\CentralEvent.Business.Contracts.csproj" />
+    <ProjectReference Include="..\CentralEvents.DataAccess.Contracts\CentralEvents.DataAccess.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>
