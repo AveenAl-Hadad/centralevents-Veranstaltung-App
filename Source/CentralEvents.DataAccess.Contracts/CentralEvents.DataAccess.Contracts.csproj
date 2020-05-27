@@ -5,12 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Context\" />
     <Folder Include="DataModels\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\centralevent.Business.Contracts\CentralEvent.Business.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

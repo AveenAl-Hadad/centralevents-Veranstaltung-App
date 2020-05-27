@@ -7,14 +7,14 @@
 
 	public interface IEventService
 	{
+		void AddEvent(EventModel eventModel);
+
 		IEnumerable<EventModel> GetEventS();
 
 		EventModel GetEvent(Guid id);
 
-		void UpdateEventModel(EventModel eventModel);
+		void UpdateEvent(EventModel eventModel);
 
-		void AddEventModel(EventModel eventModel);
-
-		void RemoveEventModel(EventModel eventModel);
+		void RemoveEvent(EventModel eventModel);
 	}
 }

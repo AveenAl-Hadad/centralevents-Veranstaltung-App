@@ -4,7 +4,7 @@
 	using System.Collections.Generic;
 	using System.Linq;
 
-	using CentralEvents.DataAccess.Context;
+	using CentralEvents.DataAccess.Contracts.Context;
 	using CentralEvents.DataAccess.Contracts.Entities;
 	using CentralEvents.DataAccess.Contracts.Exeptions;
 	using CentralEvents.DataAccess.Contracts.Repositories;
@@ -24,20 +24,19 @@
 		//CRUD
 
 		//CREATE
-		public void Add(EventEntity eventEntity)
+		public void AddEvent(EventEntity eventEntity)
 		{
 			this.dataContext.Add(eventEntity);
-			this.dataContext.SaveChanges();
+			this.dataContext.SaveChangedRepository();
 		}
 
 		//READ
-		public IEnumerable<EventEntity> FetchAll()
+		public IEnumerable<EventEntity> GetEvents()
 		{
-			EventEntity[] eventEntities = this.dataContext.Query<EventEntity>().ToArray();
-			return eventEntities;
+			return this.dataContext.Query<EventEntity>().ToArray();
 		}
 
-		public EventEntity Fetch(Guid id)
+		public EventEntity GetEvent(Guid id)
 		{
 			EventEntity eventEntity = this.dataContext.Query<EventEntity>().FirstOrDefault(e => e.Id == id);
 
@@ -50,20 +49,15 @@
 		}
 
 		//UPDATE
-		public void SaveChanges()
+		public void SaveChangedRepository()
 		{
-			this.dataContext.SaveChanges();
+			this.dataContext.SaveChangedRepository();
 		}
 
 		// REMOVE
-		public void Remove(EventEntity eventEntity)
+		public void RemoveEvent(EventEntity eventEntity)
 		{
 			this.dataContext.Remove(eventEntity);
-		}
-
-		public IEnumerable<EventEntity> GetEvents()
-		{
-			return this.dataContext.Query<EventEntity>().ToArray();
 		}
 	}
 }

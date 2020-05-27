@@ -7,16 +7,14 @@
 
 	public interface IEventRepository
 	{
+		void AddEvent(EventEntity eventEntity);
+
 		IEnumerable<EventEntity> GetEvents();
 
-		void Add(EventEntity eventEntity);
+		EventEntity GetEvent(Guid id);
 
-		IEnumerable<EventEntity> FetchAll();
+		void SaveChangedRepository();
 
-		EventEntity Fetch(Guid id);
-
-		void SaveChanges();
-
-		void Remove(EventEntity eventEntity);
+		void RemoveEvent(EventEntity eventEntity);
 	}
 }

@@ -1,4 +1,4 @@
-﻿namespace CentralEvent.Business.Mappers
+﻿namespace CentralEvent.Business.Contracts.Mappers
 {
 	using CentralEvent.Business.Contracts.Models;
 
@@ -7,6 +7,7 @@
 	public interface IEventMapper
 	{
 		EventModel EventEntityToModel(EventEntity eventEntity);
+
 		EventEntity EventModelToEntity(EventModel eventModel);
 	}
 }

@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CentralEvents.DataAccess.Contracts\CentralEvents.DataAccess.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>

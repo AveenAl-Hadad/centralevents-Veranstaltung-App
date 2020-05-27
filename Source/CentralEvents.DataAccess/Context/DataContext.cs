@@ -5,6 +5,7 @@
 	using System.Reflection;
 
 	using CentralEvents.Commons;
+	using CentralEvents.DataAccess.Contracts.Context;
 
 	using Microsoft.EntityFrameworkCore;
 	using Microsoft.Extensions.Configuration;
@@ -49,14 +50,13 @@
 		}
 
 		// READ
-
 		IQueryable<TEntity> IDataContext.Query<TEntity>()
 		{
 			return this.Set<TEntity>();
 		}
 
-		// Save
-		public void SaveChanges()
+		// UPDATE
+		public void SaveChangedRepository()
 		{
 			base.SaveChanges();
 		}
