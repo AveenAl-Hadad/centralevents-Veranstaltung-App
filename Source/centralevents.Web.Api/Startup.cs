@@ -1,3 +1,6 @@
+using CentralEvent.Business.Contracts.Mappers;
+using CentralEvents.DataAccess.Contracts.Context;
+
 namespace CentralEvents.Web.Api
 {
 	using CentralEvent.Business.Contracts.Services;
@@ -7,7 +10,7 @@ namespace CentralEvents.Web.Api
 	using CentralEvents.Commons;
 	using CentralEvents.DataAccess.Context;
 	using CentralEvents.DataAccess.Contracts.Repositories;
-	using CentralEvents.DataAccess.Repository;
+	using CentralEvents.DataAccess.Repositories;
 
 	using Microsoft.AspNetCore.Builder;
 	using Microsoft.AspNetCore.Hosting;

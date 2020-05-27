@@ -1,8 +1,14 @@
 ﻿namespace CentralEvent.Business.Services
 {
-	using CentralEvent.Business.Contracts.Services;
-	using CentralEvent.Business.Mappers;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
 
+	using CentralEvent.Business.Contracts.Mappers;
+	using CentralEvent.Business.Contracts.Models;
+	using CentralEvent.Business.Contracts.Services;
+
+	using CentralEvents.DataAccess.Contracts.Entities;
 	using CentralEvents.DataAccess.Contracts.Repositories;
 
 	public class EventService : IEventService
@@ -10,27 +16,37 @@
 		private readonly IEventMapper eventMapper;
 		private readonly IEventRepository eventRepository;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="EventService"/> class.
-		/// </summary>
 		public EventService(IEventRepository eventRepository, IEventMapper eventMapper)
 		{
 			this.eventRepository = eventRepository;
 			this.eventMapper = eventMapper;
 		}
 
-		// public IEnumerable<EventModel> GetEvents()
-		// {
-		// 	IEnumerable<EventEntity> eventEntity = this.eventRepository.FetchAll();
-		// 	EventModel[] eventModels = eventEntity.Select(this.eventMapper.Mapper).ToArray();
-		// 	return eventModels;
-		// }
-		//
-		// public EventModel GetEvent(Guid id)
-		// {
-		// 	EventEntity eventEntity = this.eventRepository.Fetch(id);
-		// 	EventModel eventModel = this.eventMapper.Mapper(eventEntity);
-		// 	return eventModel;
-		// }
+		public void AddEvent(EventModel eventModel)
+		{
+			this.eventRepository.AddEvent(this.eventMapper.EventModelToEntity(eventModel));
+		}
+
+		public IEnumerable<EventModel> GetEventS()
+		{
+			return this.eventRepository.GetEvents().Select(this.eventMapper.EventEntityToModel);
+		}
+
+		public EventModel GetEvent(Guid id)
+		{
+			EventEntity eventEntity = this.eventRepository.GetEvent(id);
+			EventModel eventModel = this.eventMapper.EventEntityToModel(eventEntity);
+			return eventModel;
+		}
+
+		public void UpdateEvent(EventModel eventModel)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void RemoveEvent(EventModel eventModel)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

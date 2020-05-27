@@ -1,7 +1,9 @@
 ﻿namespace CentralEvents.DataAccess.Contracts.Entities
 {
-	public class EntityBase
+	using System;
+
+	public abstract class EntityBase
 	{
-		
+		public Guid Id { get; protected set; }
 	}
 }
