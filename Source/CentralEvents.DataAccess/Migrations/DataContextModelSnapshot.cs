@@ -26,8 +26,6 @@ namespace CentralEvents.DataAccess.Migrations
                         .HasColumnName("Id")
                         .HasColumnType("uniqueidentifier");
 
-<<<<<<< HEAD
-=======
                     b.Property<string>("BeginnUhrzeit")
                         .HasColumnName("BeginnUhrzeit")
                         .HasColumnType("nvarchar(max)");
@@ -48,18 +46,14 @@ namespace CentralEvents.DataAccess.Migrations
                         .HasColumnName("EndeUhrzeit")
                         .HasColumnType("nvarchar(max)");
 
->>>>>>> UserStory2-DetailsZuVeranstaltungAnzeigen
                     b.Property<string>("Name")
                         .HasColumnName("Name")
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<< HEAD
-=======
                     b.Property<string>("Ort")
                         .HasColumnName("Ort")
                         .HasColumnType("nvarchar(max)");
 
->>>>>>> UserStory2-DetailsZuVeranstaltungAnzeigen
                     b.HasKey("Id");
 
                     b.ToTable("CentralEventsTable");
