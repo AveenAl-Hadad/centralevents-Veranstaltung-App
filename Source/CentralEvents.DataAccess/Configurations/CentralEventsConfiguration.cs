@@ -20,6 +20,8 @@
 			builder.Property(e => e.EndeUhrzeit).HasColumnName("EndeUhrzeit");
 			builder.Property(e => e.Eintritt).HasColumnName("Eintritt");
 			builder.Property(e => e.Beschreibung).HasColumnName("Beschreibung");
+			builder.Property(e => e.GesamtanzahlEintrittskarten).HasColumnName("GesamtanzahlEintrittskarten");
+			builder.Property(e => e.Restbestand).HasColumnName("Restbestand");
 		}
 	}
 }
