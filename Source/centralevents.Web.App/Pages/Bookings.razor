@@ -1,0 +1,49 @@
+﻿@page "/bookings/{id}"
+@using CentralEvents.Web.App.Wrappers
+@using CentralEvent.Business.Contracts.Models
+@inject IHttpClient Client
+
+<h3>Bookings</h3>
+<h2>@eventModel.Name</h2>
+
+<div>
+    <label>Vorname:</label>
+    <input />
+    <br>
+    <label>Nachname:</label>
+    <input />
+    <br>
+    <label>Strasse:</label>
+    <input />
+    <br>
+    <label>Hausnummer:</label>
+    <input />
+    <br>
+    <label>Plz:</label>
+    <input />
+    <br>
+    <label>Telefonnummer:</label>
+    <input />
+    <br>
+    <label>Email:</label>
+    <input />
+    <br>
+    <a href="/">Abbrechen</a>
+    <br>
+    <br>
+</div>
+
+@code 
+{
+
+    [Parameter]
+    public string Id { get; set; }
+
+    EventModel eventModel = new EventModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        eventModel = await Client.GetJsonAsync<EventModel>($"api/eventControl/getEvent/{Id}");
+    }
+
+}
