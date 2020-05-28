@@ -1,0 +1,16 @@
+﻿namespace CentralEvents.DataAccess.Contracts.Entities
+{
+	public class BookingEntity : EntityBase
+	{
+		public string EventName { get; set; }
+		public string AnzahlTickets { get; set; }
+		public string Vorname { get; set; }
+		public string Nachname { get; set; }
+		public string Strasse { get; set; }
+		public string Hausnummer { get; set; }
+		public string Plz { get; set; }
+		public string Ort { get; set; }
+		public string Telefon { get; set; }
+		public string Email { get; set; }
+	}
+}
