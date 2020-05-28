@@ -23,12 +23,15 @@
 
 		public double Eintritt { get; set; }
 
+		public int GesamtanzahlEintrittskarten { get; set; }
+		public int Restbestand { get; set; }
+
 		/*public string Strasse { get; set; }
 
 		public string PlzOrt { get; set; }		
 
 		public string Rubrik { get; set; }
 
-		public string GesamtanzahlEintrittskarten { get; set; }*/
+		*/
 	}
 }

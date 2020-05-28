@@ -29,6 +29,12 @@
 		[JsonPropertyName("Eintritt")]
 		public double Eintritt { get; set; }
 
+		[JsonPropertyName("GesamtanzahlEintrittskarten")]
+		public int GesamtanzahlEintrittkarten { get; set; }
+
+		[JsonPropertyName("Restbestand")]
+		public int Restbestand { get; set; }
+
 		/*[JsonPropertyName("Strasse")]
 		public string Strasse { get; set; }
 		
@@ -37,11 +43,6 @@
 
 		[JsonPropertyName("Rubrik")]
 		public string Rubrik { get; set; }
-
-		[JsonPropertyName("Strasse")]
-
-		public string GesamtanzahlEintrittskarten { get; set; }
-	
-		}*/
+		*/
 	}
-}
+	}
