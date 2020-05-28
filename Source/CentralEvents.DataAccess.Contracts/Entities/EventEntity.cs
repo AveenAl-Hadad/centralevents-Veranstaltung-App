@@ -24,6 +24,7 @@
 		public double Eintritt { get; set; }
 
 		public int GesamtanzahlEintrittskarten { get; set; }
+
 		public int Restbestand { get; set; }
 
 		/*public string Strasse { get; set; }

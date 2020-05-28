@@ -30,7 +30,7 @@
 		public double Eintritt { get; set; }
 
 		[JsonPropertyName("GesamtanzahlEintrittskarten")]
-		public int GesamtanzahlEintrittkarten { get; set; }
+		public int GesamtanzahlEintrittskarten { get; set; }
 
 		[JsonPropertyName("Restbestand")]
 		public int Restbestand { get; set; }

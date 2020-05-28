@@ -19,17 +19,9 @@
 										EndeUhrzeit = eventEntity.EndeUhrzeit,
 										Eintritt = eventEntity.Eintritt,
 										Beschreibung = eventEntity.Beschreibung,
-										GesamtanzahlEintrittkarten = eventEntity.GesamtanzahlEintrittskarten,
-										Restbestand =eventEntity.Restbestand
-
-
-				/*Strasse = eventEntity.Strasse,
-PlzOrt = eventEntity.PlzOrt,
-
-
-Rubrik = eventEntity.Rubrik,*/
-
-			};
+										GesamtanzahlEintrittskarten = eventEntity.GesamtanzahlEintrittskarten,
+										Restbestand = eventEntity.Restbestand
+									};
 			return eventModel;
 		}
 
@@ -44,10 +36,9 @@ Rubrik = eventEntity.Rubrik,*/
 										  EndeUhrzeit = eventModel.EndeUhrzeit,
 										  Eintritt = eventModel.Eintritt,
 										  Beschreibung = eventModel.Beschreibung,
-										  GesamtanzahlEintrittskarten = eventModel.GesamtanzahlEintrittkarten,
+										  GesamtanzahlEintrittskarten = eventModel.GesamtanzahlEintrittskarten,
 										  Restbestand = eventModel.Restbestand
-
-			};
+									  };
 			return eventEntity;
 		}
 
