@@ -1,13 +1,12 @@
-﻿html {
-}
-
-body {
-    margin: 50px auto;
+﻿body {
+    font-family: Verdana;
+    font-style:inherit;
+    margin: 1em auto;
     padding: 0.5em;
-    border: 0.5em solid #000000;
+    border: 0.1em solid #000000;
     max-width: 50em;
     text-align: center;
-    background-color: #cccccc;
+    background-color: rgba(0, 0, 0, 0.16);
     /*  background-repeat: no-repeat;
     background-position: top center;
     background-attachment: fixed;*/
@@ -16,7 +15,24 @@ body {
     text-align: center;
     margin: 0.5em;
     padding: 0.5em;
-    border: 0.5em solid #4b4b4b;
+    border: 0.05em solid #4b4b4b;
+}
+
+table{
+    margin: 1em auto;
+    text-align:center;
+}
+td{
+    text-align:right;
+    vertical-align: right;
+}
+
+button{
+
+}
+
+p{
+    border: 0.05em solid rgba(0, 0, 0, 0.60);
 }
 
 a {
@@ -40,14 +56,20 @@ a:active {
 .head {
     margin: 0.5em;
     padding: 0.5em;
-    border: 0.5em solid #0026ff;
+    border: 0.05em solid #0026ff;
 }
 
-h1{
-    background-color:orange;
+h1 {
+    border: 0.05em solid lightgrey;
+    background-color: rgba(198, 195, 184, 0.73);
 }
-h2{
-    background-color:aliceblue;
+h2 {
+    border: 0.05em solid lightgrey;
+    background-color: rgba(198, 195, 184, 0.73);
+}
+h3{
+    border: 0.05em solid lightgrey;
+    background-color:rgba(198, 195, 184, 0.73);
 }
 
 

@@ -4,36 +4,69 @@
 @inject IHttpClient Client
 
 <h3>Bookings</h3>
-<h2>@eventModel.Name</h2>
-<label>Ticketanzahl</label>
-        <input type="number" name="amount" id="amount" value="'.$ticket_amount.'" min="1">
+<p>
+    <h2>@eventModel.Name</h2>
 
-<div>
-    <label>Vorname:</label>
-    <input />
-    <br>
-    <label>Nachname:</label>
-    <input />
-    <br>
-    <label>Strasse:</label>
-    <input />
-    <br>
-    <label>Hausnummer:</label>
-    <input />
-    <br>
-    <label>Plz:</label>
-    <input />
-    <br>
-    <label>Telefonnummer:</label>
-    <input />
-    <br>
-    <label>Email:</label>
-    <input />
-    <br>
-    <a href="/">Abbrechen</a>
-    <br>
-    <br>
-</div>
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <label>Ticketanzahl</label>
+                    <input type="number" name="amount" id="amount" value="'.$ticket_amount.'" min="1">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Vorname:</label>
+                    <input />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Nachname:</label>
+                    <input />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Strasse:</label>
+                    <input />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Hausnummer:</label>
+                    <input />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Plz:</label>
+                    <input />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Telefonnummer:</label>
+                    <input />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Email:</label>
+                    <input />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button>
+                        <a href="/">Abbrechen</a>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</p>
 
 @code 
 {
