@@ -2,9 +2,12 @@
 {
 	using System;
 
-	public class EventEntity
+	public class EventEntity : EntityBase
 	{
-		public Guid Id { get; set; }
+		public EventEntity()
+		{
+			this.Id = Guid.NewGuid();
+		}
 
 		public string Name { get; set; }
 

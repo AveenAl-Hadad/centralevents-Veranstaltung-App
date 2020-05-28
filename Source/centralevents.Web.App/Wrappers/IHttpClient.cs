@@ -8,6 +8,8 @@ namespace CentralEvents.Web.App.Wrappers
 	{
 		// CREATE
 		Task<HttpResponseMessage> PostAsync<TModel>(string path, TModel model);
+		//Task PostAsync<TModel>(string path, object content);
+
 
 		//READ
 		Task<TModel> GetJsonAsync<TModel>(string path);
