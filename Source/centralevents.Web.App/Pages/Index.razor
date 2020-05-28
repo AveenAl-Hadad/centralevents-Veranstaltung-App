@@ -4,18 +4,19 @@
 @using CentralEvents.Web.Api.Controllers
 @inject IHttpClient Client
 
-<link href="site.css" rel="stylesheet" type="text/css" />
-<img src="css/Images/ce_logo.png"/>
-<h1>Willkommen bei CentralEvents!</h1>
+
 <h2>Veranstaltungen</h2>
 
 @foreach (EventModel eventModel in eventS)
 {
-    <div >
-        @eventModel.Name
-    </div>
+    <a href="details/@eventModel.Id">
+        <div class="event">
+            @eventModel.Name
+        </div>
+    </a>
     <br/>
 }
+
 
 @code
 {
@@ -25,7 +26,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/eventControl");
+        eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/eventControl/getEvents");
 
         if (!(eventS.Count() > 0))
         {
@@ -35,11 +36,11 @@
                 await AddEvent();
             }
         }
-        eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/eventControl");
+        eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/eventControl/getEventS");
     }
 
     private async Task AddEvent()
     {
-        await Client.PostAsync<EventModel>("api/eventControl/add", eventModel);
+        await Client.PostAsync("api/eventControl/addEvent", eventModel);
     }
 }

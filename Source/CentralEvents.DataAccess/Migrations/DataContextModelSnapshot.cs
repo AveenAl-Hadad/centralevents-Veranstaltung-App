@@ -26,10 +26,40 @@ namespace CentralEvents.DataAccess.Migrations
                         .HasColumnName("Id")
                         .HasColumnType("uniqueidentifier");
 
+<<<<<<< HEAD
+=======
+                    b.Property<string>("BeginnUhrzeit")
+                        .HasColumnName("BeginnUhrzeit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Beschreibung")
+                        .HasColumnName("Beschreibung")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Datum")
+                        .HasColumnName("Datum")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Eintritt")
+                        .HasColumnName("Eintritt")
+                        .HasColumnType("float");
+
+                    b.Property<string>("EndeUhrzeit")
+                        .HasColumnName("EndeUhrzeit")
+                        .HasColumnType("nvarchar(max)");
+
+>>>>>>> UserStory2-DetailsZuVeranstaltungAnzeigen
                     b.Property<string>("Name")
                         .HasColumnName("Name")
                         .HasColumnType("nvarchar(max)");
 
+<<<<<<< HEAD
+=======
+                    b.Property<string>("Ort")
+                        .HasColumnName("Ort")
+                        .HasColumnType("nvarchar(max)");
+
+>>>>>>> UserStory2-DetailsZuVeranstaltungAnzeigen
                     b.HasKey("Id");
 
                     b.ToTable("CentralEventsTable");
