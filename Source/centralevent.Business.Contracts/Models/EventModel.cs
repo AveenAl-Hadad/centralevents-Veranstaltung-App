@@ -35,21 +35,13 @@
 		[JsonPropertyName("PlzOrt")]
 		public string PlzOrt { get; set; }
 
-		
-
-		
-
-		
-		
-		
-
 		[JsonPropertyName("Rubrik")]
 		public string Rubrik { get; set; }
 
-	[JsonPropertyName("Strasse")]
+		[JsonPropertyName("Strasse")]
 
-	public string GesamtanzahlEintrittskarten { get; set; }
+		public string GesamtanzahlEintrittskarten { get; set; }
 	
-	}*/
+		}*/
 	}
 }
