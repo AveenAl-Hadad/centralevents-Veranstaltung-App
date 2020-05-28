@@ -27,6 +27,11 @@
 			this.eventRepository.AddEvent(this.eventMapper.EventModelToEntity(eventModel));
 		}
 
+		public void AddBooking(BookingModel bookingModel)
+		{
+			this.eventRepository.AddBooking(this.eventMapper.BookingModelToEntity(bookingModel));
+		}
+
 		public IEnumerable<EventModel> GetEventS()
 		{
 			return this.eventRepository.GetEvents().Select(this.eventMapper.EventEntityToModel);

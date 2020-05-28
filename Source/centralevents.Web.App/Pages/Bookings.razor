@@ -73,6 +73,42 @@
             </tr>
         </table>
     </div>
+<label>Ticketanzahl</label>
+<br>
+@*<input type="number" name="amount" id="amount" value="'.$ticket_amount.'" min="1" />*@
+<input @bind="@bookingModel.AnzahlTickets" type="number" name="amount" id="amount" min="1" />
+<br>
+<br>
+<div>
+    <label>Vorname:</label>
+    <input @bind="@bookingModel.Vorname" />
+    <br>
+    <label>Nachname:</label>
+    <input @bind="@bookingModel.Nachname" />
+    <br>
+    <label>Strasse:</label>
+    <input @bind="@bookingModel.Strasse" />
+    <br>
+    <label>Hausnummer:</label>
+    <input @bind="@bookingModel.Hausnummer" />
+    <br>
+    <label>Plz:</label>
+    <input @bind="@bookingModel.Plz" />
+    <br>
+    <label>Telefonnummer:</label>
+    <input @bind="@bookingModel.Telefon" />
+    <br>
+    <label>Email:</label>
+    <input @bind="@bookingModel.Email" />
+    <br>
+    <br>
+
+    <button onclick=AddBooking>Karten reservieren</button>
+
+    <a href="/">Abbrechen</a>
+    <br>
+    <br>
+</div>
 
 @code
 {
@@ -81,10 +117,18 @@
     public string Id { get; set; }
 
     EventModel eventModel = new EventModel();
+    BookingModel bookingModel = new BookingModel();
 
     protected override async Task OnInitializedAsync()
     {
         eventModel = await Client.GetJsonAsync<EventModel>($"api/eventControl/getEvent/{Id}");
+    }
+
+    private async Task AddBooking()
+    {
+        bookingModel.Name = eventModel.Name;
+
+        await Client.PostAsync("api/eventControl/addBooking", bookingModel);
     }
 
 }

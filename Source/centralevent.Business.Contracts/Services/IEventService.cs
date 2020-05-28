@@ -8,6 +8,7 @@
 	public interface IEventService
 	{
 		void AddEvent(EventModel eventModel);
+		void AddBooking(BookingModel bookingModel);
 
 		IEnumerable<EventModel> GetEventS();
 

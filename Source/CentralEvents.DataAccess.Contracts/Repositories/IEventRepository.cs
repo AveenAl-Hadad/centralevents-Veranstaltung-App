@@ -8,6 +8,7 @@
 	public interface IEventRepository
 	{
 		void AddEvent(EventEntity eventEntity);
+		void AddBooking(BookingModel bookingModel);
 
 		IEnumerable<EventEntity> GetEvents();
 

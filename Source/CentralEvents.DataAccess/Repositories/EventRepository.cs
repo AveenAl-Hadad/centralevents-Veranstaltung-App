@@ -30,6 +30,12 @@
 			this.dataContext.SaveChangedRepository();
 		}
 
+		public void AddBooking(BookingModel bookingModel)
+		{
+			this.dataContext.Add(bookingModel);
+			this.dataContext.SaveChangedRepository();
+		}
+
 		//READ
 		public IEnumerable<EventEntity> GetEvents()
 		{
