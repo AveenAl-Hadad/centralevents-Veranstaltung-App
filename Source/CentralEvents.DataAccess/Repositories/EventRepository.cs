@@ -4,6 +4,8 @@
 	using System.Collections.Generic;
 	using System.Linq;
 
+	using CentralEvent.Business.Contracts.Models;
+
 	using CentralEvents.DataAccess.Contracts.Context;
 	using CentralEvents.DataAccess.Contracts.Entities;
 	using CentralEvents.DataAccess.Contracts.Exeptions;
@@ -30,9 +32,9 @@
 			this.dataContext.SaveChangedRepository();
 		}
 
-		public void AddBooking(BookingModel bookingModel)
+		public void AddBooking(BookingEntity bookingEntity)
 		{
-			this.dataContext.Add(bookingModel);
+			this.dataContext.Add(bookingEntity);
 			this.dataContext.SaveChangedRepository();
 		}
 

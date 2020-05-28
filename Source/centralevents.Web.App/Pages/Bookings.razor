@@ -3,111 +3,80 @@
 @using CentralEvent.Business.Contracts.Models
 @inject IHttpClient Client
 
-<h3>Bookings</h3>
-<input type="number" name="amount" id="amount" value="'.$ticket_amount.'" min="1">
-<label>Ticketanzahl</label>
+<h3>Veranstaltung reservieren</h3>
+
 <h2>@eventModel.Name</h2>
 
-    <div>
-        <table>
-            <tr>
-                <td>
-                    <label>Ticketanzahl</label>
-                    <input type="number" name="amount" id="amount" value="'.$ticket_amount.'" min="1">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Vorname:</label>
-                    <input />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Nachname:</label>
-                    <input />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Strasse:</label>
-                    <input />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Hausnummer:</label>
-                    <input />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Plz:</label>
-                    <input />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Ort:</label>
-                    <input />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Telefonnummer:</label>
-                    <input />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Email:</label>
-                    <input />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <button>
-                        <a href="/">Abbrechen</a>
-                    </button>
-                </td>
-            </tr>
-        </table>
-    </div>
-<label>Ticketanzahl</label>
-<br>
-@*<input type="number" name="amount" id="amount" value="'.$ticket_amount.'" min="1" />*@
-<input @bind="@bookingModel.AnzahlTickets" type="number" name="amount" id="amount" min="1" />
-<br>
-<br>
 <div>
-    <label>Vorname:</label>
-    <input @bind="@bookingModel.Vorname" />
-    <br>
-    <label>Nachname:</label>
-    <input @bind="@bookingModel.Nachname" />
-    <br>
-    <label>Strasse:</label>
-    <input @bind="@bookingModel.Strasse" />
-    <br>
-    <label>Hausnummer:</label>
-    <input @bind="@bookingModel.Hausnummer" />
-    <br>
-    <label>Plz:</label>
-    <input @bind="@bookingModel.Plz" />
-    <br>
-    <label>Telefonnummer:</label>
-    <input @bind="@bookingModel.Telefon" />
-    <br>
-    <label>Email:</label>
-    <input @bind="@bookingModel.Email" />
-    <br>
-    <br>
+    <table>
+        <tr>
+            <td>
+                <label>Ticketanzahl</label>
+                <input @bind="@bookingModel.AnzahlTickets" type="number" name="amount" id="amount" min="1"/>
+                @* Wie komm ich an die entweder php-Werte im Code, oder gibts da cooles seitenübergreifendes binding zeug? *@
+                @*<input type="number" name="amount" id="amount" value="'.$ticket_amount.'" min="1" />*@
 
-    <button onclick=AddBooking>Karten reservieren</button>
-
-    <a href="/">Abbrechen</a>
-    <br>
-    <br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Vorname:</label>
+                <input @bind="@bookingModel.Vorname"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Nachname:</label>
+                <input @bind="@bookingModel.Nachname"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Strasse:</label>
+                <input @bind="@bookingModel.Strasse"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Hausnummer:</label>
+                <input @bind="@bookingModel.Hausnummer"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Plz:</label>
+                <input @bind="@bookingModel.Plz"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Ort:</label>
+                <input @bind="@bookingModel.Ort"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Telefonnummer:</label>
+                <input @bind="@bookingModel.Telefon"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Email:</label>
+                <input @bind="@bookingModel.Email"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="/">Abbrechen</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button @onclick="AddBooking">Karten reservieren</button>
+            </td>
+        </tr>
+    </table>
 </div>
 
 @code
@@ -126,7 +95,7 @@
 
     private async Task AddBooking()
     {
-        bookingModel.Name = eventModel.Name;
+        bookingModel.EventName = eventModel.Name;
 
         await Client.PostAsync("api/eventControl/addBooking", bookingModel);
     }

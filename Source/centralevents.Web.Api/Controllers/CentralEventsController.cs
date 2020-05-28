@@ -29,7 +29,7 @@
 		[HttpPost]
 		public void AddBooking([FromBody] BookingModel bookingModel)
 		{
-			this.eventService.AddEvent(bookingModel);
+			this.eventService.AddBooking(bookingModel);
 		}
 
 		[Route("getEvents")]
