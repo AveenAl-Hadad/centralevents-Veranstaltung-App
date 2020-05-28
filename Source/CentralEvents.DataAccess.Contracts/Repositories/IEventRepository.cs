@@ -9,6 +9,8 @@
 	{
 		void AddEvent(EventEntity eventEntity);
 
+		void AddBooking(BookingEntity bookingEntity);
+
 		IEnumerable<EventEntity> GetEvents();
 
 		EventEntity GetEvent(Guid id);

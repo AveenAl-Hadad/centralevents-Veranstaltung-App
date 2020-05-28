@@ -8,7 +8,6 @@
 	using CentralEvent.Business.Contracts.Models;
 	using CentralEvent.Business.Contracts.Services;
 
-	using CentralEvents.DataAccess.Contracts.Entities;
 	using CentralEvents.DataAccess.Contracts.Repositories;
 
 	public class EventService : IEventService
@@ -25,6 +24,11 @@
 		public void AddEvent(EventModel eventModel)
 		{
 			this.eventRepository.AddEvent(this.eventMapper.EventModelToEntity(eventModel));
+		}
+
+		public void AddBooking(BookingModel bookingModel)
+		{
+			this.eventRepository.AddBooking(this.eventMapper.BookingModelToEntity(bookingModel));
 		}
 
 		public IEnumerable<EventModel> GetEventS()

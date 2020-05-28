@@ -44,5 +44,42 @@
 									  };
 			return eventEntity;
 		}
+
+		public BookingModel BookingEntityToModel(BookingEntity bookingEntity)
+		{
+			BookingModel bookingModel = new BookingModel
+										{
+											Id = bookingEntity.Id,
+											EventName = bookingEntity.EventName,
+											AnzahlTickets = bookingEntity.AnzahlTickets,
+											Vorname = bookingEntity.Vorname,
+											Nachname = bookingEntity.Nachname,
+											Strasse = bookingEntity.Strasse,
+											Hausnummer = bookingEntity.Hausnummer,
+											Plz = bookingEntity.Plz,
+											Ort = bookingEntity.Ort,
+											Telefon = bookingEntity.Telefon,
+											Email = bookingEntity.Email
+										};
+			return bookingModel;
+		}
+
+		public BookingEntity BookingModelToEntity(BookingModel bookingModel)
+		{
+			BookingEntity bookingEntity = new BookingEntity
+										  {
+											  EventName = bookingModel.EventName,
+											  AnzahlTickets = bookingModel.AnzahlTickets,
+											  Vorname = bookingModel.Vorname,
+											  Nachname = bookingModel.Nachname,
+											  Strasse = bookingModel.Strasse,
+											  Hausnummer = bookingModel.Hausnummer,
+											  Plz = bookingModel.Plz,
+											  Ort = bookingModel.Ort,
+											  Telefon = bookingModel.Telefon,
+											  Email = bookingModel.Email
+										  };
+			return bookingEntity;
+		}
 	}
 }

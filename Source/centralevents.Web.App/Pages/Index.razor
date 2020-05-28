@@ -1,11 +1,12 @@
 ﻿@page "/"
 @using CentralEvents.Web.App.Wrappers
-@using CentralEvent.Business.Contracts.Models
+
 @using CentralEvents.Web.Api.Controllers
+@using CentralEvent.Business.Contracts.Models
 @inject IHttpClient Client
 
 
-<h2>Veranstaltungen</h2>
+<h3>Veranstaltungen</h3>
 
 @foreach (EventModel eventModel in eventS)
 {

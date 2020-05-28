@@ -9,5 +9,9 @@
 		EventModel EventEntityToModel(EventEntity eventEntity);
 
 		EventEntity EventModelToEntity(EventModel eventModel);
+
+		BookingModel BookingEntityToModel(BookingEntity bookingEntity);
+
+		BookingEntity BookingModelToEntity(BookingModel bookingModel);
 	}
 }

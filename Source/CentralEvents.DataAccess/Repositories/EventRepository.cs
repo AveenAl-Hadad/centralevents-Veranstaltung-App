@@ -4,6 +4,8 @@
 	using System.Collections.Generic;
 	using System.Linq;
 
+	using CentralEvent.Business.Contracts.Models;
+
 	using CentralEvents.DataAccess.Contracts.Context;
 	using CentralEvents.DataAccess.Contracts.Entities;
 	using CentralEvents.DataAccess.Contracts.Exeptions;
@@ -27,6 +29,12 @@
 		public void AddEvent(EventEntity eventEntity)
 		{
 			this.dataContext.Add(eventEntity);
+			this.dataContext.SaveChangedRepository();
+		}
+
+		public void AddBooking(BookingEntity bookingEntity)
+		{
+			this.dataContext.Add(bookingEntity);
 			this.dataContext.SaveChangedRepository();
 		}
 

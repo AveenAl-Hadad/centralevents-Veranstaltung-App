@@ -20,10 +20,16 @@
 
 		[Route("addEvent")]
 		[HttpPost]
-		public void
-			AddEvent([FromBody] EventModel eventModel) // FROMBODY voll wichtig da das Model in HTTP gewrappt ist und so!!!!
+		public void AddEvent([FromBody] EventModel eventModel) // FROMBODY voll wichtig da das Model in HTTP gewrappt ist und so!!!!
 		{
 			this.eventService.AddEvent(eventModel);
+		}
+
+		[Route("addBooking")]
+		[HttpPost]
+		public void AddBooking([FromBody] BookingModel bookingModel)
+		{
+			this.eventService.AddBooking(bookingModel);
 		}
 
 		[Route("getEvents")]

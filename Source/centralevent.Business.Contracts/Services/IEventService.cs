@@ -9,6 +9,8 @@
 	{
 		void AddEvent(EventModel eventModel);
 
+		void AddBooking(BookingModel bookingModel);
+
 		IEnumerable<EventModel> GetEventS();
 
 		EventModel GetEvent(Guid id);
