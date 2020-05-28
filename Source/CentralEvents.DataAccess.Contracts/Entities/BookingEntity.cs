@@ -10,7 +10,7 @@
 		}
 		public string EventName { get; set; }
 
-		public string AnzahlTickets { get; set; }
+		public int AnzahlTickets { get; set; }
 
 		public string Vorname { get; set; }
 

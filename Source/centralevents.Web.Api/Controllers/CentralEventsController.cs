@@ -45,5 +45,12 @@
 		{
 			return this.eventService.GetEvent(id);
 		}
+
+		[Route("updateEvent")]
+		[HttpPut]
+		public void UpdateEvent([FromBody] EventModel eventModel)
+		{
+			this.eventService.UpdateEvent(eventModel);
+		}
 	}
 }

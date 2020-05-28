@@ -8,6 +8,7 @@
 	using CentralEvent.Business.Contracts.Models;
 	using CentralEvent.Business.Contracts.Services;
 
+	using CentralEvents.DataAccess.Contracts.Entities;
 	using CentralEvents.DataAccess.Contracts.Repositories;
 
 	public class EventService : IEventService
@@ -23,12 +24,15 @@
 
 		public void AddEvent(EventModel eventModel)
 		{
-			this.eventRepository.AddEvent(this.eventMapper.EventModelToEntity(eventModel));
+			EventEntity eventEntity = new EventEntity();
+			this.eventRepository.AddEvent(this.eventMapper.EventModelToEntity(eventEntity, eventModel));
+			this.eventRepository.SaveChangedRepository();
 		}
 
 		public void AddBooking(BookingModel bookingModel)
 		{
 			this.eventRepository.AddBooking(this.eventMapper.BookingModelToEntity(bookingModel));
+			this.eventRepository.SaveChangedRepository();
 		}
 
 		public IEnumerable<EventModel> GetEventS()
@@ -43,7 +47,9 @@
 
 		public void UpdateEvent(EventModel eventModel)
 		{
-			throw new NotImplementedException();
+			EventEntity eventEntity = this.eventRepository.GetEvent(eventModel.Id);
+			eventEntity = this.eventMapper.EventModelToEntity(eventEntity, eventModel);
+			this.eventRepository.SaveChangedRepository();
 		}
 
 		public void RemoveEvent(EventModel eventModel)

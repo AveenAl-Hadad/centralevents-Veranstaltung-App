@@ -96,9 +96,20 @@
 
     private async Task AddBooking()
     {
+        await UpdateEvent();
+
         bookingModel.EventName = eventModel.Name;
 
         await Client.PostAsync("api/eventControl/addBooking", bookingModel);
+    }
+
+    private async Task UpdateEvent()
+    {
+        eventModel.Restbestand = eventModel.Restbestand - bookingModel.AnzahlTickets;
+
+        await Client.PutAsync("api/eventControl/updateEvent", eventModel);
+
+        eventModel = await Client.GetJsonAsync<EventModel>($"api/eventControl/getEvent/{Id}");
     }
 
 }

@@ -8,7 +8,7 @@
 	{
 		EventModel EventEntityToModel(EventEntity eventEntity);
 
-		EventEntity EventModelToEntity(EventModel eventModel);
+		EventEntity EventModelToEntity(EventEntity eventEntity, EventModel eventModel);
 
 		BookingModel BookingEntityToModel(BookingEntity bookingEntity);
 

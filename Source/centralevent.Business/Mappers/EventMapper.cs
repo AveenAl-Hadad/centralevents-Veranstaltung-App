@@ -25,20 +25,18 @@
 			return eventModel;
 		}
 
-		public EventEntity EventModelToEntity(EventModel eventModel)
+		public EventEntity EventModelToEntity(EventEntity eventEntity, EventModel eventModel)
 		{
-			EventEntity eventEntity = new EventEntity
-									  {
-										  Name = eventModel.Name,
-										  Ort = eventModel.Ort,
-										  Datum = eventModel.Datum,
-										  BeginnUhrzeit = eventModel.BeginnUhrzeit,
-										  EndeUhrzeit = eventModel.EndeUhrzeit,
-										  Eintritt = eventModel.Eintritt,
-										  Beschreibung = eventModel.Beschreibung,
-										  GesamtanzahlEintrittskarten = eventModel.GesamtanzahlEintrittskarten,
-										  Restbestand = eventModel.Restbestand
-									  };
+			eventEntity.Name = eventModel.Name;
+			eventEntity.Ort = eventModel.Ort;
+			eventEntity.Datum = eventModel.Datum;
+			eventEntity.BeginnUhrzeit = eventModel.BeginnUhrzeit;
+			eventEntity.EndeUhrzeit = eventModel.EndeUhrzeit;
+			eventEntity.Eintritt = eventModel.Eintritt;
+			eventEntity.Beschreibung = eventModel.Beschreibung;
+			eventEntity.GesamtanzahlEintrittskarten = eventModel.GesamtanzahlEintrittskarten;
+			eventEntity.Restbestand = eventModel.Restbestand;
+
 			return eventEntity;
 		}
 
@@ -61,6 +59,8 @@
 			return bookingModel;
 		}
 
+
+		//TODO wie oben
 		public BookingEntity BookingModelToEntity(BookingModel bookingModel)
 		{
 			BookingEntity bookingEntity = new BookingEntity

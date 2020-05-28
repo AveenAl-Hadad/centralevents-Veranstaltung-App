@@ -26,9 +26,9 @@ namespace CentralEvents.DataAccess.Migrations
                         .HasColumnName("Id")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AnzahlTickets")
+                    b.Property<int>("AnzahlTickets")
                         .HasColumnName("AnzahlTickets")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnName("Email")

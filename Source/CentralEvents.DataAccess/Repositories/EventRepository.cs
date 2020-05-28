@@ -29,13 +29,11 @@
 		public void AddEvent(EventEntity eventEntity)
 		{
 			this.dataContext.Add(eventEntity);
-			this.dataContext.SaveChangedRepository();
 		}
 
 		public void AddBooking(BookingEntity bookingEntity)
 		{
 			this.dataContext.Add(bookingEntity);
-			this.dataContext.SaveChangedRepository();
 		}
 
 		//READ

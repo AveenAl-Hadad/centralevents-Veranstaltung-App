@@ -12,7 +12,7 @@
 		public string EventName { get; set; }
 
 		[JsonPropertyName("AnzahlTickets")]
-		public string AnzahlTickets { get; set; }
+		public int AnzahlTickets { get; set; }
 
 		[JsonPropertyName("Vorname")]
 		public string Vorname { get; set; }
