@@ -13,6 +13,8 @@
         <tr>
             <td>
                 <label>Ticketanzahl</label>
+            </td>
+            <td>
                 <input @bind="@bookingModel.AnzahlTickets" type="number" name="amount" id="amount" min="1"/>
                 @* Wie komm ich an die entweder php-Werte im Code, oder gibts da cooles seitenübergreifendes binding zeug? *@
                 @*<input type="number" name="amount" id="amount" value="'.$ticket_amount.'" min="1" />*@
@@ -22,57 +24,71 @@
         <tr>
             <td>
                 <label>Vorname:</label>
+            </td>
+            <td>
                 <input @bind="@bookingModel.Vorname"/>
             </td>
         </tr>
         <tr>
             <td>
                 <label>Nachname:</label>
+            </td>
+            <td>
                 <input @bind="@bookingModel.Nachname"/>
             </td>
         </tr>
         <tr>
             <td>
                 <label>Strasse:</label>
+            </td>
+            <td>
                 <input @bind="@bookingModel.Strasse"/>
             </td>
         </tr>
         <tr>
             <td>
                 <label>Hausnummer:</label>
+            </td>
+            <td>
                 <input @bind="@bookingModel.Hausnummer"/>
             </td>
         </tr>
         <tr>
             <td>
-                <label>Plz:</label>
+                <label>PLZ:</label>
+            </td>
+            <td>
                 <input @bind="@bookingModel.Plz"/>
             </td>
         </tr>
         <tr>
             <td>
                 <label>Ort:</label>
+            </td>
+            <td>
                 <input @bind="@bookingModel.Ort"/>
             </td>
         </tr>
         <tr>
             <td>
                 <label>Telefonnummer:</label>
+            </td>
+            <td>
                 <input @bind="@bookingModel.Telefon"/>
             </td>
         </tr>
         <tr>
             <td>
-                <label>Email:</label>
+                <label>E-Mail:</label>
+            </td>
+            <td>
                 <input @bind="@bookingModel.Email"/>
             </td>
         </tr>
         <tr>
-            <td id="abbrechen">
-                <a href="/">Abbrechen</a>
+            <td>
+                <a href="/"><button>Abbrechen</button></a>
             </td>
-        </tr>
-        <tr>
             <td>
                 <button @onclick="AddBooking">Karten reservieren</button>
             </td>
