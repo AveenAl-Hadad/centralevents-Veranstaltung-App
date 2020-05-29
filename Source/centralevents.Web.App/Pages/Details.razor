@@ -1,0 +1,69 @@
+﻿@page "/details/{id}"
+@using CentralEvents.Web.App.Wrappers
+@using CentralEvent.Business.Contracts.Models
+@inject IHttpClient Client
+
+<h3>Veranstaltungsdetails</h3>
+<p>
+    <label>Name: </label>
+    <br/>
+    <label>@eventModel.Name</label>
+    <br/>
+    <br/>
+
+    <label>Beschreibung: </label>
+    <br/>
+    <label>@eventModel.Beschreibung</label>
+    <br/>
+    <br/>
+
+    <label>Datum: </label>
+    <br/>
+    <label>@eventModel.Datum</label>
+    <br/>
+    <br/>
+
+    <label>Uhrzeit: </label>
+    <br/>
+    <label>@eventModel.BeginnUhrzeit Uhr - @eventModel.EndeUhrzeit Uhr</label>
+    <br/>
+    <br/>
+
+    <label>Ort: </label>
+    <br/>
+    <label>@eventModel.Ort</label>
+    <br/>
+    <br/>
+
+    <label>Preis: </label>
+    <br/>
+    <label>@eventModel.Eintritt €</label>
+    <br>
+
+    @if (eventModel.Restbestand <= 0)
+    {
+        <button type="button" disabled>Veranstaltung ausverkauft</button>
+    }
+    else
+    {
+        <a href="/bookings/@eventModel.Id">Karten bestellen</a>
+    }
+
+    <br/>
+    <br/>
+</p>
+
+
+@code {
+
+    [Parameter]
+    public string Id { get; set; }
+
+    EventModel eventModel = new EventModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        eventModel = await Client.GetJsonAsync<EventModel>($"api/eventControl/getEvent/{Id}");
+    }
+
+}

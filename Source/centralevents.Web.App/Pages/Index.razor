@@ -1,0 +1,47 @@
+﻿@page "/"
+@using CentralEvents.Web.App.Wrappers
+
+@using CentralEvents.Web.Api.Controllers
+@using CentralEvent.Business.Contracts.Models
+@inject IHttpClient Client
+
+
+<h3>Veranstaltungen</h3>
+
+@foreach (EventModel eventModel in eventS)
+{
+    <a href="details/@eventModel.Id">
+        <div class="event">
+            @eventModel.Name
+        </div>
+    </a>
+    <br/>
+}
+
+
+@code
+{
+    private IEnumerable<EventModel> eventS = new EventModel[0];
+    private EventModel eventModel = new EventModel();
+    CesController cesController = new CesController();
+
+    protected override async Task OnInitializedAsync()
+    {
+        eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/eventControl/getEvents");
+
+        if (!(eventS.Count() > 0))
+        {
+            foreach (EventModel eventModel in cesController.CreateStammdaten())
+            {
+                this.eventModel = eventModel;
+                await AddEvent();
+            }
+        }
+        eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/eventControl/getEventS");
+    }
+
+    private async Task AddEvent()
+    {
+        await Client.PostAsync("api/eventControl/addEvent", eventModel);
+    }
+}

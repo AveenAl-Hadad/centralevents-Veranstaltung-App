@@ -1,0 +1,115 @@
+﻿@page "/bookings/{id}"
+@using CentralEvents.Web.App.Wrappers
+@using CentralEvent.Business.Contracts.Models
+@inject IHttpClient Client
+
+<h3>Veranstaltung reservieren</h3>
+
+<h2>@eventModel.Name</h2>
+<h5>Noch @eventModel.Restbestand Tickets von @eventModel.GesamtanzahlEintrittskarten verfügbar</h5>
+
+<div>
+    <table>
+        <tr>
+            <td>
+                <label>Ticketanzahl</label>
+                <input @bind="@bookingModel.AnzahlTickets" type="number" name="amount" id="amount" min="1"/>
+                @* Wie komm ich an die entweder php-Werte im Code, oder gibts da cooles seitenübergreifendes binding zeug? *@
+                @*<input type="number" name="amount" id="amount" value="'.$ticket_amount.'" min="1" />*@
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Vorname:</label>
+                <input @bind="@bookingModel.Vorname"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Nachname:</label>
+                <input @bind="@bookingModel.Nachname"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Strasse:</label>
+                <input @bind="@bookingModel.Strasse"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Hausnummer:</label>
+                <input @bind="@bookingModel.Hausnummer"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Plz:</label>
+                <input @bind="@bookingModel.Plz"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Ort:</label>
+                <input @bind="@bookingModel.Ort"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Telefonnummer:</label>
+                <input @bind="@bookingModel.Telefon"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Email:</label>
+                <input @bind="@bookingModel.Email"/>
+            </td>
+        </tr>
+        <tr>
+            <td id="abbrechen">
+                <a href="/">Abbrechen</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button @onclick="AddBooking">Karten reservieren</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+@code
+{
+
+    [Parameter]
+    public string Id { get; set; }
+
+    EventModel eventModel = new EventModel();
+    BookingModel bookingModel = new BookingModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        eventModel = await Client.GetJsonAsync<EventModel>($"api/eventControl/getEvent/{Id}");
+    }
+
+    private async Task AddBooking()
+    {
+        await UpdateEvent();
+
+        bookingModel.EventName = eventModel.Name;
+
+        await Client.PostAsync("api/eventControl/addBooking", bookingModel);
+    }
+
+    private async Task UpdateEvent()
+    {
+        eventModel.Restbestand = eventModel.Restbestand - bookingModel.AnzahlTickets;
+
+        await Client.PutAsync("api/eventControl/updateEvent", eventModel);
+
+        eventModel = await Client.GetJsonAsync<EventModel>($"api/eventControl/getEvent/{Id}");
+    }
+
+}
