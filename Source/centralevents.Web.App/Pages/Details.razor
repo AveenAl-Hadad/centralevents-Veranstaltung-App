@@ -6,56 +6,52 @@
 <h3>Veranstaltungsdetails</h3>
 <p>
     <label>Name: </label>
-    <br />
+    <br/>
     <label>@eventModel.Name</label>
-    <br />
-    <br />
+    <br/>
+    <br/>
 
     <label>Beschreibung: </label>
-    <br />
+    <br/>
     <label>@eventModel.Beschreibung</label>
-    <br />
-    <br />
+    <br/>
+    <br/>
 
     <label>Datum: </label>
-    <br />
+    <br/>
     <label>@eventModel.Datum</label>
-    <br />
-    <br />
+    <br/>
+    <br/>
 
     <label>Uhrzeit: </label>
-    <br />
+    <br/>
     <label>@eventModel.BeginnUhrzeit Uhr - @eventModel.EndeUhrzeit Uhr</label>
-    <br />
-    <br />
+    <br/>
+    <br/>
 
     <label>Ort: </label>
-    <br />
+    <br/>
     <label>@eventModel.Ort</label>
-    <br />
-    <br />
+    <br/>
+    <br/>
 
     <label>Preis: </label>
-    <br />
+    <br/>
     <label>@eventModel.Eintritt €</label>
     <br>
-    <button><a href="/bookings/@eventModel.Id">Karten bestellen</a></button>
-    
-    <br />
-    <br />
+
+    @if (eventModel.Restbestand <= 0)
+    {
+        <button type="button" disabled>Veranstaltung ausverkauft</button>
+    }
+    else
+    {
+        <a href="/bookings/@eventModel.Id">Karten bestellen</a>
+    }
+
+    <br/>
+    <br/>
 </p>
-
-<label>Preis: </label>
-<br/>
-<label>@eventModel.Eintritt €</label>
-<br>
-<br/>
-
-<a href="/bookings/@eventModel.Id">
-    <div class="event">Karten für: @eventModel.Name reservieren</div>
-</a>
-<br/>
-<br/>
 
 
 @code {
