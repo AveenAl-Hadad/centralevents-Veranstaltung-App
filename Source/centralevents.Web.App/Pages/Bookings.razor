@@ -12,7 +12,7 @@
     <label>* Pflichtangaben</label>
 </p>
 
-<div>
+<form>
     <table>
         <tr>
             <td>
@@ -25,26 +25,20 @@
         </tr>
         <tr>
             <td>
-                <form>
-                    <label>Vorname*:</label>
-                    <input @bind="@bookingModel.Vorname" required/>
-                </form>
+                <label>Vorname*:</label>
+                <input @bind="@bookingModel.Vorname" required/>
             </td>
         </tr>
         <tr>
             <td>
-                <form>
-                    <label>Nachname*:</label>
-                    <input @bind="@bookingModel.Nachname" required/>
-                </form>
+                <label>Nachname*:</label>
+                <input @bind="@bookingModel.Nachname" required/>
             </td>
         </tr>
         <tr>
             <td>
-                <form>
-                    <label>Straße / Nr.*:</label>
-                    <input @bind="@bookingModel.Strasse" required/>
-                </form>
+                <label>Straße / Nr.*:</label>
+                <input @bind="@bookingModel.Strasse" required/>
             </td>
         </tr>
         <tr>
@@ -55,45 +49,38 @@
         </tr>
         <tr>
             <td>
-                <form>
-                    <label>PLZ*:</label>
-                    <input @bind="@bookingModel.Plz" required/>
-                </form>
+                <label>PLZ*:</label>
+                <input @bind="@bookingModel.Plz" required/>
             </td>
         </tr>
         <tr>
             <td>
-                <form>
-                    <label>Ort*:</label>
-                    <input @bind="@bookingModel.Ort" required/>
-                </form>
-            </td>
-        </tr>
+                <label>Ort*:</label>
+                <input @bind="@bookingModel.Ort" required/>
 
-        <tr>
-            <td>
-                <form>
-                    <label>
-                        E-Mail*:
-                    </label>
-                        @* <input type="email" name="email"> *@
-                    @* <label>E-Mail*:</label> *@
-                    <input type="email" name="email" @bind="@bookingModel.Email" required/>
-                </form>
             </td>
         </tr>
         <tr>
             <td>
-                <label>Telefonnummer:
+                <label>
+                    E-Mail*:
+                </label>
+                @* <input type="email" name="email"> *@
+                @* <label>E-Mail*:</label> *@
+                <input type="email" name="email" @bind="@bookingModel.Email" required/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    Telefonnummer:
                     @* <br/> *@
                     @* <h6>+49 421 123456</h6> *@
-                    </label>
+                </label>
                 <input type="tel" name="Telefonnummer" placeholder="0421-123456" @bind="@bookingModel.Telefon"/>
             </td>
         </tr>
-
-
-    </table>
+        </table>
 
     <div id="abbrechen">
         <a href="/">
@@ -101,7 +88,7 @@
         </a>
         <button @onclick="AddBooking">Karten reservieren</button>
     </div>
-</div>
+</form>
 
 
 @code
