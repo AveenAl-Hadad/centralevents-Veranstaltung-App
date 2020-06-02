@@ -6,9 +6,7 @@
 
 	using CentralEvent.Business.Contracts.Mappers;
 	using CentralEvent.Business.Contracts.Models;
-	using CentralEvent.Business.Mappers;
 	using CentralEvent.Business.Services;
-
 	using CentralEvents.DataAccess.Contracts.Entities;
 	using CentralEvents.DataAccess.Contracts.Repositories;
 
@@ -24,6 +22,7 @@
 		//private IEventMapper eventMapper;
 
 		private Mock<IEventMapper> eventMapper;
+
 		private Mock<IEventRepository> eventRepository;
 		//private Mock<IDataContext> dataContext;
 
@@ -46,12 +45,15 @@
 			//IQueryable<EventEntity> eventSqueries = new EnumerableQuery<EventEntity>(eventSentities);
 			//this.dataContext.Setup(e => e.Query<EventEntity>()).Returns(eventSqueries);
 
-			IEnumerable<EventEntity> eventSentities = Enumerable.Range(1, 2).Select(id => new EventEntity()).ToList();
-			IEnumerable<EventModel> eventSmodels = eventSentities.Select(e => new EventModel { Id = e.Id }).ToList();
+			IEnumerable<EventEntity> eventSentities = new List<EventEntity>();
+			eventSentities = Enumerable.Range(1, 2).Select(id => new EventEntity()).ToList();
+
+			IEnumerable<EventModel> eventSmodels = new List<EventModel>();
+			eventSmodels = eventSentities.Select(e => new EventModel { Id = e.Id }).ToList();
 
 			this.eventRepository.Setup(e => e.GetEvents()).Returns(eventSentities);
 
-			IEnumerable<EventModel> result = this.eventService.GetEventS();
+			IEnumerable<EventModel> result = (IEnumerable<EventModel>)this.eventService.GetEventS();
 
 			CollectionAssert.AreEquivalent(eventSmodels, result);
 		}
@@ -72,6 +74,18 @@
 			IEnumerable<EventModel> result = this.eventService.GetEventS();
 
 			CollectionAssert.AreEquivalent(ids, result.Select(e => e.Id));
+		}
+
+		[Test]
+		public void GetEventsShouldDelegateToEventService()
+		{
+			List<EventModel> eventS = Enumerable.Range(1, 2).Select(id => new EventModel()).ToList();
+
+			this.eventRepository.Setup(t => t.GetEventS()).Returns(eventS);
+
+			IEnumerable<EventModel> result = this.eventService.GetEventS();
+
+			CollectionAssert.AreEquivalent(eventS, result);
 		}
 	}
 }

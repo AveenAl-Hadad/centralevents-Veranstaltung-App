@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\..\Source\centralevent.Business.Contracts\Models\EventModel.cs" Link="Models\EventModel.cs" />
+    <Compile Include="..\..\Source\CentralEvents.DataAccess.Contracts\Entities\EventEntity.cs" Link="Entities\EventEntity.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Moq" Version="4.14.1" />
     <PackageReference Include="nunit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
@@ -14,8 +19,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="Entities\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Source\centralevent.Business\CentralEvent.Business.csproj" />
-    <ProjectReference Include="..\..\Source\CentralEvents.DataAccess\CentralEvents.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

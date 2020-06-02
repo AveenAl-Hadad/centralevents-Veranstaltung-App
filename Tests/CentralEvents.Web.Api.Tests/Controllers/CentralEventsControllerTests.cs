@@ -30,7 +30,7 @@
 		[Test]
 		public void GetEventsShouldDelegateToEventService()
 		{
-			List<EventModel> eventS = Enumerable.Range(1, 2).Select(id => new EventModel { Id = new Guid() }).ToList();
+			List<EventModel> eventS = Enumerable.Range(1, 2).Select(id => new EventModel()).ToList();
 
 			this.eventService.Setup(t => t.GetEventS()).Returns(eventS);
 
