@@ -6,7 +6,11 @@
 <h3>Veranstaltung reservieren</h3>
 
 <h2>@eventModel.Name</h2>
-<h5>Noch @eventModel.Restbestand Tickets von @eventModel.GesamtanzahlEintrittskarten verfügbar</h5>
+<h5>@eventModel.Restbestand Tickets von @eventModel.GesamtanzahlEintrittskarten verfügbar</h5>
+
+<p>
+    <label>* Pflichtangaben</label>
+</p>
 
 <div>
     <table>
@@ -21,20 +25,26 @@
         </tr>
         <tr>
             <td>
-                <label>Vorname:</label>
-                <input @bind="@bookingModel.Vorname"/>
+                <form>
+                    <label>Vorname*:</label>
+                    <input @bind="@bookingModel.Vorname" required/>
+                </form>
             </td>
         </tr>
         <tr>
             <td>
-                <label>Nachname:</label>
-                <input @bind="@bookingModel.Nachname"/>
+                <form>
+                    <label>Nachname*:</label>
+                    <input @bind="@bookingModel.Nachname" required/>
+                </form>
             </td>
         </tr>
         <tr>
             <td>
-                <label>Strasse:</label>
-                <input @bind="@bookingModel.Strasse"/>
+                <form>
+                    <label>Straße / Nr.*:</label>
+                    <input @bind="@bookingModel.Strasse" required/>
+                </form>
             </td>
         </tr>
         <tr>
@@ -45,40 +55,54 @@
         </tr>
         <tr>
             <td>
-                <label>Plz:</label>
-                <input @bind="@bookingModel.Plz"/>
+                <form>
+                    <label>PLZ*:</label>
+                    <input @bind="@bookingModel.Plz" required/>
+                </form>
             </td>
         </tr>
         <tr>
             <td>
-                <label>Ort:</label>
-                <input @bind="@bookingModel.Ort"/>
+                <form>
+                    <label>Ort*:</label>
+                    <input @bind="@bookingModel.Ort" required/>
+                </form>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <form>
+                    <label>
+                        E-Mail*:
+                    </label>
+                        @* <input type="email" name="email"> *@
+                    @* <label>E-Mail*:</label> *@
+                    <input type="email" name="email" @bind="@bookingModel.Email" required/>
+                </form>
             </td>
         </tr>
         <tr>
             <td>
-                <label>Telefonnummer:</label>
-                <input @bind="@bookingModel.Telefon"/>
+                <label>Telefonnummer:
+                    @* <br/> *@
+                    @* <h6>+49 421 123456</h6> *@
+                    </label>
+                <input type="tel" name="Telefonnummer" placeholder="0421-123456" @bind="@bookingModel.Telefon"/>
             </td>
         </tr>
-        <tr>
-            <td>
-                <label>Email:</label>
-                <input @bind="@bookingModel.Email"/>
-            </td>
-        </tr>
-        <tr>
-            <td id="abbrechen">
-                <a href="/">Abbrechen</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button @onclick="AddBooking">Karten reservieren</button>
-            </td>
-        </tr>
+
+
     </table>
+
+    <div id="abbrechen">
+        <a href="/">
+            <a href="/">Abbrechen</a>
+        </a>
+        <button @onclick="AddBooking">Karten reservieren</button>
+    </div>
 </div>
+
 
 @code
 {
