@@ -32,6 +32,13 @@
 			this.eventService.AddBooking(bookingModel);
 		}
 
+		[Route("addCustomer")]
+		[HttpPost]
+		public void AddBooking([FromBody] CustomerModel customerModel)
+		{
+			this.eventService.AddBooking(customerModel);
+		}
+
 		[Route("getEvents")]
 		[HttpGet]
 		public IEnumerable<EventModel> GetEventS()

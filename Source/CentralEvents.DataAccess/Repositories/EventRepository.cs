@@ -36,6 +36,11 @@
 			this.dataContext.Add(bookingEntity);
 		}
 
+		public void AddCustomer(CustomerEntity customerEntity)
+		{
+			this.dataContext.Add(customerEntity);
+		}
+
 		//READ
 		public IEnumerable<EventEntity> GetEvents()
 		{

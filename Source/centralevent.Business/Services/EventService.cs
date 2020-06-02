@@ -35,6 +35,12 @@
 			this.eventRepository.SaveChangedRepository();
 		}
 
+		public void AddCustomer(CustomerModel customerModel)
+		{
+			this.eventRepository.AddCustomer(this.eventMapper.CustomerModelToEntity(customerModel));
+			this.eventRepository.SaveChangedRepository();
+		}
+
 		public IEnumerable<EventModel> GetEventS()
 		{
 			return this.eventRepository.GetEvents().Select(this.eventMapper.EventEntityToModel);

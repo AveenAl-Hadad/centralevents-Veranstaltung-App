@@ -11,6 +11,8 @@
 
 		void AddBooking(BookingModel bookingModel);
 
+		void AddCustomer(CustomerModel customerModel);
+
 		IEnumerable<EventModel> GetEventS();
 
 		EventModel GetEvent(Guid id);
