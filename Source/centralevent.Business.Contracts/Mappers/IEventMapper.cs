@@ -12,6 +12,10 @@
 
 		BookingModel BookingEntityToModel(BookingEntity bookingEntity);
 
-		BookingEntity BookingModelToEntity(BookingModel bookingModel);
+		BookingEntity BookingModelToEntity(BookingModel bookingModel, BookingEntity bookingEntity);
+
+		CustomerModel CustomerEntityToModel(CustomerEntity customerEntity);
+
+		CustomerEntity CustomerModelToEntity(CustomerModel customerModel, CustomerEntity customerEntity);
 	}
 }

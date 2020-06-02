@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <Compile Include="..\centralevent.Business.Contracts\Models\BookingModel.cs" Link="Models\BookingModel.cs" />
+    <Compile Include="..\centralevent.Business.Contracts\Models\CustomerModel.cs" Link="Models\CustomerModel.cs" />
     <Compile Include="..\centralevent.Business.Contracts\Models\EventModel.cs" Link="Models\EventModel.cs" />
     <Compile Include="..\centralevents.Web.Api\Controllers\CesController.cs" Link="CesController\CesController.cs" />
   </ItemGroup>
