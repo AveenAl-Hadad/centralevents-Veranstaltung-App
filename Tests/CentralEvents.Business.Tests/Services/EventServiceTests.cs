@@ -31,17 +31,17 @@
 		private IEnumerable<EventEntity> eventSentities;
 		private IEnumerable<EventModel> result;
 
-		//private EventModel eventModel;
-		//private EventEntity eventEntity;
+		private EventModel eventModel;
+		private EventEntity eventEntity;
 
 		[SetUp]
 		public void SetUp()
 		{
-			//this.eventSmodels = new EventModel[0];
-			//this.eventSentities = new EventEntity[0];
-			//this.result = new EventModel[0];
-			//this.eventModel = new EventModel();
-			//this.eventEntity = new EventEntity();
+			this.eventSmodels = new EventModel[0];
+			this.eventSentities = new EventEntity[0];
+			this.result = new EventModel[0];
+			this.eventModel = new EventModel();
+			this.eventEntity = new EventEntity();
 
 			this.eventMapper = new Mock<IEventMapper>();
 			//this.dataContext = new Mock<IDataContext>();
@@ -83,7 +83,6 @@
 			Guid id = Guid.Parse(guid);
 			EventModel eventModel = new EventModel { Id = id };
 			EventEntity eventEntity = new EventEntity { Id = eventModel.Id };
-
 			this.eventRepository.Setup(s => s.GetEvent(id)).Returns(eventEntity);
 			this.eventMapper.Setup(m => m.EventEntityToModel(eventEntity)).Returns(eventModel);
 
@@ -91,6 +90,24 @@
 
 			Assert.AreEqual(id, result.Id);
 			this.eventRepository.Verify(s => s.GetEvent(id));
+		}
+
+		[TestCase("ersterName")]
+		[TestCase("zweiterAndererName")]
+		public void UpdateEventShouldUpdateStoredEvent(string expected)
+		{
+			Guid id = Guid.Parse("6FD5EB20-15F5-4096-8716-13F3493B1410");
+			EventModel eventModel = new EventModel { Id = id, Name = expected };
+			EventEntity eventEntity = new EventEntity { Id = eventModel.Id, Name = expected };
+
+			this.eventRepository.Setup(s => s.GetEvent(id)).Returns(eventEntity);
+			this.eventMapper.Setup(m => m.EventEntityToModel(eventEntity)).Returns(eventModel);
+
+			this.eventService.UpdateEvent(eventModel);
+
+			EventModel result = this.eventService.GetEvent(id);
+
+			Assert.AreEqual(expected, result.Name);
 		}
 	}
 }

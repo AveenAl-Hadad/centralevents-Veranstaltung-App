@@ -27,6 +27,15 @@
 			this.cEcontroller = new CentralEventsController(this.eventService.Object);
 		}
 
+		//[Test]
+		//public void AddEventDelegatesToEventService() { }
+
+		//[Test]
+		//public void AddBookingDelegatesToEventService() { }
+
+		//[Test]
+		//public void AddCustomerDelegatesToEventService() { }
+
 		[Test]
 		public void GetEventSdelegatesToEventService()
 		{
@@ -53,6 +62,20 @@
 
 			Assert.AreEqual(id, result.Id);
 			this.eventService.Verify(s => s.GetEvent(id));
+		}
+
+		[TestCase("ersterName")]
+		[TestCase("zweiterAndererName")]
+		public void UpdateEventDelegatesToEventService(string expected)
+		{
+			Guid id = Guid.Parse("6FD5EB20-15F5-4096-8716-13F3493B1410");
+			EventModel eventModel = new EventModel { Id = id, Name = expected };
+			this.eventService.Setup(s => s.GetEvent(id)).Returns(eventModel);
+
+			this.cEcontroller.UpdateEvent(eventModel);
+			EventModel result = this.cEcontroller.GetEvent(id);
+
+			Assert.AreEqual(id, result.Id);
 		}
 	}
 }

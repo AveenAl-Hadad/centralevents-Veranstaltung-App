@@ -30,14 +30,15 @@
 
 		public IEnumerable<EventModel> EventEntitiesToModelList(IEnumerable<EventEntity> eventEntities)
 		{
-			IList<EventModel> eventModels = new List<EventModel>();
+			//IList<EventModel> eventModels = new List<EventModel>();
+			//IEnumerable<EventModel> eventS = new EventModel[0];
+			//foreach (EventEntity eventEntity in eventEntities)
+			//{
+			//	eventS = eventS.Append(this.EventEntityToModel(eventEntity));
+			//}
+			//return eventS;
 
-			foreach (EventEntity eventEntity in eventEntities)
-			{
-				eventModels.Add(this.EventEntityToModel(eventEntity));
-			}
-
-			return eventModels.ToArray();
+			return eventEntities.Select(e => this.EventEntityToModel(e)).ToList();
 		}
 
 		public EventEntity EventModelToEntity(EventEntity eventEntity, EventModel eventModel)

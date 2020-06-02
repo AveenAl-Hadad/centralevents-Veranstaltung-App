@@ -9,6 +9,7 @@
 	public interface IEventMapper
 	{
 		EventModel EventEntityToModel(EventEntity eventEntity);
+
 		IEnumerable<EventModel> EventEntitiesToModelList(IEnumerable<EventEntity> eventEntities);
 
 		EventEntity EventModelToEntity(EventEntity eventEntity, EventModel eventModel);
