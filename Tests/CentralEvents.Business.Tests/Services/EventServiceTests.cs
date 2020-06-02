@@ -6,8 +6,10 @@
 
 	using CentralEvent.Business.Contracts.Mappers;
 	using CentralEvent.Business.Contracts.Models;
+	using CentralEvent.Business.Mappers;
 	using CentralEvent.Business.Services;
 
+	using CentralEvents.DataAccess.Contracts.Entities;
 	using CentralEvents.DataAccess.Contracts.Repositories;
 
 	using Moq;
@@ -17,47 +19,59 @@
 	[TestFixture]
 	public class EventServiceTests
 	{
-		//private EventService eventService;
-		//private IEventMapper eventMapper = new EventMapper();
-		//private IEventRepository eventRepository = new EventRepository();
+		//private IEventRepository eventRepository;
 		private EventService eventService;
-		private Mock<IEventRepository> eventRepository = new Mock<IEventRepository>();
-		private Mock<IEventMapper> eventMapper = new Mock<IEventMapper>();
+		//private IEventMapper eventMapper;
+
+		private Mock<IEventMapper> eventMapper;
+		private Mock<IEventRepository> eventRepository;
+		//private Mock<IDataContext> dataContext;
 
 		[SetUp]
 		public void SetUp()
 		{
-			this.eventRepository = new Mock<IEventRepository>();
 			this.eventMapper = new Mock<IEventMapper>();
-			this.eventService = new EventService(this.eventRepository.Object, this.eventMapper.Object);
+			//this.dataContext = new Mock<IDataContext>();
+			this.eventRepository = new Mock<IEventRepository>();
 
+			//this.eventMapper = new EventMapper();
 			//this.eventService = new EventService(this.eventRepository, this.eventMapper);
+			//this.eventRepository = new EventRepository(this.dataContext.Object);
+			this.eventService = new EventService(this.eventRepository.Object, this.eventMapper.Object);
 		}
 
 		[Test]
-		public void GetEventSshouldReturnStoredEventS()
+		public void GetEventsShouldDelegateToEventRepository()
+		{
+			//IQueryable<EventEntity> eventSqueries = new EnumerableQuery<EventEntity>(eventSentities);
+			//this.dataContext.Setup(e => e.Query<EventEntity>()).Returns(eventSqueries);
+
+			IEnumerable<EventEntity> eventSentities = Enumerable.Range(1, 2).Select(id => new EventEntity()).ToList();
+			IEnumerable<EventModel> eventSmodels = eventSentities.Select(e => new EventModel { Id = e.Id }).ToList();
+
+			this.eventRepository.Setup(e => e.GetEvents()).Returns(eventSentities);
+
+			IEnumerable<EventModel> result = this.eventService.GetEventS();
+
+			CollectionAssert.AreEquivalent(eventSmodels, result);
+		}
+
+		[Test]
+		[TestCase("6FD5EB20-15F5-4096-8716-13F3493B1410")]
+		[TestCase("53833F43-CA85-4E2E-AF3B-1A09C0172989")]
+		[TestCase("1209FE48-9590-4D92-8759-1B6E2A377926")]
+		public void GetEventSshouldReturnStoredEventS(Guid id)
 		{
 			Guid[] ids =
 			{
-				Guid.Parse("6FD5EB20-15F5-4096-8716-13F3493B1410")
-				//Guid.Parse("53833F43-CA85-4E2E-AF3B-1A09C0172989"),
-				//Guid.Parse("1209FE48-9590-4D92-8759-1B6E2A377926")
+				Guid.Parse("6FD5EB20-15F5-4096-8716-13F3493B1410"),
+				Guid.Parse("53833F43-CA85-4E2E-AF3B-1A09C0172989"),
+				Guid.Parse("1209FE48-9590-4D92-8759-1B6E2A377926")
 			};
-			
+
 			IEnumerable<EventModel> result = this.eventService.GetEventS();
 
-			//CollectionAssert.AreEquivalent(ids, result.Select(r => r.Id));
-
-			//Guid[] ids =
-			//{
-			//	Guid.Parse("5A6C4A3D-67B4-4363-9D56-9A65830C724C"),
-			//	Guid.Parse("0E07202A-E5DC-4CA1-94DF-42550D756940"),
-			//	Guid.Parse("702A0F03-B9DE-4D94-B079-F476F8D03812")
-			//};
-
-			//IEnumerable<EventModel> result = this.eventService.GetEventS();
-
-			//CollectionAssert.AreEquivalent(ids, result.Select(t => t.Id));
+			CollectionAssert.AreEquivalent(ids, result.Select(e => e.Id));
 		}
 	}
 }
