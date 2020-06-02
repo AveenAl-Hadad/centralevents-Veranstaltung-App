@@ -1,5 +1,8 @@
 ﻿namespace CentralEvent.Business.Mappers
 {
+	using System.Collections.Generic;
+	using System.Linq;
+
 	using CentralEvent.Business.Contracts.Mappers;
 	using CentralEvent.Business.Contracts.Models;
 
@@ -23,6 +26,18 @@
 										Restbestand = eventEntity.Restbestand
 									};
 			return eventModel;
+		}
+
+		public IEnumerable<EventModel> EventEntitiesToModelList(IEnumerable<EventEntity> eventEntities)
+		{
+			IList<EventModel> eventModels = new List<EventModel>();
+
+			foreach (EventEntity eventEntity in eventEntities)
+			{
+				eventModels.Add(this.EventEntityToModel(eventEntity));
+			}
+
+			return eventModels.ToArray();
 		}
 
 		public EventEntity EventModelToEntity(EventEntity eventEntity, EventModel eventModel)
@@ -58,7 +73,6 @@
 										};
 			return bookingModel;
 		}
-
 
 		//TODO wie oben
 		public BookingEntity BookingModelToEntity(BookingModel bookingModel)

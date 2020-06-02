@@ -28,15 +28,31 @@
 		}
 
 		[Test]
-		public void GetEventsShouldDelegateToEventService()
+		public void GetEventSdelegatesToEventService()
 		{
 			List<EventModel> eventS = Enumerable.Range(1, 2).Select(id => new EventModel()).ToList();
 
-			this.eventService.Setup(t => t.GetEventS()).Returns(eventS);
+			this.eventService.Setup(e => e.GetEventS()).Returns(eventS);
 
 			IEnumerable<EventModel> result = this.cEcontroller.GetEventS();
 
 			CollectionAssert.AreEquivalent(eventS, result);
+			this.eventService.Verify(s => s.GetEventS());
+		}
+
+		[TestCase("6FD5EB20-15F5-4096-8716-13F3493B1410")]
+		[TestCase("53833F43-CA85-4E2E-AF3B-1A09C0172989")]
+		[TestCase("1209FE48-9590-4D92-8759-1B6E2A377926")]
+		public void GetEventDelegatesToEventService(string guid)
+		{
+			Guid id = Guid.Parse(guid);
+			EventModel eventModel = new EventModel { Id = id };
+			this.eventService.Setup(s => s.GetEvent(id)).Returns(eventModel);
+
+			EventModel result = this.cEcontroller.GetEvent(id);
+
+			Assert.AreEqual(id, result.Id);
+			this.eventService.Verify(s => s.GetEvent(id));
 		}
 	}
 }
