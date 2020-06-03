@@ -31,7 +31,15 @@
 
 		public void AddBooking(BookingModel bookingModel)
 		{
-			this.eventRepository.AddBooking(this.eventMapper.BookingModelToEntity(bookingModel));
+			BookingEntity bookingEntity = new BookingEntity();
+			this.eventRepository.AddBooking(this.eventMapper.BookingModelToEntity(bookingModel, bookingEntity));
+			this.eventRepository.SaveChangedRepository();
+		}
+
+		public void AddCustomer(CustomerModel customerModel)
+		{
+			CustomerEntity customerEntity = new CustomerEntity();
+			this.eventRepository.AddCustomer(this.eventMapper.CustomerModelToEntity(customerModel, customerEntity));
 			this.eventRepository.SaveChangedRepository();
 		}
 

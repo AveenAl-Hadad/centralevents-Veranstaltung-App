@@ -59,24 +59,56 @@
 			return bookingModel;
 		}
 
-
-		//TODO wie oben
-		public BookingEntity BookingModelToEntity(BookingModel bookingModel)
+		public BookingEntity BookingModelToEntity(BookingModel bookingModel, BookingEntity bookingEntity)
 		{
-			BookingEntity bookingEntity = new BookingEntity
-										  {
-											  EventName = bookingModel.EventName,
-											  AnzahlTickets = bookingModel.AnzahlTickets,
-											  Vorname = bookingModel.Vorname,
-											  Nachname = bookingModel.Nachname,
-											  Strasse = bookingModel.Strasse,
-											  Hausnummer = bookingModel.Hausnummer,
-											  Plz = bookingModel.Plz,
-											  Ort = bookingModel.Ort,
-											  Telefon = bookingModel.Telefon,
-											  Email = bookingModel.Email
-										  };
+			bookingEntity.EventName = bookingModel.EventName;
+			bookingEntity.AnzahlTickets = bookingModel.AnzahlTickets;
+			bookingEntity.Vorname = bookingModel.Vorname;
+			bookingEntity.Nachname = bookingModel.Nachname;
+			bookingEntity.Strasse = bookingModel.Strasse;
+			bookingEntity.Hausnummer = bookingModel.Hausnummer;
+			bookingEntity.Plz = bookingModel.Plz;
+			bookingEntity.Ort = bookingModel.Ort;
+			bookingEntity.Telefon = bookingModel.Telefon;
+			bookingEntity.Email = bookingModel.Email;
+
 			return bookingEntity;
+		}
+
+		public CustomerModel CustomerEntityToModel(CustomerEntity customerEntity)
+		{
+			CustomerModel customerModel = new CustomerModel
+										  {
+											  Id = customerEntity.Id,
+											  Vorname = customerEntity.Vorname,
+											  Nachname = customerEntity.Nachname,
+											  Strasse = customerEntity.Strasse,
+											  Hausnummer = customerEntity.Hausnummer,
+											  Plz = customerEntity.Plz,
+											  Ort = customerEntity.Ort,
+											  Telefon = customerEntity.Telefon,
+											  Email = customerEntity.Email,
+											  Passwort = customerEntity.Passwort,
+											  Benutzername = customerEntity.Benutzername
+										  }
+				;
+			return customerModel;
+		}
+
+		public CustomerEntity CustomerModelToEntity(CustomerModel customerModel, CustomerEntity customerEntity)
+		{
+			customerEntity.Vorname = customerModel.Vorname;
+			customerEntity.Nachname = customerModel.Nachname;
+			customerEntity.Strasse = customerModel.Strasse;
+			customerEntity.Hausnummer = customerModel.Hausnummer;
+			customerEntity.Plz = customerModel.Plz;
+			customerEntity.Ort = customerModel.Ort;
+			customerEntity.Telefon = customerModel.Telefon;
+			customerEntity.Email = customerModel.Email;
+			customerEntity.Passwort = customerModel.Passwort;
+			customerEntity.Benutzername = customerModel.Benutzername;
+
+			return customerEntity;
 		}
 	}
 }
