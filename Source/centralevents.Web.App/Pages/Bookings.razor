@@ -45,7 +45,7 @@
         </tr>
         <tr>
             <td>
-                <label>Plz:</label>
+                <label>PLZ:</label>
                 <input @bind="@bookingModel.Plz"/>
             </td>
         </tr>
@@ -63,17 +63,18 @@
         </tr>
         <tr>
             <td>
-                <label>Email:</label>
+                <label>E-Mail:</label>
                 <input @bind="@bookingModel.Email"/>
             </td>
         </tr>
         <tr>
-            <td id="abbrechen">
-                <a href="/">Abbrechen</a>
+            <td >
+                <a id="buttons" href="/">Abbrechen</a>
             </td>
+            <td></td>
         </tr>
         <tr>
-            <td>
+            <td >
                 <button @onclick="AddBooking">Karten reservieren</button>
             </td>
         </tr>
