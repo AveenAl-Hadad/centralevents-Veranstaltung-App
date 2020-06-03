@@ -13,51 +13,55 @@
                 <td>
 
                     <label>* Benutzername:</label>
-                    <input @bind="@customerModel.Benutzername" type="text" name="benutzer" required />
+                    <label> @NeuerBenutzername</label>
+
+
+                    <input @bind="@customerModel.Benutzername" type="text" name="benutzer" required/>
+
 
                 </td>
             </tr>
             <tr>
                 <td>
                     <label>Vorname:</label>
-                    <input @bind="@customerModel.Vorname" type="text" />
+                    <input @bind="@customerModel.Vorname" type="text"/>
                 </td>
             </tr>
             <tr>
                 <td>
                     <label>Nachname:</label>
-                    <input @bind="@customerModel.Nachname" type="text" />
+                    <input @bind="@customerModel.Nachname" type="text"/>
                 </td>
             </tr>
             <tr>
                 <td>
                     <label>Strasse:</label>
-                    <input @bind="@customerModel.Strasse" type="text" />
+                    <input @bind="@customerModel.Strasse" type="text"/>
                 </td>
             </tr>
             <tr>
                 <td>
                     <label>Hausnummer:</label>
-                    <input @bind="@customerModel.Hausnummer" type="text" />
+                    <input @bind="@customerModel.Hausnummer" type="text"/>
                 </td>
             </tr>
             <tr>
                 <td>
                     <label>PLZ:</label>
-                    <input @bind="@customerModel.Plz" type="text" />
+                    <input @bind="@customerModel.Plz" type="text"/>
                 </td>
             </tr>
             <tr>
                 <td>
                     <label>Ort:</label>
-                    <input @bind="@customerModel.Ort" type="text" />
+                    <input @bind="@customerModel.Ort" type="text"/>
                 </td>
             </tr>
             <tr>
                 <td>
 
                     <label>Telefonnummer:</label>
-                    <input @bind="@customerModel.Telefon" type="tel" />
+                    <input @bind="@customerModel.Telefon" type="tel"/>
 
                 </td>
             </tr>
@@ -65,7 +69,8 @@
                 <td>
                     <form>
                         <label>* E-Mail:</label>
-                        <input @bind="@customerModel.Email" type="email" required />
+                        <label> @NeueEmail</label>
+                        <input @bind="@customerModel.Email" type="email" required/>
                     </form>
                 </td>
             </tr>
@@ -73,7 +78,7 @@
                 <td>
 
                     <label>* Passwort:</label>
-                    <input @bind="@customerModel.Passwort" type="password" />
+                    <input @bind="@customerModel.Passwort" type="password"/>
 
                 </td>
             </tr>
@@ -81,7 +86,7 @@
                 <td>
 
                     <label>* Passwort wiederholen:</label>
-                    <input type="password" />
+                    <input type="password"/>
 
                 </td>
             </tr>
@@ -92,7 +97,7 @@
             </tr>
             <tr>
                 <td>
-                    <button @onclick="AddKunde">Registrieren</button>
+                    <button @onclick="RegisterCustomer">Registrieren</button>
                 </td>
             </tr>
             <tr>
@@ -109,7 +114,70 @@
     [Parameter]
     public string Id { get; set; }
 
+    public string NeuerBenutzername { get; set; } = "";
+
+    public string NeueEmail { get; set; } = "";
+
+    public bool checkBenutzername;
+    public bool checkEmail;
+
     readonly CustomerModel customerModel = new CustomerModel();
+    private IEnumerable<CustomerModel> customers = new CustomerModel[0];
+
+    private async Task AddChecBenutzername()
+    {
+        customers = await Client.GetJsonAsync<IEnumerable<CustomerModel>>("api/eventControl/getCustomers");
+
+        bool result = false;
+
+        foreach (CustomerModel customerModel in customers)
+        {
+            result = this.customerModel.Benutzername == customerModel.Benutzername;
+        }
+
+        if (!result)
+        {
+            checkBenutzername = true;
+        }
+        else
+        {
+            customerModel.Benutzername = "Benutzername existiert bereits";
+            NeuerBenutzername = customerModel.Benutzername;
+        }
+    }
+
+    private async Task AddCheckEmail()
+    {
+        customers = await Client.GetJsonAsync<IEnumerable<CustomerModel>>("api/eventControl/getCustomers");
+
+        bool result = false;
+
+        foreach (CustomerModel customerModel in customers)
+        {
+            result = this.customerModel.Email == customerModel.Email;
+        }
+
+        if (!result)
+        {
+            checkEmail = true;
+        }
+        else
+        {
+            customerModel.Email = "Email existiert bereits";
+            NeueEmail = customerModel.Email;
+        }
+    }
+
+    private async Task RegisterCustomer()
+    {
+        await AddChecBenutzername();
+        await AddCheckEmail();
+
+        if (checkBenutzername && checkEmail)
+        {
+            await AddKunde();
+        }
+    }
 
     private async Task AddKunde()
     {
