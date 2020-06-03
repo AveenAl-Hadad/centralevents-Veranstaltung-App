@@ -34,9 +34,9 @@
 
 		[Route("addCustomer")]
 		[HttpPost]
-		public void AddBooking([FromBody] CustomerModel customerModel)
+		public void AddCustomer([FromBody] CustomerModel customerModel)
 		{
-			this.eventService.AddBooking(customerModel);
+			this.eventService.AddCustomer(customerModel);
 		}
 
 		[Route("getEvents")]
