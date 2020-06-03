@@ -5,115 +5,13 @@
 
 <h3>Registrieren</h3>
 
-
-<div>
-    <form>
-        <table>
-            <tr>
-                <td>
-
-                    <label>* Benutzername:</label>
-                    <label> @NeuerBenutzername</label>
-
-
-                    <input @bind="@customerModel.Benutzername" type="text" name="benutzer" required/>
-
-
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Vorname:</label>
-                    <input @bind="@customerModel.Vorname" type="text"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Nachname:</label>
-                    <input @bind="@customerModel.Nachname" type="text"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Strasse:</label>
-                    <input @bind="@customerModel.Strasse" type="text"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Hausnummer:</label>
-                    <input @bind="@customerModel.Hausnummer" type="text"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>PLZ:</label>
-                    <input @bind="@customerModel.Plz" type="text"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label>Ort:</label>
-                    <input @bind="@customerModel.Ort" type="text"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-
-                    <label>Telefonnummer:</label>
-                    <input @bind="@customerModel.Telefon" type="tel"/>
-
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <form>
-                        <label>* E-Mail:</label>
-                        <label> @NeueEmail</label>
-                        <input @bind="@customerModel.Email" type="email" required/>
-                    </form>
-                </td>
-            </tr>
-            <tr>
-                <td>
-
-                    <label>* Passwort:</label>
-                    <input @bind="@customerModel.Passwort" type="password"/>
-
-                </td>
-            </tr>
-            <tr>
-                <td>
-
-                    <label>* Passwort wiederholen:</label>
-                    <input type="password"/>
-
-                </td>
-            </tr>
-            <tr>
-                <td id="abbrechen">
-                    <a href="/">Abbrechen</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <button @onclick="RegisterCustomer">Registrieren</button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    * Pflichtfelder
-                </td>
-            </tr>
-        </table>
-    </form>
-</div>
 <form>
     <table>
         <tr>
             <td>
                 <label>* Benutzername:</label>
-                <input @bind="@customerModel.Benutzername" required />
+                <label> @NeuerBenutzername</label>
+                <input @bind="@customerModel.Benutzername" type="text" name="benutzer" required/>
             </td>
         </tr>
         <tr>
@@ -161,7 +59,8 @@
         <tr>
             <td>
                 <label>* E-Mail:</label>
-                <input type="email" @bind="@customerModel.Email" required/>
+                <label> @NeueEmail</label>
+                <input @bind="@customerModel.Email" type="email" required/>
             </td>
         </tr>
         <tr>
@@ -183,7 +82,7 @@
         </tr>
         <tr>
             <td>
-                <button @onclick="AddKunde">Registrieren</button>
+                <button @onclick="RegisterCustomer">Registrieren</button>
             </td>
         </tr>
         <tr>
