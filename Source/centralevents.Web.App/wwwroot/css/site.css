@@ -69,3 +69,6 @@ h2 {
 h3 {
   border: 0.05em solid lightgrey;
   background-color: rgba(198, 195, 184, 0.73); }
+
+h6 {
+  color: lightgrey; }
