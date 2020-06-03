@@ -11,7 +11,7 @@
 
 		void AddBooking(BookingEntity bookingEntity);
 
-		void AddCustomer(CustomerModel customerModel);
+		void AddCustomer(CustomerEntity customerModel);
 
 		IEnumerable<EventEntity> GetEvents();
 

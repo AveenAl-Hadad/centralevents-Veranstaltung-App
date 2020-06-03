@@ -7,82 +7,82 @@
 <h3>Registrieren</h3>
 
 
-<div>
+<form>
     <table>
         <tr>
             <td>
                 <label>* Benutzername:</label>
-                <input type="text" required />
+                <input @bind="@customerModel.Benutzername" required />
             </td>
         </tr>
         <tr>
             <td>
                 <label>Vorname:</label>
-                <input type="text" />
+                <input @bind="@customerModel.Vorname" />
             </td>
         </tr>
         <tr>
             <td>
                 <label>Nachname:</label>
-                <input type="text" />
+                <input @bind="@customerModel.Nachname" />
             </td>
         </tr>
         <tr>
             <td>
                 <label>Strasse:</label>
-                <input type="text" />
+                <input @bind="@customerModel.Strasse" />
             </td>
         </tr>
         <tr>
             <td>
                 <label>Hausnummer:</label>
-                <input type="text" />
+                <input @bind="@customerModel.Hausnummer"/>
             </td>
         </tr>
         <tr>
             <td>
                 <label>PLZ:</label>
-                <input type="text" />
+                <input @bind="@customerModel.Plz" />
             </td>
         </tr>
         <tr>
             <td>
                 <label>Ort:</label>
-                <input type="text" />
+                <input @bind="@customerModel.Ort" />
             </td>
         </tr>
         <tr>
             <td>
                 <label>Telefonnummer:</label>
-                <input type="text" />
+                <input type="tel" @bind="@customerModel.Telefon" />
             </td>
         </tr>
         <tr>
             <td>
                 <label>* E-Mail:</label>
-                <input type="text" required/>
+                <input type="email" @bind="@customerModel.Email" required/>
             </td>
         </tr>
         <tr>
             <td>
                 <label>* Passwort:</label>
-                <input type="text" />
+                <input type="password" @bind="@customerModel.Passwort" />
             </td>
         </tr>
         <tr>
             <td>
                 <label>* Passwort wiederholen:</label>
-                <input type="text" />
+                <input type="password" />
             </td>
         </tr>
         <tr>
-            <td id="abbrechen">
-                <a href="/">Abbrechen</a>
+            <td >
+                <a id="buttons" href="/">Abbrechen</a>
             </td>
         </tr>
         <tr>
             <td>
-                <button>Registrieren</button>
+                <button @onclick="AddKunde">Registrieren</button>
             </td>
         </tr>
         <tr>
@@ -91,10 +91,20 @@
             </td>
         </tr>
     </table>
-</div>
+</form>
 
 
 
 @code {
+
+    [Parameter]
+    public string Id { get; set; }
+
+    CustomerModel customerModel = new CustomerModel();
+
+    private async Task AddKunde()
+    {
+        await Client.PostAsync("api/eventControl/addCustomer", customerModel);
+    }
 
 }
