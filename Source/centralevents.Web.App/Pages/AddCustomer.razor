@@ -17,6 +17,7 @@
 
 
                     <input @bind="@customerModel.Benutzername" type="text" name="benutzer" required/>
+                    <input type="number" name="amount" id="amount" value="'.$ticket_amount.'" min="1" />
 
 
                 </td>
@@ -59,19 +60,15 @@
             </tr>
             <tr>
                 <td>
-
                     <label>Telefonnummer:</label>
                     <input @bind="@customerModel.Telefon" type="tel"/>
-
                 </td>
             </tr>
             <tr>
                 <td>
-                    <form>
-                        <label>* E-Mail:</label>
-                        <label> @NeueEmail</label>
-                        <input @bind="@customerModel.Email" type="email" required/>
-                    </form>
+                    <label>* E-Mail:</label>
+                    <label> @NeueEmail</label>
+                    <input @bind="@customerModel.Email" type="email" required/>
                 </td>
             </tr>
             <tr>
@@ -132,7 +129,10 @@
 
         foreach (CustomerModel customerModel in customers)
         {
-            result = this.customerModel.Benutzername == customerModel.Benutzername;
+            if (result == false)
+            {
+                result = this.customerModel.Benutzername == customerModel.Benutzername;
+            }
         }
 
         if (!result)
@@ -154,7 +154,10 @@
 
         foreach (CustomerModel customerModel in customers)
         {
-            result = this.customerModel.Email == customerModel.Email;
+            if (result == false)
+            {
+                result = this.customerModel.Email == customerModel.Email;
+            }
         }
 
         if (!result)

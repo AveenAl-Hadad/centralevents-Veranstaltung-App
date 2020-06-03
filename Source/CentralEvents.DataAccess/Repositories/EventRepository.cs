@@ -59,6 +59,11 @@
 			return eventEntity;
 		}
 
+		public IEnumerable<CustomerEntity> GetCustomerS()
+		{
+			return this.dataContext.Query<CustomerEntity>().ToArray();
+		}
+
 		//UPDATE
 		public void SaveChangedRepository()
 		{
@@ -70,5 +75,7 @@
 		{
 			this.dataContext.Remove(eventEntity);
 		}
+
+	
 	}
 }

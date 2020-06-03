@@ -20,5 +20,7 @@
 		void SaveChangedRepository();
 
 		void RemoveEvent(EventEntity eventEntity);
+
+		IEnumerable<CustomerEntity> GetCustomerS();
 	}
 }

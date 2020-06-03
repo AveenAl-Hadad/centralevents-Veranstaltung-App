@@ -46,6 +46,13 @@
 			return this.eventService.GetEventS();
 		}
 
+		[Route("getCustomers")]
+		[HttpGet]
+		public IEnumerable<CustomerModel> GetCustomerS()
+		{
+			return this.eventService.GetCustomerS();
+		}
+
 		[Route("getEvent/{id}")]
 		[HttpGet]
 		public EventModel GetEvent(Guid id)

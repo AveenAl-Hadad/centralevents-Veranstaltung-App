@@ -13,7 +13,7 @@
         <tr>
             <td>
                 <label>Ticketanzahl</label>
-                <input @bind="@bookingModel.AnzahlTickets" type="number" name="amount" id="amount" min="1"/>
+                <input @bind="@bookingModel.AnzahlTickets" type="number" min="1"/>
                 @* Wie komm ich an die entweder php-Werte im Code, oder gibts da cooles seitenübergreifendes binding zeug? *@
                 @*<input type="number" name="amount" id="amount" value="'.$ticket_amount.'" min="1" />*@
 
@@ -79,6 +79,9 @@
         </tr>
     </table>
 </div>
+
+
+
 
 @code
 {

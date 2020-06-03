@@ -20,5 +20,7 @@
 		void UpdateEvent(EventModel eventModel);
 
 		void RemoveEvent(EventModel eventModel);
+
+		IEnumerable<CustomerModel> GetCustomerS();
 	}
 }

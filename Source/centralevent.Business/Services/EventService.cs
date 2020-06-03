@@ -53,6 +53,11 @@
 			return this.eventMapper.EventEntityToModel(this.eventRepository.GetEvent(id));
 		}
 
+		public IEnumerable<CustomerModel> GetCustomerS()
+		{
+			return this.eventRepository.GetCustomerS().Select(this.eventMapper.CustomerEntityToModel);
+		}
+
 		public void UpdateEvent(EventModel eventModel)
 		{
 			EventEntity eventEntity = this.eventRepository.GetEvent(eventModel.Id);
@@ -64,5 +69,7 @@
 		{
 			throw new NotImplementedException();
 		}
+
+	
 	}
 }
