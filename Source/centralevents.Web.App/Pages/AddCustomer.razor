@@ -69,6 +69,7 @@
                 <td>
                     <form>
                         <label>* E-Mail:</label>
+                        <label> @NeueEmail</label>
                         <input @bind="@customerModel.Email" type="email" required/>
                     </form>
                 </td>
@@ -96,7 +97,7 @@
             </tr>
             <tr>
                 <td>
-                    <button @onclick="AddCheckKunde">Registrieren</button>
+                    <button @onclick="RegisterCustomer">Registrieren</button>
                 </td>
             </tr>
             <tr>
@@ -115,10 +116,15 @@
 
     public string NeuerBenutzername { get; set; } = "";
 
+    public string NeueEmail { get; set; } = "";
+
+    public bool checkBenutzername;
+    public bool checkEmail;
+
     readonly CustomerModel customerModel = new CustomerModel();
     private IEnumerable<CustomerModel> customers = new CustomerModel[0];
 
-    private async Task AddCheckKunde()
+    private async Task AddChecBenutzername()
     {
         customers = await Client.GetJsonAsync<IEnumerable<CustomerModel>>("api/eventControl/getCustomers");
 
@@ -131,12 +137,45 @@
 
         if (!result)
         {
-            await AddKunde();
+            checkBenutzername = true;
         }
         else
         {
             customerModel.Benutzername = "Benutzername existiert bereits";
             NeuerBenutzername = customerModel.Benutzername;
+        }
+    }
+
+    private async Task AddCheckEmail()
+    {
+        customers = await Client.GetJsonAsync<IEnumerable<CustomerModel>>("api/eventControl/getCustomers");
+
+        bool result = false;
+
+        foreach (CustomerModel customerModel in customers)
+        {
+            result = this.customerModel.Email == customerModel.Email;
+        }
+
+        if (!result)
+        {
+            checkEmail = true;
+        }
+        else
+        {
+            customerModel.Email = "Email existiert bereits";
+            NeueEmail = customerModel.Email;
+        }
+    }
+
+    private async Task RegisterCustomer()
+    {
+        await AddChecBenutzername();
+        await AddCheckEmail();
+
+        if (checkBenutzername && checkEmail)
+        {
+            await AddKunde();
         }
     }
 
