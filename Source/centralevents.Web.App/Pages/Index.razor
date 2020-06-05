@@ -1,18 +1,17 @@
 ﻿@page "/"
 @using CentralEvents.Web.App.Wrappers
-
-@using CentralEvents.Web.Api.Controllers
 @using CentralEvent.Business.Contracts.Models
+@using CentralEvents.Web.Api.Controllers
 @inject IHttpClient Client
 
 
 <h3>Veranstaltungen</h3>
 
-@foreach (EventModel eventModel in eventS)
+@foreach (EventModel eModel in eventS)
 {
-    <a href="details/@eventModel.Id">
+    <a href="details/@eModel.Id">
         <div class="event">
-            @eventModel.Name
+            @eModel.Name
         </div>
     </a>
     <br/>
@@ -23,7 +22,7 @@
 {
     private IEnumerable<EventModel> eventS = new EventModel[0];
     private EventModel eventModel = new EventModel();
-    CeStaDaController ceStaDaController = new CeStaDaController();
+    readonly CeStaDaController ceStaDaController = new CeStaDaController();
 
     protected override async Task OnInitializedAsync()
     {
@@ -31,9 +30,9 @@
 
         if (!(eventS.Count() > 0))
         {
-            foreach (EventModel eventModel in ceStaDaController.CreateStammdaten())
+            foreach (EventModel eModel in ceStaDaController.CreateStammdaten())
             {
-                this.eventModel = eventModel;
+                eventModel = eModel;
                 await AddEvent();
             }
         }

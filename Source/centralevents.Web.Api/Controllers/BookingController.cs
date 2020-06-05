@@ -1,8 +1,5 @@
 ﻿namespace CentralEvents.Web.Api.Controllers
 {
-	using System;
-	using System.Collections.Generic;
-
 	using CentralEvent.Business.Contracts.Models;
 	using CentralEvent.Business.Contracts.Services;
 

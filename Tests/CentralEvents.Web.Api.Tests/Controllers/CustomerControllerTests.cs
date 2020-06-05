@@ -1,10 +1,5 @@
 ﻿namespace CentralEvents.Web.Api.Tests.Controllers
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-
-	using CentralEvent.Business.Contracts.Models;
 	using CentralEvent.Business.Contracts.Services;
 
 	using CentralEvents.Web.Api.Controllers;

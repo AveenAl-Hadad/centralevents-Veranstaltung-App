@@ -114,11 +114,11 @@
 
         bool result = false;
 
-        foreach (CustomerModel customerModel in customers)
+        foreach (CustomerModel model in customers)
         {
             if (result == false)
             {
-                result = this.customerModel.Benutzername == customerModel.Benutzername;
+                result = this.customerModel.Benutzername == model.Benutzername;
             }
         }
 
@@ -139,11 +139,11 @@
 
         bool result = false;
 
-        foreach (CustomerModel customerModel in customers)
+        foreach (CustomerModel model in customers)
         {
             if (result == false)
             {
-                result = this.customerModel.Email == customerModel.Email;
+                result = this.customerModel.Email == model.Email;
             }
         }
 

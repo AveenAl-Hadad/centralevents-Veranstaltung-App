@@ -4,8 +4,6 @@
 	using System.Collections.Generic;
 	using System.Linq;
 
-	using CentralEvent.Business.Contracts.Models;
-
 	using CentralEvents.DataAccess.Contracts.Context;
 	using CentralEvents.DataAccess.Contracts.Entities;
 	using CentralEvents.DataAccess.Contracts.Exeptions;
@@ -15,9 +13,6 @@
 	{
 		private readonly IDataContext dataContext;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="EventRepository"/> class.
-		/// </summary>
 		public EventRepository(IDataContext dataContext)
 		{
 			this.dataContext = dataContext;
@@ -75,7 +70,5 @@
 		{
 			this.dataContext.Remove(eventEntity);
 		}
-
-	
 	}
 }
