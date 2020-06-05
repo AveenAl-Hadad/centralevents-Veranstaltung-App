@@ -4,10 +4,18 @@
 
 	public class EventEntity : EntityBase
 	{
-		public EventEntity()
+		// public EventEntity()
+		// {
+		// 	this.Id = Guid.NewGuid();
+		// }
+
+		public EventEntity() : this(Guid.NewGuid()) { }
+
+		internal EventEntity(Guid id)
 		{
-			this.Id = Guid.NewGuid();
+			this.Id = id;
 		}
+
 
 		public string Name { get; set; }
 
