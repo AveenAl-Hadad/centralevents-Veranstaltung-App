@@ -110,7 +110,7 @@
 
     private async Task AddChecBenutzername()
     {
-        customers = await Client.GetJsonAsync<IEnumerable<CustomerModel>>("api/eventControl/getCustomers");
+        customers = await Client.GetJsonAsync<IEnumerable<CustomerModel>>("api/customer/getAll");
 
         bool result = false;
 
@@ -135,7 +135,7 @@
 
     private async Task AddCheckEmail()
     {
-        customers = await Client.GetJsonAsync<IEnumerable<CustomerModel>>("api/eventControl/getCustomers");
+        customers = await Client.GetJsonAsync<IEnumerable<CustomerModel>>("api/customer/getAll");
 
         bool result = false;
 
@@ -171,6 +171,6 @@
 
     private async Task AddKunde()
     {
-        await Client.PostAsync("api/eventControl/addCustomer", customerModel);
+        await Client.PostAsync("api/customer/add", customerModel);
     }
 }

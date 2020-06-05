@@ -14,9 +14,9 @@
 	using NUnit.Framework;
 
 	[TestFixture]
-	public class CentralEventsControllerTests
+	public class EventControllerTests
 	{
-		private CentralEventsController cEcontroller;
+		private EventController eventController;
 		private Mock<IEventService> eventService;
 
 		[SetUp]
@@ -24,17 +24,8 @@
 		{
 			this.eventService = new Mock<IEventService>();
 
-			this.cEcontroller = new CentralEventsController(this.eventService.Object);
+			this.eventController = new EventController(this.eventService.Object);
 		}
-
-		//[Test]
-		//public void AddEventDelegatesToEventService() { }
-
-		//[Test]
-		//public void AddBookingDelegatesToEventService() { }
-
-		//[Test]
-		//public void AddCustomerDelegatesToEventService() { }
 
 		[Test]
 		public void GetEventSdelegatesToEventService()
@@ -43,7 +34,7 @@
 
 			this.eventService.Setup(e => e.GetEventS()).Returns(eventS);
 
-			IEnumerable<EventModel> result = this.cEcontroller.GetEventS();
+			IEnumerable<EventModel> result = this.eventController.GetEventS();
 
 			CollectionAssert.AreEquivalent(eventS, result);
 			this.eventService.Verify(s => s.GetEventS());
@@ -58,7 +49,7 @@
 			EventModel eventModel = new EventModel { Id = id };
 			this.eventService.Setup(s => s.GetEvent(id)).Returns(eventModel);
 
-			EventModel result = this.cEcontroller.GetEvent(id);
+			EventModel result = this.eventController.GetEvent(id);
 
 			Assert.AreEqual(id, result.Id);
 			this.eventService.Verify(s => s.GetEvent(id));
@@ -72,8 +63,8 @@
 			EventModel eventModel = new EventModel { Id = id, Name = expected };
 			this.eventService.Setup(s => s.GetEvent(id)).Returns(eventModel);
 
-			this.cEcontroller.UpdateEvent(eventModel);
-			EventModel result = this.cEcontroller.GetEvent(id);
+			this.eventController.UpdateEvent(eventModel);
+			EventModel result = this.eventController.GetEvent(id);
 
 			Assert.AreEqual(id, result.Id);
 		}

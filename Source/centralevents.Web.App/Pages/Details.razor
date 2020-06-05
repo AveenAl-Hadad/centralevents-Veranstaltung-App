@@ -63,7 +63,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        eventModel = await Client.GetJsonAsync<EventModel>($"api/eventControl/getEvent/{Id}");
+        eventModel = await Client.GetJsonAsync<EventModel>($"api/event/get/{Id}");
     }
 
 }

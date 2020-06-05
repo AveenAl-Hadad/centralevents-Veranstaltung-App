@@ -8,59 +8,38 @@
 
 	using Microsoft.AspNetCore.Mvc;
 
-	[Route("api/eventControl")]
-	public class CentralEventsController : ControllerBase
+	[Route("api/event")]
+	public class EventController : ControllerBase
 	{
 		private readonly IEventService eventService;
 
-		public CentralEventsController(IEventService eventService)
+		public EventController(IEventService eventService)
 		{
 			this.eventService = eventService;
 		}
 
-		[Route("addEvent")]
+		[Route("add")]
 		[HttpPost]
 		public void AddEvent([FromBody] EventModel eventModel) // FROMBODY voll wichtig da das Model in HTTP gewrappt ist und so!!!!
 		{
 			this.eventService.AddEvent(eventModel);
 		}
 
-		[Route("addBooking")]
-		[HttpPost]
-		public void AddBooking([FromBody] BookingModel bookingModel)
-		{
-			this.eventService.AddBooking(bookingModel);
-		}
-
-		[Route("addCustomer")]
-		[HttpPost]
-		public void AddCustomer([FromBody] CustomerModel customerModel)
-		{
-			this.eventService.AddCustomer(customerModel);
-		}
-
-		[Route("getEvents")]
+		[Route("getAll")]
 		[HttpGet]
 		public IEnumerable<EventModel> GetEventS()
 		{
 			return this.eventService.GetEventS();
 		}
 
-		[Route("getCustomers")]
-		[HttpGet]
-		public IEnumerable<CustomerModel> GetCustomerS()
-		{
-			return this.eventService.GetCustomerS();
-		}
-
-		[Route("getEvent/{id}")]
+		[Route("get/{id}")]
 		[HttpGet]
 		public EventModel GetEvent(Guid id)
 		{
 			return this.eventService.GetEvent(id);
 		}
 
-		[Route("updateEvent")]
+		[Route("update")]
 		[HttpPut]
 		public void UpdateEvent([FromBody] EventModel eventModel)
 		{
