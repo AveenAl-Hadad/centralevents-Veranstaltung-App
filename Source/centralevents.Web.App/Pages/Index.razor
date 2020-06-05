@@ -23,7 +23,7 @@
 {
     private IEnumerable<EventModel> eventS = new EventModel[0];
     private EventModel eventModel = new EventModel();
-    CesController cesController = new CesController();
+    CeStaDaController ceStaDaController = new CeStaDaController();
 
     protected override async Task OnInitializedAsync()
     {
@@ -31,7 +31,7 @@
 
         if (!(eventS.Count() > 0))
         {
-            foreach (EventModel eventModel in cesController.CreateStammdaten())
+            foreach (EventModel eventModel in ceStaDaController.CreateStammdaten())
             {
                 this.eventModel = eventModel;
                 await AddEvent();
