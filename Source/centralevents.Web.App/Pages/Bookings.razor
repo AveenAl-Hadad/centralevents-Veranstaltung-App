@@ -7,8 +7,7 @@
 
 <h2>@eventModel.Name</h2>
 <h5>@eventModel.Restbestand Tickets von @eventModel.GesamtanzahlEintrittskarten verfügbar</h5>
-<h5>Während des Buchungsvorgangs kann es passieren, dass Tickets ausverkauft sind.</h5>
-<h5>@MessageOverbooking</h5>
+
 <p>
     <label>* Pflichtangaben</label>
 </p>
@@ -18,7 +17,7 @@
         <tr>
             <td>
                 <label>Ticketanzahl</label>
-                <input @bind="@bookingModel.AnzahlTickets" type="number" min="1" />
+                <input @bind="@bookingModel.AnzahlTickets" type="number" min="1"/>
                 @* Wie komm ich an die entweder php-Werte im Code, oder gibts da cooles seitenübergreifendes binding zeug? *@
                 @*<input type="number" name="amount" id="amount" value="'.$ticket_amount.'" min="1" />*@
 
@@ -27,37 +26,37 @@
         <tr>
             <td>
                 <label>Vorname*:</label>
-                <input @bind="@bookingModel.Vorname" required />
+                <input @bind="@bookingModel.Vorname" required/>
             </td>
         </tr>
         <tr>
             <td>
                 <label>Nachname*:</label>
-                <input @bind="@bookingModel.Nachname" required />
+                <input @bind="@bookingModel.Nachname" required/>
             </td>
         </tr>
         <tr>
             <td>
-                <label>Straße*:</label>
-                <input @bind="@bookingModel.Strasse" required />
+                <label>Straße / Nr.*:</label>
+                <input @bind="@bookingModel.Strasse" required/>
             </td>
         </tr>
         <tr>
             <td>
-                <label>Hausnummer*:</label>
-                <input @bind="@bookingModel.Hausnummer" required/>
+                <label>Hausnummer:</label>
+                <input @bind="@bookingModel.Hausnummer"/>
             </td>
         </tr>
         <tr>
             <td>
                 <label>PLZ*:</label>
-                <input @bind="@bookingModel.Plz" required />
+                <input @bind="@bookingModel.Plz" required/>
             </td>
         </tr>
         <tr>
             <td>
                 <label>Ort*:</label>
-                <input @bind="@bookingModel.Ort" required />
+                <input @bind="@bookingModel.Ort" required/>
             </td>
         </tr>
         <tr>
@@ -65,7 +64,7 @@
                 <label>
                     E-Mail*:
                 </label>
-                <input type="email" name="email" @bind="@bookingModel.Email" required />
+                <input type="email" name="email" @bind="@bookingModel.Email" required/>
             </td>
         </tr>
         <tr>
@@ -73,23 +72,21 @@
                 <label>
                     Telefonnummer:
                 </label>
-                <input type="tel" name="Telefonnummer" placeholder="0421-123456" @bind="@bookingModel.Telefon" />
+                <input type="tel" name="Telefonnummer" placeholder="0421-123456" @bind="@bookingModel.Telefon"/>
             </td>
         </tr>
         <tr>
-            <td>
+            <td >
                 <a id="buttons" href="/">Abbrechen</a>
             </td>
             <td></td>
         </tr>
         <tr>
-            <td>
-                <button @onclick="CheckOverBooking">Karten reservieren</button>
-
+            <td >
+                <button @onclick="AddBooking">Karten reservieren</button>
             </td>
         </tr>
-      </table>
-
+    </table>
 </form>
 
 
@@ -101,8 +98,6 @@
 
     EventModel eventModel = new EventModel();
     BookingModel bookingModel = new BookingModel();
-
-    public string MessageOverbooking { get; set; };
 
     protected override async Task OnInitializedAsync()
     {
@@ -127,17 +122,4 @@
         eventModel = await Client.GetJsonAsync<EventModel>($"api/event/get/{Id}");
     }
 
-    private async Task CheckOverBooking()
-    {
-        eventModel = await Client.GetJsonAsync<EventModel>($"api/eventControl/getEvent/{Id}");
-        if (eventModel.Restbestand >= bookingModel.AnzahlTickets)
-        {
-            MessageOverbooking = "Gebucht";
-            AddBooking();
-        }
-        else
-        {
-            MessageOverbooking = "Es sind nicht mehr so viele Tickets buchbar.";
-        }
-    }
 }
