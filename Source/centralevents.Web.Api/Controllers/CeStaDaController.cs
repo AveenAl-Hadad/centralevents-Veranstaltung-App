@@ -6,7 +6,7 @@
 
 	using CentralEvent.Business.Contracts.Models;
 
-	public class CesController
+	public class CeStaDaController
 	{
 		public IEnumerable<EventModel> CreateStammdaten()
 		{
