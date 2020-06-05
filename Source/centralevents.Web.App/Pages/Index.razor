@@ -27,7 +27,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/eventControl/getEvents");
+        eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/event/getAll");
 
         if (!(eventS.Count() > 0))
         {
@@ -37,12 +37,12 @@
                 await AddEvent();
             }
         }
-        eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/eventControl/getEventS");
+        eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/event/getAll");
     }
 
     private async Task AddEvent()
     {
-        await Client.PostAsync("api/eventControl/addEvent", eventModel);
+        await Client.PostAsync("api/event/add", eventModel);
     }
 
 }

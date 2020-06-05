@@ -101,7 +101,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        eventModel = await Client.GetJsonAsync<EventModel>($"api/eventControl/getEvent/{Id}");
+        eventModel = await Client.GetJsonAsync<EventModel>($"api/event/get/{Id}");
     }
 
     private async Task AddBooking()
@@ -110,16 +110,16 @@
 
         bookingModel.EventName = eventModel.Name;
 
-        await Client.PostAsync("api/eventControl/addBooking", bookingModel);
+        await Client.PostAsync("api/booking/add", bookingModel);
     }
 
     private async Task UpdateEvent()
     {
         eventModel.Restbestand = eventModel.Restbestand - bookingModel.AnzahlTickets;
 
-        await Client.PutAsync("api/eventControl/updateEvent", eventModel);
+        await Client.PutAsync("api/event/update", eventModel);
 
-        eventModel = await Client.GetJsonAsync<EventModel>($"api/eventControl/getEvent/{Id}");
+        eventModel = await Client.GetJsonAsync<EventModel>($"api/event/get/{Id}");
     }
 
 }
