@@ -1,17 +1,15 @@
-using CentralEvent.Business.Contracts.Mappers;
-using CentralEvents.DataAccess.Contracts.Context;
-
 namespace CentralEvents.Web.Api
 {
+	using CentralEvent.Business.Contracts.Mappers;
 	using CentralEvent.Business.Contracts.Services;
 	using CentralEvent.Business.Mappers;
 	using CentralEvent.Business.Services;
 
 	using CentralEvents.Commons;
 	using CentralEvents.DataAccess.Context;
+	using CentralEvents.DataAccess.Contracts.Context;
 	using CentralEvents.DataAccess.Contracts.Repositories;
 	using CentralEvents.DataAccess.Repositories;
-
 	using Microsoft.AspNetCore.Builder;
 	using Microsoft.AspNetCore.Hosting;
 	using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +27,8 @@ namespace CentralEvents.Web.Api
 			services.AddScoped<IEventRepository, EventRepository>();
 			services.AddScoped<IEventMapper, EventMapper>();
 			services.AddScoped<IDataContext, DataContext>();
+
+
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

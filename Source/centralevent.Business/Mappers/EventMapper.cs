@@ -89,8 +89,9 @@
 											  Telefon = customerEntity.Telefon,
 											  Email = customerEntity.Email,
 											  Passwort = customerEntity.Passwort,
-											  Benutzername = customerEntity.Benutzername
-										  }
+											  Benutzername = customerEntity.Benutzername,
+											  Rolle = customerEntity.Rolle
+			}
 				;
 			return customerModel;
 		}
@@ -107,6 +108,7 @@
 			customerEntity.Email = customerModel.Email;
 			customerEntity.Passwort = customerModel.Passwort;
 			customerEntity.Benutzername = customerModel.Benutzername;
+			customerEntity.Rolle = customerModel.Rolle;
 
 			return customerEntity;
 		}

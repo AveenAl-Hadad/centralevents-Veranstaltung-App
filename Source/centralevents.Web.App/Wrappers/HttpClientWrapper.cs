@@ -5,9 +5,9 @@
 	using System.Net.Http;
 	using System.Text;
 	using System.Threading.Tasks;
-
+	using Microsoft.AspNetCore.Authentication;
 	using Microsoft.AspNetCore.Components;
-
+	using Microsoft.AspNetCore.Http;
 	using Newtonsoft.Json;
 
 	[ExcludeFromCodeCoverage]
@@ -30,14 +30,26 @@
 			return await this.httpClient.PostAsync(this.GetUrl(path), this.JsonToStringContent(model));
 		}
 
+		public async Task<TModel> PostJsonAsync<TModel>(string path, TModel model)
+		{
+			return await this.httpClient.PostJsonAsync<TModel>(this.GetUrl(path), model);
+		}
+
 		//READ
 		public async Task<TModel> GetJsonAsync<TModel>(string path)
 		{
 			return await this.httpClient.GetJsonAsync<TModel>(this.GetUrl(path));
 		}
 
+	
+
 		//UPDATE
 		public async Task<HttpResponseMessage> PutAsync<TModel>(string path, TModel model)
+		{
+			return await this.httpClient.PutAsync(this.GetUrl(path), this.JsonToStringContent(model));
+		}
+
+		public async Task<HttpResponseMessage> ActionAsync<TModel>(string path, TModel model)
 		{
 			return await this.httpClient.PutAsync(this.GetUrl(path), this.JsonToStringContent(model));
 		}
@@ -63,6 +75,26 @@
 			//StringContent stringContent = new StringContent(serializedBody);
 			//stringContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
 			return stringContent;
+		}
+
+		public Task<AuthenticateResult> AuthenticateAsync()
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task ChallengeAsync(AuthenticationProperties properties)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task ForbidAsync(AuthenticationProperties properties)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task InitializeAsync(AuthenticationScheme scheme, HttpContext context)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

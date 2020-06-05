@@ -37,5 +37,8 @@
 
 		[JsonPropertyName("Passwort")]
 		public string Passwort { get; set; }
+
+		[JsonPropertyName("Rolle")]
+		public string Rolle { get; set; }
 	}
 }
