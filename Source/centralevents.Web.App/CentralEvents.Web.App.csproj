@@ -16,8 +16,12 @@
     <Compile Include="..\centralevent.Business.Contracts\Models\BookingModel.cs" Link="Models\BookingModel.cs" />
     <Compile Include="..\centralevent.Business.Contracts\Models\CustomerModel.cs" Link="Models\CustomerModel.cs" />
     <Compile Include="..\centralevent.Business.Contracts\Models\EventModel.cs" Link="Models\EventModel.cs" />
+<<<<<<< HEAD
     <Compile Include="..\centralevents.Web.Api\Controllers\CesController.cs" Link="CesController\CesController.cs" />
     <Compile Include="..\centralevents.Web.Api\Controllers\LoginController.cs" Link="CesController\LoginController.cs" />
+=======
+    <Compile Include="..\centralevents.Web.Api\Controllers\CeStaDaController.cs" Link="CesController\CeStaDaController.cs" />
+>>>>>>> develop
   </ItemGroup>
 
   <ItemGroup>

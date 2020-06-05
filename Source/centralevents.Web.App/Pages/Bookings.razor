@@ -99,9 +99,11 @@
     EventModel eventModel = new EventModel();
     BookingModel bookingModel = new BookingModel();
 
+    public string MessageOverbooking { get; set; } // nächstes mal Properties ohne Semikolon ;P
+
     protected override async Task OnInitializedAsync()
     {
-        eventModel = await Client.GetJsonAsync<EventModel>($"api/eventControl/getEvent/{Id}");
+        eventModel = await Client.GetJsonAsync<EventModel>($"api/event/get/{Id}");
     }
 
     private async Task AddBooking()
@@ -110,16 +112,32 @@
 
         bookingModel.EventName = eventModel.Name;
 
-        await Client.PostAsync("api/eventControl/addBooking", bookingModel);
+        await Client.PostAsync("api/booking/add", bookingModel);
     }
 
     private async Task UpdateEvent()
     {
         eventModel.Restbestand = eventModel.Restbestand - bookingModel.AnzahlTickets;
 
-        await Client.PutAsync("api/eventControl/updateEvent", eventModel);
+        await Client.PutAsync("api/event/update", eventModel);
 
-        eventModel = await Client.GetJsonAsync<EventModel>($"api/eventControl/getEvent/{Id}");
+        eventModel = await Client.GetJsonAsync<EventModel>($"api/event/get/{Id}");
     }
 
+    private async Task CheckOverBooking()
+    {
+        eventModel = await Client.GetJsonAsync<EventModel>($"api/eventControl/getEvent/{Id}");
+        if (eventModel.Restbestand >= bookingModel.AnzahlTickets)
+        {
+            MessageOverbooking = "Gebucht";
+            await AddBooking(); // und hier nich das await vergessen, wette das is die nicht aktuelle zahl....ihr wartet nicht auf das ende der funktion, sondern
+                                // geht asyncron am aufruf(synchron) vorbei und manchmal zeigt man dann schneller das ergebnis an, bevor die methode gearbeitet hat und noch garnich gebucht hat.
+                                // is alles richtig, nur die zahl is noch die alte, weil ihr schneller guggt als gebucht wurde, weil auf durchführung nicht gewartet wurde.
+                                // oder ich klugscheisser nur und es geht immrnoch nich =))
+        }
+        else
+        {
+            MessageOverbooking = "Es sind nicht mehr so viele Tickets buchbar.";
+        }
+    }
 }
