@@ -35,7 +35,6 @@
 														 ?? throw new InvalidOperationException());
 		}
 
-		// Hier wird immer der aktuelle der Stand der DB migriert
 		public void Initialize()
 		{
 			this.Database.Migrate();

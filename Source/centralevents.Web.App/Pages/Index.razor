@@ -2,10 +2,17 @@
 @using CentralEvents.Web.App.Wrappers
 @using CentralEvent.Business.Contracts.Models
 @using CentralEvents.Web.Api.Controllers
+@*@model EventModel
+@{
+   ViewData["Title"] = "CentralEvents- Hauptseite";
+}*@
 @inject IHttpClient Client
 
 
 <h3>Veranstaltungen</h3>
+
+@*<button @onclick="Test">test</button>*@
+
 
 @foreach (EventModel eModel in eventS)
 {
@@ -20,9 +27,15 @@
 
 @code
 {
+
     private IEnumerable<EventModel> eventS = new EventModel[0];
     private EventModel eventModel = new EventModel();
     readonly CeStaDaController ceStaDaController = new CeStaDaController();
+
+    //private IActionResult acResult = new ActionResult<>();
+
+    //ViewData["Title"] = "CentralEvents- Hauptseite";
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -44,4 +57,8 @@
         await Client.PostAsync("api/event/add", eventModel);
     }
 
+    //private async Task<IActionResult> Test()
+    //{
+    //    //return RedirectToPage("/.booking");
+    //}
 }

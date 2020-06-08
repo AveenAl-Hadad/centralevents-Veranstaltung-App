@@ -17,19 +17,19 @@
         <tr>
             <td>
                 <label>Vorname:</label>
-                <input @bind="@customerModel.Vorname" />
+                <input @bind="@customerModel.Vorname"/>
             </td>
         </tr>
         <tr>
             <td>
                 <label>Nachname:</label>
-                <input @bind="@customerModel.Nachname" />
+                <input @bind="@customerModel.Nachname"/>
             </td>
         </tr>
         <tr>
             <td>
                 <label>Strasse:</label>
-                <input @bind="@customerModel.Strasse" />
+                <input @bind="@customerModel.Strasse"/>
             </td>
         </tr>
         <tr>
@@ -41,19 +41,19 @@
         <tr>
             <td>
                 <label>PLZ:</label>
-                <input @bind="@customerModel.Plz" />
+                <input @bind="@customerModel.Plz"/>
             </td>
         </tr>
         <tr>
             <td>
                 <label>Ort:</label>
-                <input @bind="@customerModel.Ort" />
+                <input @bind="@customerModel.Ort"/>
             </td>
         </tr>
         <tr>
             <td>
                 <label>Telefonnummer:</label>
-                <input type="tel" @bind="@customerModel.Telefon" />
+                <input type="tel" @bind="@customerModel.Telefon"/>
             </td>
         </tr>
         <tr>
@@ -66,13 +66,13 @@
         <tr>
             <td>
                 <label>* Passwort:</label>
-                <input type="password" @bind="@customerModel.Passwort" />
+                <input type="password" @bind="@customerModel.Passwort"/>
             </td>
         </tr>
         <tr>
             <td>
                 <label>* Passwort wiederholen:</label>
-                <input type="password" />
+                <input type="password"/>
             </td>
         </tr>
         <tr>
@@ -102,8 +102,8 @@
 
     public string NeueEmail { get; set; } = "";
 
-    public bool checkBenutzername;
-    public bool checkEmail;
+    public bool CheckBenutzername;
+    public bool CheckEmail;
 
     readonly CustomerModel customerModel = new CustomerModel();
     private IEnumerable<CustomerModel> customers = new CustomerModel[0];
@@ -118,13 +118,13 @@
         {
             if (result == false)
             {
-                result = this.customerModel.Benutzername == model.Benutzername;
+                result = customerModel.Benutzername == model.Benutzername;
             }
         }
 
         if (!result)
         {
-            checkBenutzername = true;
+            CheckBenutzername = true;
         }
         else
         {
@@ -143,13 +143,13 @@
         {
             if (result == false)
             {
-                result = this.customerModel.Email == model.Email;
+                result = customerModel.Email == model.Email;
             }
         }
 
         if (!result)
         {
-            checkEmail = true;
+            CheckEmail = true;
         }
         else
         {
@@ -163,8 +163,10 @@
         await AddChecBenutzername();
         await AddCheckEmail();
 
-        if (checkBenutzername && checkEmail)
+        if (CheckBenutzername && CheckEmail)
         {
+    //customerModel.Passwort = H;
+
             await AddKunde();
         }
     }

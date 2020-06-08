@@ -27,9 +27,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Presentation- Layer", "1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CentralEvents.Commons", "Source\CentralEvents.Commons\CentralEvents.Commons.csproj", "{E3EAC0C1-814D-43F0-B926-E6A77D34220D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CentralEvents.Business.Tests", "Tests\CentralEvents.Business.Tests\CentralEvents.Business.Tests.csproj", "{74148C01-D5BB-4D39-BEB6-4485D5DC7F41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CentralEvents.Business.Tests", "Tests\CentralEvents.Business.Tests\CentralEvents.Business.Tests.csproj", "{74148C01-D5BB-4D39-BEB6-4485D5DC7F41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CentralEvents.Web.Api.Tests", "Tests\CentralEvents.Web.Api.Tests\CentralEvents.Web.Api.Tests.csproj", "{1ACEE694-7E80-41D8-B58A-CE17BA4052CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CentralEvents.Web.Api.Tests", "Tests\CentralEvents.Web.Api.Tests\CentralEvents.Web.Api.Tests.csproj", "{1ACEE694-7E80-41D8-B58A-CE17BA4052CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

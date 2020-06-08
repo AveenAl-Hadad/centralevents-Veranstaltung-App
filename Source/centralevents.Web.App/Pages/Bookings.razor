@@ -126,7 +126,7 @@
 
     private async Task CheckOverBooking()
     {
-        eventModel = await Client.GetJsonAsync<EventModel>($"api/eventControl/getEvent/{Id}");
+        eventModel = await Client.GetJsonAsync<EventModel>($"api/event/get/{Id}");
         if (eventModel.Restbestand >= bookingModel.AnzahlTickets)
         {
             MessageOverbooking = "Gebucht";

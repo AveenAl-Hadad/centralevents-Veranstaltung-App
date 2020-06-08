@@ -12,21 +12,22 @@
 	using Microsoft.Extensions.Configuration;
 	using Microsoft.IdentityModel.Tokens;
 
-	[Authorize]
-	[Route("api/loginController")]
+	using RestSharp;
+
 	[ApiController]
-	public class LoginController : ControllerBase
+	[Route("api/security")]
+	[Authorize]
+	public class SecurityController : ControllerBase
 	{
 		private IConfiguration config;
 
-		public LoginController(IConfiguration config)
+		public SecurityController(IConfiguration config)
 		{
 			this.config = config;
 		}
 
+		[Route("login")]
 		[AllowAnonymous]
-		// Maybe Route setzen
-		//[Route("login")]
 		[HttpGet]
 		public IActionResult Login(string userId = "", string pass = "")
 		{
@@ -40,10 +41,33 @@
 
 			if (userModel.Benutzername != null)
 			{
-				string tokenString = this.GenerateJSONWebToken(userModel);
+				string tokenString = this.GenerateJsonWebToken(userModel);
 				response = this.Ok(new { token = tokenString });
 			}
 
+			return response;
+		}
+
+		[Route("login2/{UserId}/{Passwort}")]
+		[AllowAnonymous]
+		[HttpGet]
+		public IActionResult Login2(string UserId, string Passwort)
+		{
+			CustomerModel loginModel = new CustomerModel();
+			loginModel.Benutzername = UserId;
+			loginModel.Passwort = Passwort;
+
+			IActionResult response = this.Unauthorized();
+
+			CustomerModel userModel = this.AuthenticateUser(loginModel);
+
+			if (userModel.Benutzername != null)
+			{
+				string tokenString = this.GenerateJsonWebToken(userModel);
+				response = this.Ok(new { token = tokenString });
+			}
+
+			//IRestResponse test = response;
 			return response;
 		}
 
@@ -60,7 +84,7 @@
 			return userModel;
 		}
 
-		private string GenerateJSONWebToken(CustomerModel infoModel)
+		private string GenerateJsonWebToken(CustomerModel infoModel)
 		{
 			SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.config["Jwt:Key"]));
 			SigningCredentials credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -84,10 +108,27 @@
 			return encodetoken;
 		}
 
-		[Authorize(Roles = "Admin")]
-		//[Route("setAdmin")]
+		[Authorize("Admin")]
+		//[AllowAnonymous]
+		[Route("auth")]
 		[HttpPost]
 		public IActionResult Post([FromBody] string value)
+		{
+			try
+			{
+				return this.Ok(value);
+			}
+			catch (Exception)
+			{
+				return this.NotFound();
+			}
+		}
+
+		[Route("auth2")]
+		[Authorize("Admin")]
+		//[AllowAnonymous]
+		[HttpGet]
+		public IActionResult Test([FromHeader] string value)
 		{
 			try
 			{

@@ -16,7 +16,6 @@
     <Compile Include="..\centralevent.Business.Contracts\Models\BookingModel.cs" Link="Models\BookingModel.cs" />
     <Compile Include="..\centralevent.Business.Contracts\Models\CustomerModel.cs" Link="Models\CustomerModel.cs" />
     <Compile Include="..\centralevent.Business.Contracts\Models\EventModel.cs" Link="Models\EventModel.cs" />
-    <Compile Include="..\centralevents.Web.Api\Controllers\LoginController.cs" Link="CesController\LoginController.cs" />
     <Compile Include="..\centralevents.Web.Api\Controllers\CeStaDaController.cs" Link="CesController\CeStaDaController.cs" />
 
   </ItemGroup>
@@ -35,7 +34,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="RestSharp" Version="106.11.4" />
+    <PackageReference Include="RestSharp" Version="106.11.5-alpha.0.2" />
   </ItemGroup>
 
   <ItemGroup>

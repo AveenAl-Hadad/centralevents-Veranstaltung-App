@@ -22,8 +22,6 @@ namespace CentralEvents.Web.App
 
 		public IConfiguration Configuration { get; }
 
-		// This method gets called by the runtime. Use this method to add services to the container.
-		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddRazorPages();
@@ -32,26 +30,25 @@ namespace CentralEvents.Web.App
 
 			//JWT
 			services.AddScoped<IServiceComponent, ServiceComponent>();
-			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-					.AddJwtBearer(option =>
-								  {
-									  option.TokenValidationParameters = new TokenValidationParameters
-																		 {
-																			 ValidateIssuer = true,
-																			 ValidateAudience = true,
-																			 ValidateLifetime = true,
-																			 ValidateIssuerSigningKey = true,
-																			 ValidIssuer = this.Configuration["Jwt: Issuer"],
-																			 ValidAudience = this.Configuration["Jwt:Issuer"],
-																			 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.Configuration["Jwt:Key"]))
-																		 };
+			//services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+			//		.AddJwtBearer(option =>
+			//					  {
+			//						  option.TokenValidationParameters = new TokenValidationParameters
+			//															 {
+			//																 ValidateIssuer = true,
+			//																 ValidateAudience = true,
+			//																 ValidateLifetime = true,
+			//																 ValidateIssuerSigningKey = true,
+			//																 ValidIssuer = this.Configuration["Jwt: Issuer"],
+			//																 ValidAudience = this.Configuration["Jwt:Issuer"],
+			//																 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.Configuration["Jwt:Key"]))
+			//															 };
 
-									  // .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options => Configuration.Bind("JwtSettings", options));
-									  //.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options => Configuration.Bind("CookieSettings", options));
-								  });
+			//						  // .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options => Configuration.Bind("JwtSettings", options));
+			//						  //.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options => Configuration.Bind("CookieSettings", options));
+			//					  });
 		}
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
 			if (env.IsDevelopment())
@@ -71,13 +68,14 @@ namespace CentralEvents.Web.App
 			app.UseRouting();
 
 			// JWT
-			app.UseAuthentication();
-			app.UseAuthorization();
+			//app.UseAuthentication();
+			//app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>
 							 {
 								 endpoints.MapBlazorHub();
-								 endpoints.MapDefaultControllerRoute();
+								 //endpoints.MapRazorPages();
+								 //endpoints.MapDefaultControllerRoute(); // JWT
 								 endpoints.MapFallbackToPage("/_Host");
 							 });
 		}

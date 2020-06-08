@@ -7,13 +7,16 @@
 	using System.Threading.Tasks;
 
 	using Microsoft.AspNetCore.Components;
+	using Microsoft.AspNetCore.Mvc;
 
 	using Newtonsoft.Json;
+
+	using RestSharp;
 
 	[ExcludeFromCodeCoverage]
 	public class HttpClientWrapper : IHttpClient
 	{
-		private static string ApiUrl = "http://localhost:54768/";
+		private static string apiUrl = "http://localhost:54768/";
 
 		private HttpClient httpClient;
 
@@ -40,6 +43,12 @@
 			return await this.httpClient.GetJsonAsync<TModel>(this.GetUrl(path));
 		}
 
+		public async Task<IRestResponse> GetAsync(string path)
+		{
+			IRestResponse response =  (IRestResponse)await this.httpClient.GetAsync(this.GetUrl(path));
+			return response;
+		}
+
 		//UPDATE
 		public async Task<HttpResponseMessage> PutAsync<TModel>(string path, TModel model)
 		{
@@ -57,10 +66,16 @@
 			await this.httpClient.DeleteAsync(this.GetUrl(path));
 		}
 
+		public async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request)
+		{
+			return await this.httpClient.SendAsync(request);
+
+		}
+
 		//Hilfsmethoden
 		private string GetUrl(string path)
 		{
-			Uri api = new Uri(ApiUrl);
+			Uri api = new Uri(apiUrl);
 			Uri uri = new Uri(api, path);
 			return uri.ToString();
 		}

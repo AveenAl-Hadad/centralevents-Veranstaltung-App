@@ -35,21 +35,24 @@
 
                     <button @onclick="@CreateToken">Login</button>
                     <button @onclick="@PostMethod">Post</button>
-                    @* Formatieren macht die äusseren klammern weg *@
+                    <button @onclick="@Test">Test</button>
+                    <button @onclick="@Login2">Login2</button>
                 </td>
             </tr>
-            <tr>
+            @*<tr>
                 <td>
-                    <label>@Bearer</label>
-                    <label>@Message</label>
+
                 </td>
-            </tr>
+            </tr>*@
             <tr>
                 <td id="buttons">
                     <a href="customer">Registrieren</a> @*weiterleiten auf Registireren Seite*@
                 </td>
             </tr>
         </table>
+        <label>Bearer: @Bearer</label>
+        <br/>
+        <label>Nachricht: @Message</label>
     </header>
     <div>
         @Body
@@ -74,8 +77,10 @@
 
 @code{
 
+    [Parameter]
     public string UserId { get; set; } = "ceUser";
 
+    [Parameter]
     public string Passwort { get; set; } = "xxx";
 
     public string Message { get; set; }
@@ -90,15 +95,15 @@
         Message = "";
         Bearer = "";
 
-    // 54865 APP Port
-        IRestResponse response = await Service.ResponseJson("http://localhost:54865/api/loginController?userId=" + UserId + "&pass=" + Passwort + "", null, null, null, Method.GET);
+        // 54865 APP Port
+        var response = await Service.ResponseJsonOrig("http://localhost:54768/api/security/login?userId=" + UserId + "&pass=" + Passwort + "", null, null, null, Method.GET);
 
-    //customModel.Benutzername = UserId;
-    //customModel.Passwort = Passwort;
-    //IRestResponse response = this.Client.PostAsync()
-    //IRestResponse response = await Client.GetJsonAsync<IRestResponse>("")
-    //await Client.PostJsonAsync("api/loginControl/login", customModel);
-    //await Client.PostAsync("api/eventControl/addBooking", customModel);
+        //customModel.Benutzername = UserId;
+        //customModel.Passwort = Passwort;
+        //IRestResponse response = this.Client.PostAsync()
+        //IRestResponse response = await Client.GetJsonAsync<IRestResponse>("")
+        //await Client.PostJsonAsync("api/loginControl/login", customModel);
+        //await Client.PostAsync("api/eventControl/addBooking", customModel);
 
         if (response.StatusCode == HttpStatusCode.OK)
         {
@@ -117,11 +122,12 @@
     {
         Message = "";
         Dictionary<string, string> header = new Dictionary<string, string>();
-        header.Add("Authorization", "Bearer" + Bearer);
+        header.Add("Authorization", "Bearer" + " " + Bearer);
         string value = Guid.NewGuid().ToString();
 
-    // 54768 ist API Port
-        IRestResponse response = await Service.ResponseJsonAuth("http://localhost:54865/api/loginController", value, header, Method.GET);
+        // 54768 ist API Port
+        var response = await Service.ResponseJsonAuth("http://localhost:54768/api/security/auth", value, header, Method.GET);
+        //IRestResponse response = await Service.ResponseJsonAuth("http://localhost:54768/api/security/auth", value, header, Method.POST);
 
         if (response.StatusCode == HttpStatusCode.OK)
         {
@@ -133,4 +139,45 @@
         }
     }
 
+    public async Task Login2()
+    {
+        Message = "";
+        Dictionary<string, string> header = new Dictionary<string, string>();
+        header.Add("Authorization", "Bearer" + " " + Bearer);
+        string value = Guid.NewGuid().ToString();
+
+        var response = await Service.ResponseJsonAuth("http://localhost:54768/api/security/login2", null, header, Method.GET);
+        //var response = await Client..GetAsync($"api/security/login2/{UserId}/{Passwort}");
+
+        if (response.StatusCode == HttpStatusCode.OK)
+        {
+            string json = JsonConvert.DeserializeObject<Dictionary<string, string>>(response.Content.ToString())["token"];
+
+            Bearer = json;
+            Message = "Create Token Success: " + response.StatusCode;
+        }
+        else
+        {
+            Message = "Create Token Error: " + response.StatusCode;
+        }
+    }
+
+    public async Task Test()
+    {
+        Message = "";
+        Dictionary<string, string> header = new Dictionary<string, string>();
+        header.Add("Authorization", "Bearer" + " " + Bearer);
+        string value = Guid.NewGuid().ToString();
+
+        var response = await Service.ResponseJsonAuth("http://localhost:54768/api/security/auth2", null, header, Method.GET);
+
+        if (response.StatusCode == HttpStatusCode.OK)
+        {
+            Message = "Test Success: " + response.StatusCode;
+        }
+        else
+        {
+            Message = "Test Error: " + response.StatusCode;
+        }
+    }
 }
