@@ -1,6 +1,9 @@
 ﻿@page "/customer"
 @using CentralEvents.Web.App.Wrappers
 @using CentralEvent.Business.Contracts.Models
+@using System
+@using System.Security.Cryptography;
+@using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 @inject IHttpClient Client
 
 <h3>Registrieren</h3>
@@ -72,7 +75,7 @@
         <tr>
             <td>
                 <label>* Passwort wiederholen:</label>
-                <input type="password"/>
+                <input type="password" @bind="PasswortCheck"/>
             </td>
         </tr>
         <tr>
@@ -98,17 +101,19 @@
     [Parameter]
     public string Id { get; set; }
 
+    public string PasswortCheck { get; set; }
     public string NeuerBenutzername { get; set; } = "";
 
     public string NeueEmail { get; set; } = "";
 
     public bool CheckBenutzername;
     public bool CheckEmail;
+    public bool CheckPasswort;
 
     readonly CustomerModel customerModel = new CustomerModel();
     private IEnumerable<CustomerModel> customers = new CustomerModel[0];
 
-    private async Task AddChecBenutzername()
+    private async Task AddCheckBenutzername()
     {
         customers = await Client.GetJsonAsync<IEnumerable<CustomerModel>>("api/customer/getAll");
 
@@ -158,14 +163,30 @@
         }
     }
 
+    private async Task AddCheckPasswort()
+    {
+        CheckPasswort = false;
+        if (customerModel.Passwort == PasswortCheck)
+        {
+            CheckPasswort = true;
+        }
+        else
+        {
+            customerModel.Passwort = "Bitte geben sie das identische Passwort ein!";
+            PasswortCheck = customerModel.Passwort;
+        }
+    }
+
     private async Task RegisterCustomer()
     {
-        await AddChecBenutzername();
-        await AddCheckEmail();
 
-        if (CheckBenutzername && CheckEmail)
+        await AddCheckBenutzername();
+        await AddCheckEmail();
+        await AddCheckPasswort();
+
+        if (CheckBenutzername && CheckEmail && CheckPasswort)
         {
-    //customerModel.Passwort = H;
+            //customerModel.Passwort = H;
 
             await AddKunde();
         }
