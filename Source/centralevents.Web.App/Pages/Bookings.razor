@@ -6,7 +6,8 @@
 <h3>Veranstaltung reservieren</h3>
 
 <h2>@eventModel.Name</h2>
-<h5>@eventModel.Restbestand Tickets von @eventModel.GesamtanzahlEintrittskarten verfügbar</h5>
+<h4>@eventModel.Restbestand Tickets von @eventModel.GesamtanzahlEintrittskarten verfügbar</h4>
+<h5>@BookingMessage </h5>
 
 <p>
     <label>* Pflichtangaben</label>
@@ -37,14 +38,14 @@
         </tr>
         <tr>
             <td>
-                <label>Straße / Nr.*:</label>
+                <label>Straße*:</label>
                 <input @bind="@bookingModel.Strasse" required/>
             </td>
         </tr>
         <tr>
             <td>
-                <label>Hausnummer:</label>
-                <input @bind="@bookingModel.Hausnummer"/>
+                <label>Hausnummer*:</label>
+                <input @bind="@bookingModel.Hausnummer"required/>
             </td>
         </tr>
         <tr>
@@ -75,19 +76,21 @@
                 <input type="tel" name="Telefonnummer" placeholder="0421-123456" @bind="@bookingModel.Telefon"/>
             </td>
         </tr>
-        <tr>
-            <td >
-                <a id="buttons" href="/">Abbrechen</a>
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td >
-                <button @onclick="CheckOverBooking">Karten reservieren</button>
-            </td>
-        </tr>
     </table>
 </form>
+
+<table>
+    <tr>
+        <td>
+            <a id="buttons" href="/">Abbrechen</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button @onclick="CheckOverBooking">Karten reservieren</button>
+        </td>
+    </tr>
+</table>
 
 
 @code
@@ -99,7 +102,7 @@
     EventModel eventModel = new EventModel();
     BookingModel bookingModel = new BookingModel();
 
-    public string MessageOverbooking { get; set; } // nächstes mal Properties ohne Semikolon ;P
+    public string BookingMessage { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -129,15 +132,12 @@
         eventModel = await Client.GetJsonAsync<EventModel>($"api/event/get/{Id}");
         if (eventModel.Restbestand >= bookingModel.AnzahlTickets)
         {
-            MessageOverbooking = "Gebucht";
-            await AddBooking(); // und hier nich das await vergessen, wette das is die nicht aktuelle zahl....ihr wartet nicht auf das ende der funktion, sondern
-                                // geht asyncron am aufruf(synchron) vorbei und manchmal zeigt man dann schneller das ergebnis an, bevor die methode gearbeitet hat und noch garnich gebucht hat.
-                                // is alles richtig, nur die zahl is noch die alte, weil ihr schneller guggt als gebucht wurde, weil auf durchführung nicht gewartet wurde.
-                                // oder ich klugscheisser nur und es geht immrnoch nich =))
+            BookingMessage = "Ihre Tickets wurden gebucht. Vielen Dank.";
+            await AddBooking();
         }
         else
         {
-            MessageOverbooking = "Es sind nicht mehr so viele Tickets buchbar.";
+            BookingMessage = $"Es sind nur noch {eventModel.Restbestand} Tickets buchbar.";
         }
     }
 }
