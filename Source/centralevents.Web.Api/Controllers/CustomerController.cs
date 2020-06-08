@@ -27,10 +27,12 @@
 		{
 			string password = customerModel.Passwort;
 			byte[] salt = new byte[128 / 8];
+
 			using (var rng = RandomNumberGenerator.Create())
 			{
 				rng.GetBytes(salt);
 			}
+
 			customerModel.Passwort = Convert.ToBase64String(KeyDerivation.Pbkdf2(
 																		password: password,
 																		salt: salt,
