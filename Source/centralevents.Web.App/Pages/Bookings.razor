@@ -1,85 +1,80 @@
 ﻿@page "/bookings/{id}"
 @using CentralEvents.Web.App.Wrappers
 @using CentralEvent.Business.Contracts.Models
+@using System.Net.Mail
 @inject IHttpClient Client
 
 <h3>Veranstaltung reservieren</h3>
 
 <h2>@eventModel.Name</h2>
 <h4>@eventModel.Restbestand Tickets von @eventModel.GesamtanzahlEintrittskarten verfügbar</h4>
+<h4>Tickets sind schnell vergriffen</h4>
 <h5>@BookingMessage </h5>
 
 <p>
     <label>* Pflichtangaben</label>
 </p>
 
-<form>
-    <table>
-        <tr>
-            <td>
-                <label>Ticketanzahl</label>
-                <input @bind="@bookingModel.AnzahlTickets" type="number" min="1"/>
-                @* Wie komm ich an die entweder php-Werte im Code, oder gibts da cooles seitenübergreifendes binding zeug? *@
-                @*<input type="number" name="amount" id="amount" value="'.$ticket_amount.'" min="1" />*@
-
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>Vorname*:</label>
-                <input @bind="@bookingModel.Vorname" required/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>Nachname*:</label>
-                <input @bind="@bookingModel.Nachname" required/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>Straße*:</label>
-                <input @bind="@bookingModel.Strasse" required/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>Hausnummer*:</label>
-                <input @bind="@bookingModel.Hausnummer"required/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>PLZ*:</label>
-                <input @bind="@bookingModel.Plz" required/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>Ort*:</label>
-                <input @bind="@bookingModel.Ort" required/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>
-                    E-Mail*:
-                </label>
-                <input type="email" name="email" @bind="@bookingModel.Email" required/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>
-                    Telefonnummer:
-                </label>
-                <input type="tel" name="Telefonnummer" placeholder="0421-123456" @bind="@bookingModel.Telefon"/>
-            </td>
-        </tr>
-    </table>
-</form>
-
 <table>
+    <tr>
+        <td>
+            <label>Ticketanzahl*:</label>
+            <input @bind="@bookingModel.AnzahlTickets" type="number" min="1"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Vorname*:</label>
+            <input @bind="@bookingModel.Vorname" required/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Nachname*:</label>
+            <input @bind="@bookingModel.Nachname" required/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Straße*:</label>
+            <input @bind="@bookingModel.Strasse" required/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Hausnummer*:</label>
+            <input @bind="@bookingModel.Hausnummer"required/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>PLZ*:</label>
+            <input @bind="@bookingModel.Plz" required/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Ort*:</label>
+            <input @bind="@bookingModel.Ort" required/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>
+                E-Mail*:
+            </label>
+            <input type="email" name="email" @bind="@bookingModel.Email" required/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>
+                Telefonnummer:
+            </label>
+            <input type="tel" name="Telefonnummer" placeholder="0421-123456" @bind="@bookingModel.Telefon"/>
+        </td>
+    </tr>
+
     <tr>
         <td>
             <a id="buttons" href="/">Abbrechen</a>
@@ -91,7 +86,6 @@
         </td>
     </tr>
 </table>
-
 
 @code
 {
@@ -107,6 +101,7 @@
     protected override async Task OnInitializedAsync()
     {
         eventModel = await Client.GetJsonAsync<EventModel>($"api/event/get/{Id}");
+        bookingModel.AnzahlTickets = 1;
     }
 
     private async Task AddBooking()
@@ -130,14 +125,47 @@
     private async Task CheckOverBooking()
     {
         eventModel = await Client.GetJsonAsync<EventModel>($"api/event/get/{Id}");
+
         if (eventModel.Restbestand >= bookingModel.AnzahlTickets)
         {
-            BookingMessage = "Ihre Tickets wurden gebucht. Vielen Dank.";
-            await AddBooking();
+            if (bookingModel.AnzahlTickets > 0)
+            {
+                if (!string.IsNullOrEmpty(bookingModel.Vorname)
+                    && !string.IsNullOrEmpty(bookingModel.Nachname)
+                    && !string.IsNullOrEmpty(bookingModel.Strasse)
+                    && !string.IsNullOrEmpty(bookingModel.Hausnummer)
+                    && !string.IsNullOrEmpty(bookingModel.Plz)
+                    && !string.IsNullOrEmpty(bookingModel.Ort)
+                    && !string.IsNullOrEmpty(bookingModel.Email))
+
+                {
+                    try
+                    {
+                        // Validation durch das Framework für Emailadressen
+                        MailAddress address = new MailAddress(bookingModel.Email);
+                        await AddBooking();
+                        BookingMessage = "Ihre Tickets wurden gebucht.";
+                    }
+                    catch (FormatException e)
+                    {
+                        // Exeption fängt den Fehlerfall und Buchung wird nicht ausgeführt
+                        BookingMessage = "Ungültige Emailadresse";
+                    }
+                }
+                else
+                {
+                    BookingMessage = "Bitte Pflichtfelder ausfüllen";
+                }
+            }
+            else
+
+            {
+                BookingMessage = "Ungültige Ticketanzahl";
+            }
         }
         else
         {
-            BookingMessage = $"Es sind nur noch {eventModel.Restbestand} Tickets buchbar.";
+            BookingMessage = $"Es sind nur noch {eventModel.Restbestand} Tickets buchbar";
         }
     }
 }
