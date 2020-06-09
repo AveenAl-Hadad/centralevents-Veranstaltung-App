@@ -82,7 +82,14 @@
     </tr>
     <tr>
         <td>
-            <button @onclick="CheckOverBooking">Karten reservieren</button>
+            @if (eventModel.Restbestand <= 0)
+            {
+                <button type="button" disabled>Veranstaltung ausverkauft</button>
+            }
+            else
+            {
+                <button @onclick="CheckOverBooking">Karten reservieren</button>
+            }
         </td>
     </tr>
 </table>
