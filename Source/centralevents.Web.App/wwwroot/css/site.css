@@ -27,6 +27,9 @@ td {
 p {
   border: 0.05em solid rgba(0, 0, 0, 0.6); }
 
+input {
+  min-width: 180px; }
+
 #login {
   margin: 0 0 0 auto;
   text-align: right;
@@ -42,6 +45,12 @@ p {
   text-align: center;
   border: 0.05em solid #adadad;
   background-color: #e1e1e1; }
+
+#fehlermeldung {
+  color: red; }
+
+#registriert {
+  color: green; }
 
 a {
   color: #000000;
