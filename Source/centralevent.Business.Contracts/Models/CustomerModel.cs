@@ -49,7 +49,7 @@
 
 		[Display(Name = "Passwort")]
 		[JsonPropertyName("Passwort")]
-		public string Passwort { get; set; }
+		public string Passwort { get; set; } = "";
 
 		[Display(Name = "Rolle")]
 		[JsonPropertyName("Rolle")]
