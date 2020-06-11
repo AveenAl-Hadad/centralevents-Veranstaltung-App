@@ -34,6 +34,12 @@
 			return await this.httpClient.PostAsync(this.GetUrl(path), this.JsonToStringContent(model));
 		}
 
+		public async Task<TModel> PostJsonAsyncWithHead<TModel>(string path, object content)
+		{
+			await this.SetHeader();
+			return await this.httpClient.PostJsonAsync<TModel>(this.GetUrl(path), content);
+		}
+
 		//READ
 		public async Task<TModel> GetJsonAsync<TModel>(string path)
 		{
@@ -50,6 +56,12 @@
 		public async Task<HttpResponseMessage> PutAsync<TModel>(string path, TModel model)
 		{
 			return await this.httpClient.PutAsync(this.GetUrl(path), this.JsonToStringContent(model));
+		}
+
+		public async Task<TModel> PutJsonAsyncWithHead<TModel>(string path, object content)
+		{
+			await this.SetHeader();
+			return await this.httpClient.PutJsonAsync<TModel>(this.GetUrl(path), content);
 		}
 
 		//DELETE
@@ -70,21 +82,7 @@
 		{
 			string serializedBody = JsonConvert.SerializeObject(content);
 			StringContent stringContent = new StringContent(serializedBody, Encoding.UTF8, "application/json");
-			//StringContent stringContent = new StringContent(serializedBody);
-			//stringContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
 			return stringContent;
-		}
-
-		public async Task<TModel> PostJsonAsync<TModel>(string path, object content)
-		{
-			await this.SetHeader();
-			return await this.httpClient.PostJsonAsync<TModel>(this.GetUrl(path), content);
-		}
-
-		public async Task<TModel> PutJsonAsync<TModel>(string path, object content)
-		{
-			await this.SetHeader();
-			return await this.httpClient.PutJsonAsync<TModel>(this.GetUrl(path), content);
 		}
 
 		private async Task SetHeader()

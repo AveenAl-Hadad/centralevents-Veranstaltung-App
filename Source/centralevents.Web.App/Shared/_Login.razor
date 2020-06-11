@@ -1,0 +1,134 @@
+﻿@using CentralEvents.Web.App.Wrappers
+@using Microsoft.AspNetCore.Cryptography.KeyDerivation
+@using Blazored.LocalStorage
+@using CentralEvent.Business.Contracts.Models
+@inherits LayoutComponentBase
+@inject IHttpClient Client
+@inject ILocalStorageService LocalStorage
+@inject NavigationManager NavigationManager
+
+
+
+@if (!securityModel.IsAuthorized)
+{
+    <table id="login">
+        <tr>
+            <td>
+                <input @bind="customerCredentials.Benutzername" type="text" placeholder="Benutzername" required />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input @bind="customerCredentials.Passwort" type="password" placeholder="Passwort" required />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>@Message</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button @onclick="LogIn">Login</button>
+            </td>
+        </tr>
+        <tr>
+            <td id="buttons">
+                <a href="customer">Registrieren</a>
+            </td>
+        </tr>
+    </table>
+}
+@if (securityModel.IsAuthorized)
+{
+    <table id="login">
+        <tr>
+            <td>
+                <label>@Message</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button @onclick="LogOut">Logout</button>
+            </td>
+        </tr>
+    </table>
+}
+
+@code {
+    private const string Unlogged = "Möchten Sie sich einloggen oder registrieren?";
+    private const string Logged = "Willkommen:";
+    private const string Unknown = "Sie sind uns noch unbekannt!";
+    private const string LoggedOut = "Sie sind ausgeloggt!";
+
+    private string Message = "";
+
+    CustomerCredentials customerCredentials = new CustomerCredentials();
+
+    private SecurityModel securityModel = new SecurityModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Message = Unlogged;
+        securityModel = await AuthorizedCustomer();
+    }
+
+    private async Task LogIn()
+    {
+        try
+        {
+            customerCredentials.Passwort = Encrypt(customerCredentials.Passwort);
+            string token = await Client.PostJsonAsyncWithHead<string>("api/security", customerCredentials);
+            await LocalStorage.SetItemAsync("jwt", token);
+            securityModel = await AuthorizedCustomer();
+            Message = Logged +" "+ securityModel.Benutzername;
+
+        }
+        catch (Exception)
+        {
+            Message = Unknown;
+        }
+    }
+
+    private async Task LogOut()
+    {
+        if (await LocalStorage.ContainKeyAsync("jwt"))
+        {
+            await LocalStorage.RemoveItemAsync("jwt");
+            securityModel = await AuthorizedCustomer();
+            Message = LoggedOut;
+
+            NavigationManager.NavigateTo("http://localhost:54865/", false);
+        }
+    }
+
+    private string Encrypt(string password)
+    {
+        byte[] salt = new byte[128 / 8];
+
+        //	GetBytes(salt);
+        // TODO salt in die bytes
+
+        return Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                                                           password: password,
+                                                           salt: salt,
+                                                           prf: KeyDerivationPrf.HMACSHA1,
+                                                           iterationCount: 10000,
+                                                           numBytesRequested: 256 / 8));
+    }
+
+    private async Task<SecurityModel> AuthorizedCustomer()
+    {
+        SecurityModel authorizedCustomer = new SecurityModel();
+        try
+        {
+            authorizedCustomer = await Client.GetJsonAsyncWithHead<SecurityModel>("api/security");
+        }
+        catch (Exception)
+        {
+            authorizedCustomer.IsAuthorized = false;
+        }
+        return authorizedCustomer;
+    }
+
+}

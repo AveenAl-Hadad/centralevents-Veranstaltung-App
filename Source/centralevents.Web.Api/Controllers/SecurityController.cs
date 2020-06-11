@@ -7,15 +7,15 @@
 
 	using Microsoft.AspNetCore.Mvc;
 
-	[Route("api/test")]
-	public class TestController : AuthorizedController
+	[Route("api/security")]
+	public class SecurityController : AuthorizedController
 	{
 		[Route("")]
 		[HttpGet]
-		public TestTextModel Test()
+		public SecurityModel Test()
 		{
 			string userName = SessionService.Instance.Benutzername;
-			return new TestTextModel { Text = $"Api works: {userName}" };
+			return new SecurityModel { IsAuthorized = true, Benutzername = userName };
 		}
 	}
 }

@@ -44,11 +44,11 @@ namespace CentralEvents.Web.Api.Controllers
 		/// <summary>
 		/// TODO: Remove when testing ended.
 		/// </summary>
-		[Route("{username}")]
+		[Route("{benutzername}")]
 		[HttpGet]
 		public async Task<IActionResult> TestAuthentication(string username)
 		{
-			return await this.RequestToken(new CustomerCredentials { Username = username });
+			return await this.RequestToken(new CustomerCredentials { Benutzername = username });
 		}
 
 		private static string ToJsonString(string message)

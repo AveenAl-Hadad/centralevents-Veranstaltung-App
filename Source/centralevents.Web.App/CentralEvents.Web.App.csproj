@@ -17,7 +17,7 @@
     <Compile Include="..\centralevent.Business.Contracts\Models\CustomerCredentials.cs" Link="Models\CustomerCredentials.cs" />
     <Compile Include="..\centralevent.Business.Contracts\Models\CustomerModel.cs" Link="Models\CustomerModel.cs" />
     <Compile Include="..\centralevent.Business.Contracts\Models\EventModel.cs" Link="Models\EventModel.cs" />
-    <Compile Include="..\centralevent.Business.Contracts\Models\TestTextModel.cs" Link="Models\TestTextModel.cs" />
+    <Compile Include="..\centralevent.Business.Contracts\Models\SecurityModel.cs" Link="Models\SecurityModel.cs" />
     <Compile Include="..\centralevents.Web.Api\Controllers\CeStaDaController.cs" Link="CesController\CeStaDaController.cs" />
 
   </ItemGroup>
@@ -40,7 +40,6 @@
 
   <ItemGroup>
     <Folder Include="CesController\" />
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>
