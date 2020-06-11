@@ -7,6 +7,8 @@
 	using CentralEvent.Business.Contracts.Models;
 	using CentralEvent.Business.Contracts.Services;
 
+	using CentralEvents.Web.Api.Controllers.Base;
+
 	using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 	using Microsoft.AspNetCore.Mvc;
 
@@ -27,11 +29,11 @@
 			string password = customerModel.Passwort;
 			byte[] salt = new byte[128 / 8];
 
-			using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
-			{
-				rng.GetBytes(salt);
-			}
-
+			//using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+			//{
+			//	rng.GetBytes(salt);
+			//}
+			// TODO salt in die bytes
 			customerModel.Passwort = Convert.ToBase64String(KeyDerivation.Pbkdf2(
 																				 password: password,
 																				 salt: salt,

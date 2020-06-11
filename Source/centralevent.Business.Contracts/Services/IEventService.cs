@@ -25,6 +25,9 @@
 
 		CustomerModel GetCustomer(Guid guid);
 
+		 CustomerModel GetCustomerByName(string userName);
+
+
 		void UpdateCustomer(CustomerModel customerModel);
 	}
 }

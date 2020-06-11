@@ -153,7 +153,7 @@
                         await AddBooking();
                         BookingMessage = "Ihre Tickets wurden gebucht.";
                     }
-                    catch (FormatException e)
+                    catch (FormatException)
                     {
                         // Exeption fängt den Fehlerfall und Buchung wird nicht ausgeführt
                         BookingMessage = "Ungültige Emailadresse";

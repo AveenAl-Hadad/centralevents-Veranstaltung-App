@@ -1,67 +1,13 @@
 ﻿@using CentralEvents.Web.App.Wrappers
+@using Blazored.LocalStorage
 @inherits LayoutComponentBase
 @inject IHttpClient Client
-
+@inject ILocalStorageService LocalStorage
 
 <div>
-    <header class="head">
-        <a href="/">
-            <img src="css/Images/ce_logo.png"/>
-        </a>
-        <br/>
-        <table id="login">
-            <tr>
-                <td>
-                    <input type="text" placeholder="Benutzername" required/> @*Benutzername einbinden*@
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="password" placeholder="Passwort" required/> @*Passwort einbinden*@
-                </td>
-            </tr>
-            <tr>
-                @* <td id="buttons"> *@
-                @*     <a href="/">Login: <img src="css/Images/login.png" height="12" width="16" /></a> $1$Login einbinden #1# *@
-                @* </td> *@
-
-            </tr>
-
-            <tr>
-                <td id="buttons">
-                    <a href="customer">Registrieren</a> @*weiterleiten auf Registireren Seite*@
-                </td>
-            </tr>
-        </table>
-
-    </header>
+    <_Header></_Header>
     <div>
         @Body
     </div>
-
-    <footer>
-        <p>
-            <label>Adresse:</label>
-            <br/>
-            <label>CentralEvents</label>
-            <br/>
-            <label>CentralEvents-Straße 1</label>
-            <br/>
-            <label>28111 Metro-Stadt</label>
-            <br/>
-            <label>tickets@centralevents.de</label>
-            <br/>
-            <label>0555-123456789</label>
-        </p>
-    </footer>
+    <_Footer></_Footer>
 </div>
-
-@code{
-
-
-
-
-
-
-
-}

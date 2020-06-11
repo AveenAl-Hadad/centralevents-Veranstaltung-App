@@ -1,5 +1,6 @@
 namespace CentralEvents.Web.App
 {
+	using Blazored.LocalStorage;
 	using CentralEvents.Web.App.Wrappers;
 
 	using Microsoft.AspNetCore.Builder;
@@ -22,6 +23,7 @@ namespace CentralEvents.Web.App
 			services.AddRazorPages();
 			services.AddServerSideBlazor();
 			services.AddScoped<IHttpClient, HttpClientWrapper>();
+			services.AddBlazoredLocalStorage();
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

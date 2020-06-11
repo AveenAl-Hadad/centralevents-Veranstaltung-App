@@ -58,13 +58,14 @@
 			return this.eventRepository.GetCustomerS().Select(this.eventMapper.CustomerEntityToModel);
 		}
 
-	
-
-	
-
 		public CustomerModel GetCustomer(Guid guid)
 		{
 			return this.eventMapper.CustomerEntityToModel(this.eventRepository.GetCustomer(guid));
+		}
+
+		public CustomerModel GetCustomerByName(string userName)
+		{
+			return this.eventMapper.CustomerEntityToModel(this.eventRepository.GetCustomerByUserName(userName));
 		}
 
 		public void UpdateCustomer(CustomerModel customerModel)

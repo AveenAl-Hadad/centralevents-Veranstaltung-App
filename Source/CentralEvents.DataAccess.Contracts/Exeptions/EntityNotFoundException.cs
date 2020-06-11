@@ -8,5 +8,10 @@
 		{
 			throw new NotImplementedException();
 		}
+
+		public EntityNotFoundException(Type type, string userName)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

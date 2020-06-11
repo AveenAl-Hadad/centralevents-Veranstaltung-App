@@ -68,6 +68,19 @@
 			return customerEntity;
 		}
 
+		public CustomerEntity GetCustomerByUserName(string userName)
+		{
+			CustomerEntity customerEntity = this.dataContext.Query<CustomerEntity>()
+							.FirstOrDefault(e => e.Benutzername == userName);
+
+			if (customerEntity == null)
+			{
+				throw new EntityNotFoundException(typeof(CustomerEntity), userName);
+			}
+
+			return customerEntity;
+		}
+
 
 		public IEnumerable<CustomerEntity> GetCustomerS()
 		{
