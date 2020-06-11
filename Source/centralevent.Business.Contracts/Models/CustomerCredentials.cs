@@ -4,9 +4,6 @@
 
 	public class CustomerCredentials
 	{
-		[JsonPropertyName("username")]
-		public string Username { get; set; }
-
 		[JsonPropertyName("Benutzername")]
 		public string Benutzername { get; set; }
 

@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\centralevent.Business.Contracts\CentralEvent.Business.Contracts.csproj" />
     <ProjectReference Include="..\centralevent.Business\CentralEvent.Business.csproj" />
     <ProjectReference Include="..\CentralEvents.Commons\CentralEvents.Commons.csproj" />
     <ProjectReference Include="..\CentralEvents.DataAccess\CentralEvents.DataAccess.csproj" />
