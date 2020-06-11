@@ -40,7 +40,7 @@ namespace CentralEvents.DataAccess.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Beschreibung = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Datum = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Datum = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BeginnUhrzeit = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EndeUhrzeit = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Ort = table.Column<string>(type: "nvarchar(max)", nullable: true),
