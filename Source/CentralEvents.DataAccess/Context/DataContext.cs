@@ -30,12 +30,10 @@
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.HasDefaultSchema("DBO");
-			// alle Konfigurationen werden in die DB eingladen, die sich DataAccess befinden
 			modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(DataContext))
 														 ?? throw new InvalidOperationException());
 		}
 
-		// Hier wird immer der aktuelle der Stand der DB migriert
 		public void Initialize()
 		{
 			this.Database.Migrate();

@@ -8,11 +8,16 @@
 		// CREATE
 		Task<HttpResponseMessage> PostAsync<TModel>(string path, TModel model);
 
+		Task<TModel> PostJsonAsync<TModel>(string path, object content);
+
 		//READ
 		Task<TModel> GetJsonAsync<TModel>(string path);
+		Task<TModel> GetJsonAsyncWithHead<TModel>(string path);
 
 		//UPDATE
 		Task<HttpResponseMessage> PutAsync<TModel>(string path, TModel model);
+
+		Task<TModel> PutJsonAsync<TModel>(string path, object content);
 
 		//DELETE
 		Task DeleteAsync(string path);

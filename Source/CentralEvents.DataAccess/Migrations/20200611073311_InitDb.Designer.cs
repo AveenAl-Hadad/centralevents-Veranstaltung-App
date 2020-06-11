@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CentralEvents.DataAccess.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200528170644_InitDb")]
+    [Migration("20200611073311_InitDb")]
     partial class InitDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,6 +71,57 @@ namespace CentralEvents.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BookingDetailsTable");
+                });
+
+            modelBuilder.Entity("CentralEvents.DataAccess.Contracts.Entities.CustomerEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnName("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Benutzername")
+                        .HasColumnName("Benutzername")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnName("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Hausnummer")
+                        .HasColumnName("Hausnummer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nachname")
+                        .HasColumnName("Nachname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ort")
+                        .HasColumnName("Ort")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Passwort")
+                        .HasColumnName("Passwort")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Plz")
+                        .HasColumnName("Plz")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Strasse")
+                        .HasColumnName("Strasse")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefon")
+                        .HasColumnName("Telefon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Vorname")
+                        .HasColumnName("Vorname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CustomerTable");
                 });
 
             modelBuilder.Entity("CentralEvents.DataAccess.Contracts.Entities.EventEntity", b =>

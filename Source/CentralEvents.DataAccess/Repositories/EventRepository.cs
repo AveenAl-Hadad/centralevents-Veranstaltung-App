@@ -4,20 +4,17 @@
 	using System.Collections.Generic;
 	using System.Linq;
 
-	using CentralEvent.Business.Contracts.Models;
-
 	using CentralEvents.DataAccess.Contracts.Context;
 	using CentralEvents.DataAccess.Contracts.Entities;
 	using CentralEvents.DataAccess.Contracts.Exeptions;
 	using CentralEvents.DataAccess.Contracts.Repositories;
 
+	using Microsoft.EntityFrameworkCore;
+
 	public class EventRepository : IEventRepository
 	{
 		private readonly IDataContext dataContext;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="EventRepository"/> class.
-		/// </summary>
 		public EventRepository(IDataContext dataContext)
 		{
 			this.dataContext = dataContext;
@@ -59,6 +56,32 @@
 			return eventEntity;
 		}
 
+		public CustomerEntity GetCustomer(Guid guid)
+		{
+			CustomerEntity customerEntity = this.dataContext.Query<CustomerEntity>().FirstOrDefault(e => e.Id == guid);
+
+			if (customerEntity == null)
+			{
+				throw new EntityNotFoundException(typeof(CustomerEntity), guid);
+			}
+
+			return customerEntity;
+		}
+
+		public CustomerEntity GetCustomerByUserName(string userName)
+		{
+			CustomerEntity customerEntity = this.dataContext.Query<CustomerEntity>()
+							.FirstOrDefault(e => e.Benutzername == userName);
+
+			if (customerEntity == null)
+			{
+				throw new EntityNotFoundException(typeof(CustomerEntity), userName);
+			}
+
+			return customerEntity;
+		}
+
+
 		public IEnumerable<CustomerEntity> GetCustomerS()
 		{
 			return this.dataContext.Query<CustomerEntity>().ToArray();
@@ -75,7 +98,5 @@
 		{
 			this.dataContext.Remove(eventEntity);
 		}
-
-	
 	}
 }

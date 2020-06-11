@@ -14,9 +14,12 @@
 
   <ItemGroup>
     <Compile Include="..\centralevent.Business.Contracts\Models\BookingModel.cs" Link="Models\BookingModel.cs" />
+    <Compile Include="..\centralevent.Business.Contracts\Models\CustomerCredentials.cs" Link="Models\CustomerCredentials.cs" />
     <Compile Include="..\centralevent.Business.Contracts\Models\CustomerModel.cs" Link="Models\CustomerModel.cs" />
     <Compile Include="..\centralevent.Business.Contracts\Models\EventModel.cs" Link="Models\EventModel.cs" />
+    <Compile Include="..\centralevent.Business.Contracts\Models\TestTextModel.cs" Link="Models\TestTextModel.cs" />
     <Compile Include="..\centralevents.Web.Api\Controllers\CeStaDaController.cs" Link="CesController\CeStaDaController.cs" />
+
   </ItemGroup>
 
   <ItemGroup>
@@ -24,13 +27,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazored.LocalStorage" Version="2.1.6" />
     <PackageReference Include="BuildWebCompiler" Version="1.12.405" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.2.0-preview3.20168.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0-preview.4.20220.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 

@@ -34,6 +34,10 @@ p{
     border: 0.05em solid rgba(0, 0, 0, 0.60);
 }
 
+input{
+    min-width: 180px;
+}
+
 #login {
     margin: 0 0 0 auto;
     text-align: right;
@@ -51,6 +55,15 @@ p{
     border: 0.05em solid #adadad;
     background-color: #e1e1e1;
 }
+
+#fehlermeldung {
+    color: red;
+}
+
+#registriert {
+    color: green;
+}
+
 a {
     color: #000000;
     text-decoration: none;
@@ -86,6 +99,10 @@ h2 {
 h3{
     border: 0.05em solid lightgrey;
     background-color:rgba(198, 195, 184, 0.73);
+}
+
+h5{
+    color: red;
 }
 
 h6 {

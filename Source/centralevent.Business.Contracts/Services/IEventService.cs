@@ -22,5 +22,12 @@
 		void RemoveEvent(EventModel eventModel);
 
 		IEnumerable<CustomerModel> GetCustomerS();
+
+		CustomerModel GetCustomer(Guid guid);
+
+		 CustomerModel GetCustomerByName(string userName);
+
+
+		void UpdateCustomer(CustomerModel customerModel);
 	}
 }

@@ -4,131 +4,134 @@
 @inject IHttpClient Client
 
 <h3>Registrieren</h3>
+<h4><label id="fehlermeldung">@Fehlermeldung</label></h4>
+<h4><label id="registriert">@Registriert</label></h4>
 
-<form>
-    <table>
-        <tr>
-            <td>
-                <label>* Benutzername:</label>
-                <label> @NeuerBenutzername</label>
-                <input @bind="@customerModel.Benutzername" type="text" name="benutzer" required/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>Vorname:</label>
-                <input @bind="@customerModel.Vorname" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>Nachname:</label>
-                <input @bind="@customerModel.Nachname" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>Strasse:</label>
-                <input @bind="@customerModel.Strasse" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>Hausnummer:</label>
-                <input @bind="@customerModel.Hausnummer"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>PLZ:</label>
-                <input @bind="@customerModel.Plz" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>Ort:</label>
-                <input @bind="@customerModel.Ort" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>Telefonnummer:</label>
-                <input type="tel" @bind="@customerModel.Telefon" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>* E-Mail:</label>
-                <label> @NeueEmail</label>
-                <input @bind="@customerModel.Email" type="email" required/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>* Passwort:</label>
-                <input type="password" @bind="@customerModel.Passwort" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>* Passwort wiederholen:</label>
-                <input type="password" />
-            </td>
-        </tr>
-        <tr>
-            <td >
-                <a id="buttons" href="/">Abbrechen</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button @onclick="RegisterCustomer">Registrieren</button>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                * Pflichtfelder
-            </td>
-        </tr>
-    </table>
-</form>
+<table>
+    <tr>
+        <td>
+            <label>* Benutzername:</label>
+            <input @bind="@customerModel.Benutzername" type="text" name="benutzer" placeholder="Bitte Benutzername eingeben" required />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Vorname:</label>
+            <input @bind="@customerModel.Vorname" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Nachname:</label>
+            <input @bind="@customerModel.Nachname" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Strasse:</label>
+            <input @bind="@customerModel.Strasse" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Hausnummer:</label>
+            <input @bind="@customerModel.Hausnummer" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>PLZ:</label>
+            <input @bind="@customerModel.Plz" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Ort:</label>
+            <input @bind="@customerModel.Ort" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>Telefonnummer:</label>
+            <input type="tel" @bind="@customerModel.Telefon" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>* E-Mail:</label>
+            <input type="email" @bind="@customerModel.Email" placeholder="Bitte E-Mail eingeben" required />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>* Passwort:</label>
+            <input type="password" @bind="@customerModel.Passwort" placeholder="Bitte Passwort eingeben" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>* Passwort wiederholen:</label>
+            <input type="password" @bind="PasswortCheck" placeholder="Bitte Passwort eingeben"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a id="buttons" href="/">Abbrechen</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button @onclick="RegisterCustomer">Registrieren</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            * Pflichtfelder
+        </td>
+    </tr>
+</table>
 
 @code
 {
     [Parameter]
     public string Id { get; set; }
 
-    public string NeuerBenutzername { get; set; } = "";
+    public string Fehlermeldung { get; set; }
+    public string Registriert { get; set; }
 
-    public string NeueEmail { get; set; } = "";
+    public string NeuerBenutzername { get; set; }
+    public string NeueEmail { get; set; }
+    public string PasswortCheck { get; set; }
 
-    public bool checkBenutzername;
-    public bool checkEmail;
+    public bool CheckBenutzername;
+    public bool CheckEmail;
+    public bool CheckPasswort;
 
     readonly CustomerModel customerModel = new CustomerModel();
     private IEnumerable<CustomerModel> customers = new CustomerModel[0];
 
-    private async Task AddChecBenutzername()
+    private async Task AddCheckBenutzername()
     {
         customers = await Client.GetJsonAsync<IEnumerable<CustomerModel>>("api/customer/getAll");
 
         bool result = false;
 
-        foreach (CustomerModel customerModel in customers)
+        foreach (CustomerModel model in customers)
         {
             if (result == false)
             {
-                result = this.customerModel.Benutzername == customerModel.Benutzername;
+                result = customerModel.Benutzername == model.Benutzername;
             }
         }
 
         if (!result)
         {
-            checkBenutzername = true;
+            CheckBenutzername = true;
         }
         else
         {
-            customerModel.Benutzername = "Benutzername existiert bereits";
+            Registriert = "";
+            Fehlermeldung = "Benutzername existiert bereits";
             NeuerBenutzername = customerModel.Benutzername;
         }
     }
@@ -139,33 +142,53 @@
 
         bool result = false;
 
-        foreach (CustomerModel customerModel in customers)
+        foreach (CustomerModel model in customers)
         {
             if (result == false)
             {
-                result = this.customerModel.Email == customerModel.Email;
+                result = customerModel.Email == model.Email;
             }
         }
 
         if (!result)
         {
-            checkEmail = true;
+            CheckEmail = true;
         }
         else
         {
-            customerModel.Email = "Email existiert bereits";
+            Registriert = "";
+            Fehlermeldung = "Email existiert bereits";
             NeueEmail = customerModel.Email;
+        }
+    }
+
+    private async Task AddCheckPasswort()
+    {
+        CheckPasswort = false;
+        if (customerModel.Passwort == PasswortCheck)
+        {
+            CheckPasswort = true;
+        }
+        else
+        {
+            Registriert = "";
+            Fehlermeldung = "Bitte geben sie das identische Passwort ein!";
+            PasswortCheck = customerModel.Passwort;
         }
     }
 
     private async Task RegisterCustomer()
     {
-        await AddChecBenutzername();
-        await AddCheckEmail();
+        Fehlermeldung = "";
 
-        if (checkBenutzername && checkEmail)
+        await AddCheckBenutzername();
+        await AddCheckEmail();
+        await AddCheckPasswort();
+
+        if (CheckBenutzername && CheckEmail && CheckPasswort)
         {
             await AddKunde();
+            Registriert = "Sie haben sich erfolgreich registirert";
         }
     }
 
