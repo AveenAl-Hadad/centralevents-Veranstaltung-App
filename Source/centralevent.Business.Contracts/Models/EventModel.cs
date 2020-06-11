@@ -15,7 +15,7 @@
 		public string Beschreibung { get; set; }
 
 		[JsonPropertyName("Datum")]
-		public string Datum { get; set; }
+		public DateTime Datum { get; set; }
 
 		[JsonPropertyName("BeginnUhrzeit")]
 		public string BeginnUhrzeit { get; set; }

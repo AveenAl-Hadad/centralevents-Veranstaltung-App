@@ -14,6 +14,8 @@
     <a href="details/@eModel.Id">
         <div class="event">
             @eModel.Name
+            <br/>
+            @eModel.Datum.ToShortDateString()
         </div>
     </a>
     <br/>
@@ -33,7 +35,7 @@
     protected override async Task OnInitializedAsync()
     {
         eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/event/getAll");
-
+       eventS = eventS.OrderBy(e => e.Datum);
         if (!(eventS.Count() > 0))
         {
             foreach (EventModel eModel in ceStaDaController.CreateStammdaten())
@@ -41,8 +43,10 @@
                 eventModel = eModel;
                 await AddEvent();
             }
+            eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/event/getAll");
+            eventS = eventS.OrderBy(e => e.Datum);
+
         }
-        eventS = await Client.GetJsonAsync<IEnumerable<EventModel>>("api/event/getAll");
     }
 
     private async Task AddEvent()

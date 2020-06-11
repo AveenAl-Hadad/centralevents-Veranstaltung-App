@@ -136,9 +136,9 @@ namespace CentralEvents.DataAccess.Migrations
                         .HasColumnName("Beschreibung")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Datum")
+                    b.Property<DateTime>("Datum")
                         .HasColumnName("Datum")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("datetime2");
 
                     b.Property<double>("Eintritt")
                         .HasColumnName("Eintritt")

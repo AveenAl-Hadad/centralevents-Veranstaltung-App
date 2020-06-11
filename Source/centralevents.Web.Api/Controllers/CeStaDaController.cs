@@ -31,7 +31,7 @@
 									{
 										Name = entries[0].Trim(),
 										Ort = this.GetOrtFromEntry(entries[1].Trim()),
-										Datum = entries[2].Trim(),
+										Datum = this.GetBeginnDateFromEntries(entries[2].Trim()),
 										BeginnUhrzeit = entries[3].Trim(),
 										EndeUhrzeit = entries[4].Trim(),
 										Eintritt = Convert.ToDouble(entries[5].Replace("€", "").Replace("-", "-1").Trim()),
@@ -45,6 +45,13 @@
 		private string GetOrtFromEntry(string e)
 		{
 			return e.Substring(6);
+		}
+
+		private DateTime GetBeginnDateFromEntries(string d)
+		{
+			DateTime dateTime = new DateTime();
+			dateTime = Convert.ToDateTime(d);
+			return dateTime;
 		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿namespace CentralEvents.DataAccess.Contracts.Entities
 {
 	using System;
+	using System.Runtime.Serialization;
 
 	public class EventEntity : EntityBase
 	{
@@ -13,7 +14,7 @@
 
 		public string Beschreibung { get; set; }
 
-		public string Datum { get; set; }
+		public DateTime Datum { get; set; }
 
 		public string BeginnUhrzeit { get; set; }
 
