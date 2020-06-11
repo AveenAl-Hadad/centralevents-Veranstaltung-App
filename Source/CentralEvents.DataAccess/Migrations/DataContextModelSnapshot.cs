@@ -105,10 +105,6 @@ namespace CentralEvents.DataAccess.Migrations
                         .HasColumnName("Plz")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Rolle")
-                        .HasColumnName("Rolle")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Strasse")
                         .HasColumnName("Strasse")
                         .HasColumnType("nvarchar(max)");

@@ -9,6 +9,8 @@
 	using CentralEvents.DataAccess.Contracts.Exeptions;
 	using CentralEvents.DataAccess.Contracts.Repositories;
 
+	using Microsoft.EntityFrameworkCore;
+
 	public class EventRepository : IEventRepository
 	{
 		private readonly IDataContext dataContext;
@@ -53,6 +55,19 @@
 
 			return eventEntity;
 		}
+
+		public CustomerEntity GetCustomer(Guid guid)
+		{
+			CustomerEntity customerEntity = this.dataContext.Query<CustomerEntity>().FirstOrDefault(e => e.Id == guid);
+
+			if (customerEntity == null)
+			{
+				throw new EntityNotFoundException(typeof(CustomerEntity), guid);
+			}
+
+			return customerEntity;
+		}
+
 
 		public IEnumerable<CustomerEntity> GetCustomerS()
 		{

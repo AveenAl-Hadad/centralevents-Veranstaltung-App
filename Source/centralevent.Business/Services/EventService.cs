@@ -58,6 +58,22 @@
 			return this.eventRepository.GetCustomerS().Select(this.eventMapper.CustomerEntityToModel);
 		}
 
+	
+
+	
+
+		public CustomerModel GetCustomer(Guid guid)
+		{
+			return this.eventMapper.CustomerEntityToModel(this.eventRepository.GetCustomer(guid));
+		}
+
+		public void UpdateCustomer(CustomerModel customerModel)
+		{
+			CustomerEntity customerEntity = this.eventRepository.GetCustomer(customerModel.Id);
+			customerEntity = this.eventMapper.CustomerModelToEntity(customerModel, customerEntity);
+			this.eventRepository.SaveChangedRepository();
+		}
+
 		public void UpdateEvent(EventModel eventModel)
 		{
 			EventEntity eventEntity = this.eventRepository.GetEvent(eventModel.Id);
@@ -69,7 +85,5 @@
 		{
 			throw new NotImplementedException();
 		}
-
-	
 	}
 }

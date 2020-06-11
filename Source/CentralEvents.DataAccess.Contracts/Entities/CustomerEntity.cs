@@ -28,6 +28,5 @@
 		public string Benutzername { get; set; }
 
 		public string Passwort { get; set; }
-		public string Rolle { get; set; }
 	}
 }

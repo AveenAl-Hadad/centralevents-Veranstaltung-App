@@ -22,5 +22,7 @@
 		void RemoveEvent(EventEntity eventEntity);
 
 		IEnumerable<CustomerEntity> GetCustomerS();
+
+		CustomerEntity GetCustomer(Guid guid);
 	}
 }

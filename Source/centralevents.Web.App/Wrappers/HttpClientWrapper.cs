@@ -7,11 +7,8 @@
 	using System.Threading.Tasks;
 
 	using Microsoft.AspNetCore.Components;
-	using Microsoft.AspNetCore.Mvc;
 
 	using Newtonsoft.Json;
-
-	using RestSharp;
 
 	[ExcludeFromCodeCoverage]
 	public class HttpClientWrapper : IHttpClient
@@ -32,21 +29,10 @@
 			return await this.httpClient.PostAsync(this.GetUrl(path), this.JsonToStringContent(model));
 		}
 
-		public async Task<TModel> PostJsonAsync<TModel>(string path, TModel model)
-		{
-			return await this.httpClient.PostJsonAsync<TModel>(this.GetUrl(path), model);
-		}
-
 		//READ
 		public async Task<TModel> GetJsonAsync<TModel>(string path)
 		{
 			return await this.httpClient.GetJsonAsync<TModel>(this.GetUrl(path));
-		}
-
-		public async Task<IRestResponse> GetAsync(string path)
-		{
-			IRestResponse response =  (IRestResponse)await this.httpClient.GetAsync(this.GetUrl(path));
-			return response;
 		}
 
 		//UPDATE
@@ -55,21 +41,10 @@
 			return await this.httpClient.PutAsync(this.GetUrl(path), this.JsonToStringContent(model));
 		}
 
-		public async Task<HttpResponseMessage> ActionAsync<TModel>(string path, TModel model)
-		{
-			return await this.httpClient.PutAsync(this.GetUrl(path), this.JsonToStringContent(model));
-		}
-
 		//DELETE
 		public async Task DeleteAsync(string path)
 		{
 			await this.httpClient.DeleteAsync(this.GetUrl(path));
-		}
-
-		public async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request)
-		{
-			return await this.httpClient.SendAsync(request);
-
 		}
 
 		//Hilfsmethoden

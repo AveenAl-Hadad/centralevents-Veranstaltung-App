@@ -23,7 +23,6 @@
 			builder.Property(e => e.Email).HasColumnName("Email");
 			builder.Property(e => e.Benutzername).HasColumnName("Benutzername");
 			builder.Property(e => e.Passwort).HasColumnName("Passwort");
-			builder.Property(e => e.Rolle).HasColumnName("Rolle");
 		}
 	}
 }

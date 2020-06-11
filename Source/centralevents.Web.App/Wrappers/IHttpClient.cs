@@ -12,12 +12,10 @@
 		// CREATE
 		Task<HttpResponseMessage> PostAsync<TModel>(string path, TModel model);
 
-		Task<TModel> PostJsonAsync<TModel>(string path, TModel model);
 
 		//READ
 		Task<TModel> GetJsonAsync<TModel>(string path);
 
-		Task<IRestResponse> GetAsync(string path);
 
 
 		//UPDATE
@@ -27,7 +25,6 @@
 		Task DeleteAsync(string path);
 
 
-		Task<HttpResponseMessage> SendAsync(HttpRequestMessage request);
 
 	}
 }

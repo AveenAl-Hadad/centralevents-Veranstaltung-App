@@ -3,12 +3,11 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Security.Cryptography;
-	using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-	using System.Text;
 
 	using CentralEvent.Business.Contracts.Models;
 	using CentralEvent.Business.Contracts.Services;
 
+	using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 	using Microsoft.AspNetCore.Mvc;
 
 	[Route("api/customer")]
@@ -28,17 +27,17 @@
 			string password = customerModel.Passwort;
 			byte[] salt = new byte[128 / 8];
 
-			using (var rng = RandomNumberGenerator.Create())
+			using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
 			{
 				rng.GetBytes(salt);
 			}
 
 			customerModel.Passwort = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-																		password: password,
-																		salt: salt,
-																		prf: KeyDerivationPrf.HMACSHA1,
-																		iterationCount: 10000,
-																		numBytesRequested: 256 / 8));
+																				 password: password,
+																				 salt: salt,
+																				 prf: KeyDerivationPrf.HMACSHA1,
+																				 iterationCount: 10000,
+																				 numBytesRequested: 256 / 8));
 			this.eventService.AddCustomer(customerModel);
 		}
 
@@ -47,6 +46,20 @@
 		public IEnumerable<CustomerModel> GetCustomerS()
 		{
 			return this.eventService.GetCustomerS();
+		}
+
+		[Route("get/{id}")]
+		[HttpGet]
+		public void Get(Guid guid)
+		{
+			this.eventService.GetCustomer(guid);
+		}
+
+		[Route("update")]
+		[HttpPut]
+		public void UpdateCustomer(CustomerModel customerModel)
+		{
+			this.eventService.UpdateCustomer(customerModel);
 		}
 	}
 }
