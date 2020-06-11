@@ -2,12 +2,9 @@
 {
 	using System;
 	using System.Collections.Generic;
-	using System.Security.Cryptography;
 
 	using CentralEvent.Business.Contracts.Models;
 	using CentralEvent.Business.Contracts.Services;
-
-	using CentralEvents.Web.Api.Controllers.Base;
 
 	using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 	using Microsoft.AspNetCore.Mvc;
@@ -52,9 +49,16 @@
 
 		[Route("get/{id}")]
 		[HttpGet]
-		public void Get(Guid guid)
+		public CustomerModel Get(Guid guid)
 		{
-			this.eventService.GetCustomer(guid);
+			return this.eventService.GetCustomer(guid);
+		}
+
+		[Route("getByUserName/{username}")]
+		[HttpGet]
+		public CustomerModel GetByUserName(string username)
+		{
+			return this.eventService.GetCustomerByName(username);
 		}
 
 		[Route("update")]

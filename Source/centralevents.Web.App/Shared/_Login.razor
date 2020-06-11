@@ -24,14 +24,15 @@
         </tr>
         <tr>
             <td>
-                <label>@Message</label>
+                <button @onclick="LogIn">Login</button>
             </td>
         </tr>
         <tr>
             <td>
-                <button @onclick="LogIn">Login</button>
+                <label>@Message</label>
             </td>
         </tr>
+ 
         <tr>
             <td id="buttons">
                 <a href="customer">Registrieren</a>
@@ -61,7 +62,7 @@
     private const string Unknown = "Sie sind uns noch unbekannt!";
     private const string LoggedOut = "Sie sind ausgeloggt!";
 
-    private string Message = "";
+    private string Message { get; set; } = "";
 
     CustomerCredentials customerCredentials = new CustomerCredentials();
 
@@ -81,7 +82,6 @@
             string token = await Client.PostJsonAsyncWithHead<string>("api/security", customerCredentials);
             await LocalStorage.SetItemAsync("jwt", token);
             securityModel = await AuthorizedCustomer();
-            Message = Logged +" "+ securityModel.Benutzername;
 
         }
         catch (Exception)
@@ -98,7 +98,7 @@
             securityModel = await AuthorizedCustomer();
             Message = LoggedOut;
 
-            NavigationManager.NavigateTo("http://localhost:54865/", false);
+            NavigationManager.NavigateTo("http://localhost:54865/");
         }
     }
 
@@ -123,6 +123,8 @@
         try
         {
             authorizedCustomer = await Client.GetJsonAsyncWithHead<SecurityModel>("api/security");
+            Message = Logged + " " + authorizedCustomer.Benutzername;
+
         }
         catch (Exception)
         {

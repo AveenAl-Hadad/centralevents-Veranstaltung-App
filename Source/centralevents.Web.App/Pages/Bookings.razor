@@ -100,15 +100,22 @@
     [Parameter]
     public string Id { get; set; }
 
+    [Parameter]
+    public string Benutzername { get; set; }
+
     EventModel eventModel = new EventModel();
     BookingModel bookingModel = new BookingModel();
 
-    public string BookingMessage { get; set; }
+    private string BookingMessage { get; set; }
+    private SecurityModel securityModel = new SecurityModel();
+    private CustomerModel customerModel = new CustomerModel();
+
 
     protected override async Task OnInitializedAsync()
     {
         eventModel = await Client.GetJsonAsync<EventModel>($"api/event/get/{Id}");
         bookingModel.AnzahlTickets = 1;
+        await FillDataForCustomer();
     }
 
     private async Task AddBooking()
@@ -174,5 +181,39 @@
         {
             BookingMessage = $"Es sind nur noch {eventModel.Restbestand} Tickets buchbar";
         }
+    }
+
+    private async Task<SecurityModel> AuthorizedCustomer()
+    {
+        SecurityModel authorizedCustomer = new SecurityModel();
+        try
+        {
+            authorizedCustomer = await Client.GetJsonAsyncWithHead<SecurityModel>("api/security");
+        }
+        catch (Exception)
+        {
+            authorizedCustomer.IsAuthorized = false;
+        }
+        return authorizedCustomer;
+    }
+
+    private async Task<CustomerModel> GetCustomerByUserName(string benutzername)
+    {
+        return await this.Client.GetJsonAsyncWithHead<CustomerModel>($"api/customer/getByUserName/{benutzername}");
+    }
+
+    private async Task FillDataForCustomer()
+    {
+        securityModel = await AuthorizedCustomer();
+        customerModel = await GetCustomerByUserName(securityModel.Benutzername);
+
+        bookingModel.Vorname = customerModel.Vorname;
+        bookingModel.Nachname = customerModel.Nachname;
+        bookingModel.Strasse = customerModel.Strasse;
+        bookingModel.Hausnummer = customerModel.Hausnummer;
+        bookingModel.Plz = customerModel.Plz;
+        bookingModel.Ort = customerModel.Ort;
+        bookingModel.Email = customerModel.Email;
+        bookingModel.Telefon = customerModel.Telefon;
     }
 }

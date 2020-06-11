@@ -72,7 +72,7 @@ namespace CentralEvents.Web.Api
 									  options.Events = new CustomJwtBearerEvents();
 								  });
 
-			services.AddAuthorization(options => options.AddPolicy("UserNamePolicy", policy => policy.RequireClaim("benutzername")));// TODO
+			services.AddAuthorization(options => options.AddPolicy("UserNamePolicy", policy => policy.RequireClaim("benutzername"))); // TODO
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

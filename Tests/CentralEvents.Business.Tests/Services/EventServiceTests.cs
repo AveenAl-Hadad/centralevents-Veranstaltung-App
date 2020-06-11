@@ -31,17 +31,12 @@
 		private IEnumerable<EventEntity> eventSentities;
 		private IEnumerable<EventModel> result;
 
-		private EventModel eventModel;
-		private EventEntity eventEntity;
-
 		[SetUp]
 		public void SetUp()
 		{
 			this.eventSmodels = new EventModel[0];
 			this.eventSentities = new EventEntity[0];
 			this.result = new EventModel[0];
-			this.eventModel = new EventModel();
-			this.eventEntity = new EventEntity();
 
 			this.eventMapper = new Mock<IEventMapper>();
 			//this.dataContext = new Mock<IDataContext>();

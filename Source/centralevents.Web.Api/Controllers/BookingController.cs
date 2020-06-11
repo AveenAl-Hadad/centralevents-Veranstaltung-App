@@ -3,8 +3,6 @@
 	using CentralEvent.Business.Contracts.Models;
 	using CentralEvent.Business.Contracts.Services;
 
-	using CentralEvents.Web.Api.Controllers.Base;
-
 	using Microsoft.AspNetCore.Mvc;
 
 	[Route("api/booking")]

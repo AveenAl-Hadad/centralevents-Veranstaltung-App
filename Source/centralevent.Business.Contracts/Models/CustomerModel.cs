@@ -1,16 +1,10 @@
 ﻿namespace CentralEvent.Business.Contracts.Models
 {
 	using System;
-	using System.Collections.Generic;
 	using System.Text.Json.Serialization;
-
 
 	public class CustomerModel
 	{
-		public CustomerModel()
-		{
-		}
-
 		[JsonPropertyName("id")]
 		public Guid Id { get; set; }
 

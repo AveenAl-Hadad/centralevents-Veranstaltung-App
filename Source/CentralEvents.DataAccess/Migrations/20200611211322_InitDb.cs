@@ -74,6 +74,12 @@ namespace CentralEvents.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_CustomerTable", x => x.Id);
                 });
+
+            migrationBuilder.InsertData(
+                schema: "DBO",
+                table: "CustomerTable",
+                columns: new[] { "Id", "Benutzername", "Email", "Hausnummer", "Nachname", "Ort", "Passwort", "Plz", "Strasse", "Telefon", "Vorname" },
+                values: new object[] { new Guid("00000000-0000-0000-0000-000000000001"), "ceUser", "Hans.Werner@freemail.de", "66a", "Werner", "Bremen", "lUgM3gwaOyfgUGaOB300LtJKsbYamO+hZGrdQVZkIYk=", "28759", "Bremerstraße", "0421-555 888 22", "Hans" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

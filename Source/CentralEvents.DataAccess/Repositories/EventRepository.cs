@@ -9,8 +9,6 @@
 	using CentralEvents.DataAccess.Contracts.Exeptions;
 	using CentralEvents.DataAccess.Contracts.Repositories;
 
-	using Microsoft.EntityFrameworkCore;
-
 	public class EventRepository : IEventRepository
 	{
 		private readonly IDataContext dataContext;
@@ -71,7 +69,7 @@
 		public CustomerEntity GetCustomerByUserName(string userName)
 		{
 			CustomerEntity customerEntity = this.dataContext.Query<CustomerEntity>()
-							.FirstOrDefault(e => e.Benutzername == userName);
+												.FirstOrDefault(e => e.Benutzername == userName);
 
 			if (customerEntity == null)
 			{
@@ -80,7 +78,6 @@
 
 			return customerEntity;
 		}
-
 
 		public IEnumerable<CustomerEntity> GetCustomerS()
 		{

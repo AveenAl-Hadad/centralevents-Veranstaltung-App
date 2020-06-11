@@ -1,5 +1,9 @@
 ﻿namespace CentralEvents.DataAccess.Configurations
 {
+	using System;
+
+	using CentralEvent.Business.Contracts.Models;
+
 	using CentralEvents.DataAccess.Contracts.Entities;
 
 	using Microsoft.EntityFrameworkCore;
@@ -23,6 +27,21 @@
 			builder.Property(e => e.Email).HasColumnName("Email");
 			builder.Property(e => e.Benutzername).HasColumnName("Benutzername");
 			builder.Property(e => e.Passwort).HasColumnName("Passwort");
+
+			builder.HasData(new CustomerModel
+							{
+								Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
+								Vorname = "Hans",
+								Nachname = "Werner",
+								Strasse = "Bremerstraße",
+								Hausnummer = "66a",
+								Plz = "28759",
+								Ort = "Bremen",
+								Telefon = "0421-555 888 22",
+								Email = "Hans.Werner@freemail.de",
+								Benutzername = "ceUser",
+								Passwort = "lUgM3gwaOyfgUGaOB300LtJKsbYamO+hZGrdQVZkIYk="
+							});
 		}
 	}
 }
