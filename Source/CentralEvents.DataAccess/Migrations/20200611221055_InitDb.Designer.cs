@@ -4,14 +4,16 @@ using CentralEvents.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CentralEvents.DataAccess.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200611221055_InitDb")]
+    partial class InitDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,22 +122,6 @@ namespace CentralEvents.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CustomerTable");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            Benutzername = "ceUser",
-                            Email = "Hans.Werner@freemail.de",
-                            Hausnummer = "66a",
-                            Nachname = "Werner",
-                            Ort = "Bremen",
-                            Passwort = "lUgM3gwaOyfgUGaOB300LtJKsbYamO+hZGrdQVZkIYk=",
-                            Plz = "28759",
-                            Strasse = "Bremerstraße",
-                            Telefon = "0421-555 888 22",
-                            Vorname = "Hans"
-                        });
                 });
 
             modelBuilder.Entity("CentralEvents.DataAccess.Contracts.Entities.EventEntity", b =>
