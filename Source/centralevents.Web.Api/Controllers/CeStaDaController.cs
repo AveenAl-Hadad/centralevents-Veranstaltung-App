@@ -34,7 +34,7 @@
 										Datum = this.GetBeginnDateFromEntries(entries[2].Trim()),
 										BeginnUhrzeit = entries[3].Trim(),
 										EndeUhrzeit = entries[4].Trim(),
-										Eintritt = Convert.ToDouble(entries[5].Replace("€", "").Replace("-", "-1").Trim()),
+										Eintritt = Convert.ToDouble(entries[5].Replace("€", "").Replace("-", "0").Trim()),
 										Beschreibung = entries[6].Replace('\"'.ToString(), "").Trim(),
 										GesamtanzahlEintrittskarten = Convert.ToInt16(entries[7].Replace("-", "-1")),
 										Restbestand = Convert.ToInt16(entries[7].Replace("-", "-1"))

@@ -7,65 +7,69 @@
 <h4><label id="fehlermeldung">@Fehlermeldung</label></h4>
 <h4><label id="registriert">@Registriert</label></h4>
 
+
+<p>
+    <label>* Pflichtangaben</label>
+</p>
 <table>
     <tr>
         <td>
             <label>* Benutzername:</label>
-            <input @bind="@customerModel.Benutzername" type="text" name="benutzer" placeholder="Bitte Benutzername eingeben" required />
+            <input @bind="@customerModel.Benutzername" type="text" name="benutzer" placeholder="Bitte Benutzername eingeben" required/>
         </td>
     </tr>
     <tr>
         <td>
             <label>Vorname:</label>
-            <input @bind="@customerModel.Vorname" />
+            <input @bind="@customerModel.Vorname"/>
         </td>
     </tr>
     <tr>
         <td>
             <label>Nachname:</label>
-            <input @bind="@customerModel.Nachname" />
+            <input @bind="@customerModel.Nachname"/>
         </td>
     </tr>
     <tr>
         <td>
-            <label>Strasse:</label>
-            <input @bind="@customerModel.Strasse" />
+            <label>Straße:</label>
+            <input @bind="@customerModel.Strasse"/>
         </td>
     </tr>
     <tr>
         <td>
             <label>Hausnummer:</label>
-            <input @bind="@customerModel.Hausnummer" />
+            <input @bind="@customerModel.Hausnummer"/>
         </td>
     </tr>
     <tr>
         <td>
             <label>PLZ:</label>
-            <input @bind="@customerModel.Plz" />
+            <input @bind="@customerModel.Plz"/>
         </td>
     </tr>
     <tr>
         <td>
             <label>Ort:</label>
-            <input @bind="@customerModel.Ort" />
+            <input @bind="@customerModel.Ort"/>
         </td>
     </tr>
     <tr>
         <td>
             <label>Telefonnummer:</label>
-            <input type="tel" @bind="@customerModel.Telefon" />
+            <input type="tel" @bind="@customerModel.Telefon"/>
         </td>
     </tr>
     <tr>
         <td>
             <label>* E-Mail:</label>
-            <input type="email" @bind="@customerModel.Email" placeholder="Bitte E-Mail eingeben" required />
+            <input type="email" @bind="@customerModel.Email" placeholder="Bitte E-Mail eingeben" required/>
         </td>
     </tr>
     <tr>
         <td>
             <label>* Passwort:</label>
-            <input type="password" @bind="@customerModel.Passwort" placeholder="Bitte Passwort eingeben" />
+            <input type="password" @bind="@customerModel.Passwort" placeholder="Bitte Passwort eingeben"/>
         </td>
     </tr>
     <tr>
@@ -84,11 +88,7 @@
             <button @onclick="RegisterCustomer">Registrieren</button>
         </td>
     </tr>
-    <tr>
-        <td>
-            * Pflichtfelder
-        </td>
-    </tr>
+
 </table>
 
 @code
@@ -180,6 +180,7 @@
     private async Task RegisterCustomer()
     {
         Fehlermeldung = "";
+        Registriert = "";
 
         await AddCheckBenutzername();
         await AddCheckEmail();
@@ -188,7 +189,7 @@
         if (CheckBenutzername && CheckEmail && CheckPasswort)
         {
             await AddKunde();
-            Registriert = "Sie haben sich erfolgreich registirert";
+            Registriert = "Sie haben sich erfolgreich registriert";
         }
     }
 

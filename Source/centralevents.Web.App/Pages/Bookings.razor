@@ -18,50 +18,50 @@
 <table>
     <tr>
         <td>
-            <label>Ticketanzahl*:</label>
-            <input @bind="@bookingModel.AnzahlTickets" type="number" min="1"/>
+            <label>* Ticketanzahl:</label>
+            <input @bind="@RestTicketanzahl" type="number" min="1"/>
         </td>
     </tr>
     <tr>
         <td>
-            <label>Vorname*:</label>
+            <label>* Vorname:</label>
             <input @bind="@bookingModel.Vorname" required/>
         </td>
     </tr>
     <tr>
         <td>
-            <label>Nachname*:</label>
+            <label>* Nachname:</label>
             <input @bind="@bookingModel.Nachname" required/>
         </td>
     </tr>
     <tr>
         <td>
-            <label>Straße*:</label>
+            <label>* Straße:</label>
             <input @bind="@bookingModel.Strasse" required/>
         </td>
     </tr>
     <tr>
         <td>
-            <label>Hausnummer*:</label>
+            <label>* Hausnummer:</label>
             <input @bind="@bookingModel.Hausnummer"required/>
         </td>
     </tr>
     <tr>
         <td>
-            <label>PLZ*:</label>
+            <label>* PLZ:</label>
             <input @bind="@bookingModel.Plz" required/>
         </td>
     </tr>
     <tr>
         <td>
-            <label>Ort*:</label>
+            <label>* Ort:</label>
             <input @bind="@bookingModel.Ort" required/>
         </td>
     </tr>
     <tr>
         <td>
             <label>
-                E-Mail*:
+                * E-Mail:
             </label>
             <input type="email" name="email" @bind="@bookingModel.Email" required/>
         </td>
@@ -103,18 +103,25 @@
     [Parameter]
     public string Benutzername { get; set; }
 
+    public string RestTicketanzahl { get; set; }
+
     EventModel eventModel = new EventModel();
     BookingModel bookingModel = new BookingModel();
 
     private string BookingMessage { get; set; }
+
     private SecurityModel securityModel = new SecurityModel();
     private CustomerModel customerModel = new CustomerModel();
-
 
     protected override async Task OnInitializedAsync()
     {
         eventModel = await Client.GetJsonAsync<EventModel>($"api/event/get/{Id}");
-        bookingModel.AnzahlTickets = 1;
+
+        if (eventModel.GesamtanzahlEintrittskarten == -1)
+        {
+            RestTicketanzahl = "keine Angabe";
+        }
+
         await FillDataForCustomer();
     }
 
@@ -129,6 +136,7 @@
 
     private async Task UpdateEvent()
     {
+        bookingModel.AnzahlTickets = Convert.ToInt16(RestTicketanzahl);
         eventModel.Restbestand = eventModel.Restbestand - bookingModel.AnzahlTickets;
 
         await Client.PutAsync("api/event/update", eventModel);
@@ -138,6 +146,8 @@
 
     private async Task CheckOverBooking()
     {
+        bookingModel.AnzahlTickets = Convert.ToInt16(RestTicketanzahl);
+
         eventModel = await Client.GetJsonAsync<EventModel>($"api/event/get/{Id}");
 
         if (eventModel.Restbestand >= bookingModel.AnzahlTickets)
@@ -155,14 +165,14 @@
                 {
                     try
                     {
-                        // Validation durch das Framework für Emailadressen
+    // Validation durch das Framework für Emailadressen
                         MailAddress address = new MailAddress(bookingModel.Email);
                         await AddBooking();
                         BookingMessage = "Ihre Tickets wurden gebucht.";
                     }
                     catch (FormatException)
                     {
-                        // Exeption fängt den Fehlerfall und Buchung wird nicht ausgeführt
+    // Exeption fängt den Fehlerfall und Buchung wird nicht ausgeführt
                         BookingMessage = "Ungültige Emailadresse";
                     }
                 }
@@ -174,7 +184,7 @@
             else
 
             {
-                BookingMessage = "Ungültige Ticketanzahl";
+                BookingMessage = "Ungültige RestTicketanzahl";
             }
         }
         else
@@ -199,21 +209,27 @@
 
     private async Task<CustomerModel> GetCustomerByUserName(string benutzername)
     {
-        return await this.Client.GetJsonAsyncWithHead<CustomerModel>($"api/customer/getByUserName/{benutzername}");
+        if (securityModel.IsAuthorized)
+        {
+            return await Client.GetJsonAsyncWithHead<CustomerModel>($"api/customer/getByUserName/{benutzername}");
+        }
+        return new CustomerModel();
     }
 
     private async Task FillDataForCustomer()
     {
         securityModel = await AuthorizedCustomer();
         customerModel = await GetCustomerByUserName(securityModel.Benutzername);
-
-        bookingModel.Vorname = customerModel.Vorname;
-        bookingModel.Nachname = customerModel.Nachname;
-        bookingModel.Strasse = customerModel.Strasse;
-        bookingModel.Hausnummer = customerModel.Hausnummer;
-        bookingModel.Plz = customerModel.Plz;
-        bookingModel.Ort = customerModel.Ort;
-        bookingModel.Email = customerModel.Email;
-        bookingModel.Telefon = customerModel.Telefon;
+        if (securityModel.IsAuthorized)
+        {
+            bookingModel.Vorname = customerModel.Vorname;
+            bookingModel.Nachname = customerModel.Nachname;
+            bookingModel.Strasse = customerModel.Strasse;
+            bookingModel.Hausnummer = customerModel.Hausnummer;
+            bookingModel.Plz = customerModel.Plz;
+            bookingModel.Ort = customerModel.Ort;
+            bookingModel.Email = customerModel.Email;
+            bookingModel.Telefon = customerModel.Telefon;
+        }
     }
 }
